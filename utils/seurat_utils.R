@@ -6,6 +6,16 @@ renameFun <- function(x,id){
   return(x)
 }
 
+# Annotate Label
+# first parameter : seurat; Second parameter : new ID, which order same with level; third para : the slot you want to store in metadata
+renameLabel <- function(x,id,label){
+  names(id) <- levels(x)
+  x <- RenameIdents(x,id)
+  x@meta.data[[label]] <- Idents(x)
+  return(x)
+}
+
+
 #== create sample meta---------------------------
 
 createSampleMeta <- function(seurat,meta=osteoMeta,name){
@@ -51,7 +61,7 @@ runSeurat <- function(x,dim=30,seeds = 0){
   x <- RunPCA(x, features = VariableFeatures(object = x))
   x <- FindNeighbors(x, dims = 1:dim)
   x <- FindClusters(x, resolution = 0.5,random.seed = seeds)
-  x <- RunUMAP(x, dims = 1:dim,random.seed = seed)
+  x <- RunUMAP(x, dims = 1:dim,random.seed = seeds)
 }
 
 # seurat cca merge function-----------------------------------

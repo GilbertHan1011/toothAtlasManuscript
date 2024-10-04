@@ -1,0 +1,79 @@
+---
+title: "20241004_first_round_annotation_example"
+output: html_document
+date: "2024-10-04"
+---
+
+```{r setup, include=FALSE,root.dir = "/home/gilberthan/Desktop/disk2/202409_tooth/"}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "/home/gilberthan/Desktop/disk2/202409_tooth/") # set working directory
+
+```
+
+## Load Env
+
+
+```{r}
+library(Seurat)
+library(dplyr)
+library(ggplot2)
+outputdir <- "process/annotation/first_round_base/"
+baseName <- "Tooth_Zheng" # You should change this.
+seurat <- readRDS(paste0("preprocess_data/",baseName,".Rds"))
+source("script/utils/seurat_utils.R")
+```
+
+## Visualization
+
+
+```{r}
+markers <- c("Sox9","Vcan",  # Mesenchyme
+             "Krt14","Pitx2",# Epithelium
+             "C1qa","Napsa", #Immune
+             "Cdh5", #Endo
+             "Sox10", # neuron
+             "Rgs5" # perivasular
+             ) 
+FeaturePlot(seurat,markers,label = T)
+ggsave(paste0(outputdir,"plot/",baseName,"_EDA_FeatUmap.pdf"))
+```
+```{r}
+VlnPlot(seurat,markers,stack = T,flip = T)
+ggsave(paste0(outputdir,"plot/",baseName,"_EDA_Vln.pdf"))
+```
+```{r}
+dput(levels(seurat))
+
+```
+```{r}
+newID <- c("Mesenchyme", "Mesenchyme", "Mesenchyme", "Mesenchyme", "Mesenchyme", "Mesenchyme", "Immune", "Endothelium", "Perivasular", 
+           "Epithelium", "Mesenchyme", "Immune"
+)
+seurat <- renameLabel(seurat,newID,"coarse_anno_1") # first parameter : seurat; Second parameter : new ID, which order same with level; third para : the slot you want to store in metadata
+```
+
+## Validation
+```{r}
+p1 <- DimPlot(seurat,group.by = "coarse_anno_1")
+p2 <- DimPlot(seurat,group.by = "orig.ident")
+p1|p2
+ggsave(paste0(outputdir,"plot/",baseName,"_validation_umap.pdf"))
+```
+
+
+## Store data
+Do NOT overwrite the seurat RDS!!!
+Just save the annotation information.
+
+```{r}
+label <- seurat$coarse_anno_1 %>% as.data.frame()
+colnames(label) <- "Coarse_Label_1"
+
+write.csv(label,paste0(outputdir,"anno/",baseName,".csv"))
+```
+
+When read the label, it should be like this
+```{r}
+loadLabel <- read.csv(paste0(outputdir,"anno/",baseName,".csv"),row.names = 1)
+loadLabel %>% head()
+```

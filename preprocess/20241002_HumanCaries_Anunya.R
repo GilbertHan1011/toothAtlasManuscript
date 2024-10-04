@@ -1,0 +1,13 @@
+rm(list=ls())
+source("script/utils/seurat_utils.R")
+
+files <- list.files("~/Desktop/disk1/tooth/tooth_pulp/",pattern = "Human*",full.names = T)
+filesShort <- list.files("~/Desktop/disk1/tooth/tooth_pulp/",pattern = "Human*")
+fileList <- lapply(files, read.csv,row.names = 1)
+#tooth1 <- read.csv("~/Desktop/disk1/tooth/tooth_pulp/GSM5608427_DTP_01.csv",row.names = 1)
+#seuratList <- lapply(fileList, CreateSeuratObject)
+seuratList <- map2(fileList,filesShort,function(x,y) CreateSeuratObject(x,min.cells = 3, min.features = 500,project = y))
+seuratList <- lapply(seuratList,qcFun,Species="Human")
+seuratMerge <- merge(seuratList[[1]],seuratList[2:4])
+seuratMerge <- runharmony(seuratMerge)
+saveRDS(seuratMerge,"preprocess_data/HumanCaries_Anunya.Rds")
