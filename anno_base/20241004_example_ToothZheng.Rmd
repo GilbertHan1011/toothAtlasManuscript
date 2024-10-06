@@ -37,6 +37,7 @@ markers <- c("Sox9","Vcan",  # Mesenchyme
 FeaturePlot(seurat,markers,label = T)
 ggsave(paste0(outputdir,"plot/",baseName,"_EDA_FeatUmap.pdf"))
 ```
+
 ```{r}
 VlnPlot(seurat,markers,stack = T,flip = T)
 ggsave(paste0(outputdir,"plot/",baseName,"_EDA_Vln.pdf"))
