@@ -43,14 +43,18 @@ FeaturePlot(seurat,features = c("VCAN","POSTN","KRT14",
                                 "C1QA","NAPSA"))
 FeaturePlot(seurat,features = c("CLU","S100A8"))
 FeaturePlot(seurat,features = c("PTPRC"))
-FeaturePlot(seurat,features = c("COL1A1"))
+FeaturePlot(seurat,features = c("COL1A1"),label = T)
 VlnPlot(seurat,"PTPRC")
 VlnPlot(seurat,"POSTN")
 VlnPlot(seurat,"SP7")
 VlnPlot(seurat,"CDH5")
 VlnPlot(seurat,"RGS5")
 VlnPlot(seurat,"DCN")
-
+VlnPlot(seurat,"MYOG")
+VlnPlot(seurat,features = c("VCAN","POSTN","KRT14",
+                                "RGS5","DMP1","CDH5",
+                                "C1QA","NAPSA"),stack = T,flip = T)
+DimPlot(seurat,label = T)
 new.id <- c("Fibroblast", "Endothelium", "Immune", "Fibroblast",
             "Perivasular", "Fibroblast", "Fibroblast", "Fibroblast", "Immune",
             "Immune", "Mesenchyme", "Immune", "Endothelium", "Immune", "14", "15", "Immune")
