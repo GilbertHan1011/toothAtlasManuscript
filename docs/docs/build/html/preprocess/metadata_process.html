@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Metadata Collection &#8212; scAtlas 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f6245a2f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
+    <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
+    <script defer="defer" src="../_static/tippy/preprocess/metadata_process.283d1bb9-8acb-4838-9a07-b646490da2e6.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="References" href="../references.html" />
+    <link rel="prev" title="Welcome to scAtlas’s documentation!" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="metadata-collection">
+<h1>Metadata Collection<a class="headerlink" href="#metadata-collection" title="Permalink to this heading">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a></h2>
+<p>When you’re working on large-scale single-cell datasets, you should manually collect metadata for each study. Here are some benefits:</p>
+<ul class="simple">
+<li><p>It allows you to build a standard criterion to compare across studies.</p></li>
+<li><p>It allows you to conveniently add study-level annotations to cell-level metadata.</p></li>
+<li><p>It allows you to access the information you need quickly.</p></li>
+</ul>
+</section>
+<section id="what-metadata-to-collect">
+<h2>What metadata to collect?<a class="headerlink" href="#what-metadata-to-collect" title="Permalink to this heading">¶</a></h2>
+<p>While this is highly dependent on the study, here are some general categories of metadata that are often collected:</p>
+<ul class="simple">
+<li><p>Study metadata:</p>
+<ul>
+<li><p>Study name</p></li>
+<li><p>Sample name</p></li>
+<li><p>Data accession</p></li>
+<li><p>Study publication journal</p></li>
+<li><p>Study publication year</p></li>
+</ul>
+</li>
+<li><p>Biological covariates:</p>
+<ul>
+<li><p>Tissue information</p></li>
+<li><p>Age</p></li>
+<li><p>Gene type</p></li>
+<li><p>Treatment</p></li>
+<li><p>Disease</p></li>
+<li><p>Organism</p></li>
+</ul>
+</li>
+<li><p>Technical covariates:</p>
+<ul>
+<li><p>Sequencing platform</p></li>
+<li><p>Dissociation enzyme</p></li>
+</ul>
+</li>
+</ul>
+<p>In the following sections, we will go through an example of the metadata we collected in the tooth atlas.</p>
+</section>
+<section id="study-metadata">
+<h2>Study metadata<a class="headerlink" href="#study-metadata" title="Permalink to this heading">¶</a></h2>
+<section id="study-name-sample-name">
+<h3>Study name &amp; Sample name<a class="headerlink" href="#study-name-sample-name" title="Permalink to this heading">¶</a></h3>
+<p>Usually, we define the study as one publication conducted by one lab. Samples in the same study are usually comparable. For example, the paper <a class="reference external" href="https://www.nature.com/articles/s41467-022-32490-y"><strong>Spatiotemporal single-cell regulatory atlas reveals neural crest lineage diversification and cellular function during tooth morphogenesis</strong></a> <span id="id1">[<a class="reference internal" href="../references.html#id2" title="Junjun Jing, Jifan Feng, Yuan Yuan, Tingwei Guo, Jie Lei, Fei Pei, Thach-Vu Ho, and Yang Chai. Spatiotemporal single-cell regulatory atlas reveals neural crest lineage diversification and cellular function during tooth morphogenesis. Nature Communications, 13(1):4803, August 2022. doi:10.1038/s41467-022-32490-y.">Jing <em>et al.</em>, 2022</a>]</span> conducted by Yang Chai lab contains five samples ranging from E13.5 to PN7.5 in mouse embryo development. In my convention, I use characters “uniqueID+author” to name the study and use “uniqueID+sampleName” to name the sample. In this example, the study name is <code class="docutils literal notranslate"><span class="pre">ToothNc_Junjun</span></code> and the sample name is <code class="docutils literal notranslate"><span class="pre">ToothNc_Junjun_E13.5</span></code>. The most important thing is the study name should be easy to remember and unique.</p>
+</section>
+<section id="data-accession">
+<h3>Data accession<a class="headerlink" href="#data-accession" title="Permalink to this heading">¶</a></h3>
+<p>This is the accession number of the data. For example, the data of <code class="docutils literal notranslate"><span class="pre">ToothNc_Junjun</span></code> is <a class="reference external" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE189381">GSE189381</a>. Once you have recorded this information, you can easily access the data if you forget the data source.</p>
+</section>
+</section>
+<section id="biological-covariates">
+<h2>Biological covariates<a class="headerlink" href="#biological-covariates" title="Permalink to this heading">¶</a></h2>
+<section id="tissue-information">
+<h3>Tissue information<a class="headerlink" href="#tissue-information" title="Permalink to this heading">¶</a></h3>
+<p>This is the most tricky part, and it is highly dependent on your purpose. For example, when I build the <a class="reference external" href="https://trajatlas.readthedocs.io/en/stable/introduction/Differentiation_Atlas.html">Differentiation Atlas</a> focused on bone development, I found it’s hard to use one single tissue information to summarize the tissue information. So I use multi-level tissue information for description. Some reviews <span id="id2">[<a class="reference internal" href="../references.html#id3" title="Toshihide Mizoguchi and Noriaki Ono. The diverse origin of bone-forming osteoblasts. Journal of Bone and Mineral Research, 36(8):1432–1447, 2021. doi:10.1002/jbmr.4410.">Mizoguchi and Ono, 2021</a>]</span> suggest there are three main organs that generate the osteoblasts: Head, Limb bud, and Long bone, and the osteogenic pathways are significantly different across the organs. So I used <strong>tissue origin</strong> which contains these three categories to describe the main organ sources. And in a finer resolution, we can see that the organ can be divided into the <strong>histological</strong> and <strong>tissue location</strong> subtypes <span id="id3">[<a class="reference internal" href="../references.html#id4" title="Hui Sophie Shu, Yiming Liam Liu, Xinyu Thomas Tang, Xinyi Shirley Zhang, Bin Zhou, Weiguo Zou, and Bo O. Zhou. Tracing the skeletal progenitor transition during postnatal bone formation. Cell Stem Cell, 28(12):2122-2136.e3, December 2021. doi:10.1016/j.stem.2021.08.010.">Shu <em>et al.</em>, 2021</a>]</span>. For example, the long bone can be divided into metaphysis, diaphysis, and epiphysis, which are histologically different. And it can also be divided into tibia, femur, which is location different. Therefore, I finally form three-level tissue metadata.
+<img alt="png" src="../_images/meta_tissue.png" /></p>
+<p>And in tooth development, the situation is completely different. First, the tooth from <strong>mandibular or maxillary</strong> may have great shape and transcriptional differences <span id="id4">[<a class="reference internal" href="../references.html#id5" title="Thira Faruangsaeng, Sermporn Thaweesapphitak, Chompak Khamwachirapitak, Thantrira Porntaveetus, and Vorasuk Shotelersuk. Comparative transcriptome profiles of human dental pulp stem cells from maxillary and mandibular teeth. Scientific Reports, 12:8860, May 2022. doi:10.1038/s41598-022-12867-1.">Faruangsaeng <em>et al.</em>, 2022</a>]</span> <span id="id5">[<a class="reference internal" href="../references.html#id6" title="Sophie Pantalacci, Laurent Guéguen, Coraline Petit, Anne Lambert, Renata Peterkovà, and Marie Sémon. Transcriptomic signatures shaped by cell proportions shed light on comparative developmental biology. Genome Biology, 18:29, February 2017. doi:10.1186/s13059-017-1157-7.">Pantalacci <em>et al.</em>, 2017</a>]</span>. This is significant in mice, as the mandibular incisors of mice are longer than maxillary incisors.
+<img alt="png" src="../_images/meta_tissue_tooth.png" />
+Even more significant is the distinction between <strong>tooth types</strong>. The differences between molars and incisors extend beyond shape to include enamel structure. In incisors, the enamel exhibits a uniserial lamellar pattern of prisms in the inner enamel, while the outer enamel features parallel radial prisms. In contrast, molars display a multifaceted rod pattern with more variable structures than those found in incisors.<span id="id6">[<a class="reference internal" href="../references.html#id7" title="Kerstin Seidel, Pauline Marangoni, Cynthia Tang, Bahar Houshmand, Wen Du, Richard L Maas, Steven Murray, Michael C Oldham, and Ophir D Klein. Resolving stem and progenitor cells in the adult mouse incisor through gene co-expression analysis. eLife, 6:e24712, May 2017. doi:10.7554/eLife.24712.">Seidel <em>et al.</em>, 2017</a>]</span></p>
+<figure class="align-center" id="id12">
+<a class="bg-primary reference internal image-reference" href="../_images/20241023_enamel.png"><img alt="fishy" class="bg-primary" src="../_images/20241023_enamel.png" style="width: 800px;" /></a>
+<figcaption>
+<p><span class="caption-text">Comparison of incisor and molar enamel structure. Figure adapted from <span id="id7">[<a class="reference internal" href="../references.html#id7" title="Kerstin Seidel, Pauline Marangoni, Cynthia Tang, Bahar Houshmand, Wen Du, Richard L Maas, Steven Murray, Michael C Oldham, and Ophir D Klein. Resolving stem and progenitor cells in the adult mouse incisor through gene co-expression analysis. eLife, 6:e24712, May 2017. doi:10.7554/eLife.24712.">Seidel <em>et al.</em>, 2017</a>]</span>.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Some studies may focus on a specific <strong>tooth histology type</strong>. For example the study <span id="id8">[<a class="reference internal" href="../references.html#id8" title="Jan Krivanek, Ruslan A. Soldatov, Maria Eleni Kastriti, Tatiana Chontorotzea, Anna Nele Herdina, Julian Petersen, Bara Szarowska, Marie Landova, Veronika Kovar Matejova, Lydie Izakovicova Holla, Ulrike Kuchler, Ivana Vidovic Zdrilic, Anushree Vijaykumar, Anamaria Balic, Pauline Marangoni, Ophir D. Klein, Vitor C. M. Neves, Val Yianni, Paul T. Sharpe, Tibor Harkany, Brian D. Metscher, Marc Bajénoff, Mina Mina, Kaj Fried, Peter V. Kharchenko, and Igor Adameyko. Dental cell type atlas reveals stem and differentiated cell types in mouse and human teeth. Nature Communications, 11(1):4816, September 2020. doi:10.1038/s41467-020-18512-7.">Krivanek <em>et al.</em>, 2020</a>]</span> use the dental pulp as the tissue source, while the study <span id="id9">[<a class="reference internal" href="../references.html#id9" title="S.Y. Luo, S. Wang, Z.X. Liu, Q. Bian, and X.D. Wang. Six1 Regulates Mouse Incisor Development by Promoting Dlx1/2/5 Expression. Journal of Dental Research, 103(10):1017–1027, September 2024. doi:10.1177/00220345241256286.">Luo <em>et al.</em>, 2024</a>]</span> focus on the tooth germ.</p>
+</section>
+</section>
+<section id="age">
+<h2>Age<a class="headerlink" href="#age" title="Permalink to this heading">¶</a></h2>
+<p>Another important biological covariate is <strong>age</strong>. Based on the shape of tooth germ, we can roughly divide the tooth development into five stages: thicking, bud, cap, bell and erupted. <span id="id10">[<a class="reference internal" href="../references.html#id10" title="Abigail Tucker and Paul Sharpe. The cutting-edge of mammalian development; how the embryo makes teeth. Nature Reviews Genetics, 5(7):499–508, July 2004. doi:10.1038/nrg1380.">Tucker and Sharpe, 2004</a>]</span>
+<img alt="png" src="../_images/meta_age.png" />
+Studies also report the age-related difference in the dental pulp. <span id="id11">[<a class="reference internal" href="../references.html#id11" title="Wei Wu, Jian Zhou, Chong-Tao Xu, Jie Zhang, Yan-Jiao Jin, and Geng-Lin Sun. Derivation and growth characteristics of dental pulp stem cells from patients of different ages. Molecular Medicine Reports, 12(4):5127–5134, October 2015. doi:10.3892/mmr.2015.4106.">Wu <em>et al.</em>, 2015</a>]</span> Therefore, we also collect the detailed age information for each sample and base on the age we divided into different stages.
+<img alt="png" src="../_images/meta_age_stage.png" /></p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">scAtlas</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Metadata Collection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-metadata-to-collect">What metadata to collect?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#study-metadata">Study metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#biological-covariates">Biological covariates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#age">Age</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/team.html">Team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/cite.html">Citing scAtlas</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Welcome to scAtlas’s documentation!</a></li>
+      <li>Next: <a href="../references.html" title="next chapter">References</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Gilbert Han.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../_sources/preprocess/metadata_process.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
