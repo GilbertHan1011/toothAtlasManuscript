@@ -54,8 +54,10 @@ Comparison of incisor and molar enamel structure. Figure adapted from {cite:p}`s
 
 Some studies may focus on a specific **tooth histology type**. For example the study {cite:p}`krivanekDentalCellType2020b` use the dental pulp as the tissue source, while the study {cite:p}`luoSix1RegulatesMouse2024` focus on the tooth germ.
 
-## Age
+### Age
 Another important biological covariate is **age**. Based on the shape of tooth germ, we can roughly divide the tooth development into five stages: thicking, bud, cap, bell and erupted. {cite:p}`tuckerCuttingedgeMammalianDevelopment2004`
 ![png](../img/meta_age.png)
 Studies also report the age-related difference in the dental pulp. {cite:p}`wuDerivationGrowthCharacteristics2015` Therefore, we also collect the detailed age information for each sample and base on the age we divided into different stages.
 ![png](../img/meta_age_stage.png)
+
+## Technical covariates
