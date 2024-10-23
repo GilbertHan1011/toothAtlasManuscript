@@ -1,0 +1,2 @@
+validation_loss,timestamp,checkpoint_dir_name,done,training_iteration,trial_id,date,time_this_iter_s,time_total_s,pid,hostname,node_ip,time_since_restore,iterations_since_restore
+1142.4327392578125,1729243622,,True,1,9b5cf_00046,2024-10-18_17-27-02,87.76696181297302,87.76696181297302,581649,gilberthan-WD12,192.168.1.100,87.76696181297302,1

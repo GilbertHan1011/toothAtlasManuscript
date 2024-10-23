@@ -17,8 +17,6 @@ def update_metadata(meta_path, scMeta_path, output_path):
     # Temporarily replace NaN values
     meta = meta.fillna("Not provided")
     
-    # Add 'Sample' column from the index
-    meta["Sample"] = meta.index
     
     # Reset index of scMeta for merging
     scMeta = scMeta.reset_index()

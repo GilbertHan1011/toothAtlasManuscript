@@ -1,0 +1,13 @@
+{
+  "model_params": {
+    "dispersion": "gene",
+    "dropout_rate": 0.5,
+    "gene_likelihood": "zinb",
+    "n_hidden": 256,
+    "n_latent": 6,
+    "n_layers": 6
+  },
+  "train_params": {
+    "max_epochs": 40
+  }
+}

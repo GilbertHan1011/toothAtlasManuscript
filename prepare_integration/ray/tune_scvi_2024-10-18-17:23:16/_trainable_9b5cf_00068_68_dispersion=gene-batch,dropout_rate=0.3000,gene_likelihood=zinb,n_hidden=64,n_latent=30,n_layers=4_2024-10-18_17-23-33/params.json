@@ -1,0 +1,8 @@
+{
+  "dispersion": "gene-batch",
+  "dropout_rate": 0.3,
+  "gene_likelihood": "zinb",
+  "n_hidden": 64,
+  "n_latent": 30,
+  "n_layers": 4
+}

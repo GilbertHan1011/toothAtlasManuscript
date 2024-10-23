@@ -239,3 +239,27 @@ process_seurat_data <- function(data_directory, min_cells = 3, min_features = 50
 
   return(seuratMerge)
 }
+
+#== rename gene name-------------------
+convertGene <- function(path, symbols) {
+  load(path)
+  mapper = function(df, value_col, name_col) setNames(df[[value_col]], df[[name_col]])
+
+  humansymbol2mousesymbol = mapper(geneinfo_2022, "symbol_mouse", "symbol")
+  converted_symbols = humansymbol2mousesymbol[symbols %>% as.character()]
+
+  return(converted_symbols)
+}
+
+RenameGenesSeurat <- function(obj, newnames) { # Replace gene names in different slots of a Seurat object. Run this before integration. Run this before integration. It only changes obj@assays$RNA@counts, @data and @scale.data.
+  print("Run this before integration. It only changes obj@assays$RNA@counts, @data and @scale.data.")
+  RNA <- obj@assays$RNA
+
+  if (nrow(RNA) == length(newnames)) {
+    if (length(RNA@counts)) RNA@counts@Dimnames[[1]]            <- newnames
+    if (length(RNA@data)) RNA@data@Dimnames[[1]]              <- newnames
+    if (length(RNA@scale.data)) rownames(RNA@scale.data)    <- newnames
+  } else {"Unequal gene sets: nrow(RNA) != nrow(newnames)"}
+  obj@assays$RNA <- RNA
+  return(obj)
+}

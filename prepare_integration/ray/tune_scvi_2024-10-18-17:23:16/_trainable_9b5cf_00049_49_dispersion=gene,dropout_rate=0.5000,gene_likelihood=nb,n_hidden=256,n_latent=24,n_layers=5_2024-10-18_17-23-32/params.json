@@ -1,0 +1,8 @@
+{
+  "dispersion": "gene",
+  "dropout_rate": 0.5,
+  "gene_likelihood": "nb",
+  "n_hidden": 256,
+  "n_latent": 24,
+  "n_layers": 5
+}

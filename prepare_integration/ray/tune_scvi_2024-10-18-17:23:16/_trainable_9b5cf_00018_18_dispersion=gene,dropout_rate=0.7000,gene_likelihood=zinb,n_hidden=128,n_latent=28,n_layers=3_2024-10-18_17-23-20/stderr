@@ -1,0 +1,18 @@
+:actor_name:_trainable
+<frozen abc>:119: FutureWarning: SparseDataset is deprecated and will be removed in late 2024. It has been replaced by the public classes CSRDataset and CSCDataset.
+
+For instance checks, use `isinstance(X, (anndata.experimental.CSRDataset, anndata.experimental.CSCDataset))` instead.
+
+For creation, use `anndata.experimental.sparse_dataset(X)` instead.
+
+An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not installed. Falling back to cpu.
+/home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+  warnings.warn(
+/home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/ray/tune/integration/pytorch_lightning.py:194: UserWarning: `ray.tune.integration.pytorch_lightning.TuneReportCallback` is deprecated. Use `ray.tune.integration.pytorch_lightning.TuneReportCheckpointCallback` instead.
+  warnings.warn(
+<frozen abc>:119: FutureWarning: SparseDataset is deprecated and will be removed in late 2024. It has been replaced by the public classes CSRDataset and CSCDataset.
+
+For instance checks, use `isinstance(X, (anndata.experimental.CSRDataset, anndata.experimental.CSCDataset))` instead.
+
+For creation, use `anndata.experimental.sparse_dataset(X)` instead.
+
