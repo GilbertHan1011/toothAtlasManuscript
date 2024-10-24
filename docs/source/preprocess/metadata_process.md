@@ -61,3 +61,6 @@ Studies also report the age-related difference in the dental pulp. {cite:p}`wuDe
 ![png](../img/meta_age_stage.png)
 
 ## Technical covariates
+
+### Sequencing platform
+Different platform may have huge impact on batch effect because of the different sequencing depth, handling personnel, reagent lots and equipments {cite:p}`tranBenchmarkBatcheffectCorrection2020`. Even the same platform with different protocols, like 10Xv2 and 10Xv3, may also matters {cite:p}`sikkemaIntegratedCellAtlas2023`. Therefore, we collect these information for each sample.

@@ -1,4 +1,4 @@
-selector_to_html = {"a[href=\"#contributing-guide\"]": "<h1 class=\"tippy-header\" style=\"margin-top: 0;\">Contributing Guide<a class=\"headerlink\" href=\"#contributing-guide\" title=\"Permalink to this heading\">\u00b6</a></h1><p>Contributions are welcome, and they are greatly appreciated! Every little bit helps, and credit will always be given.</p><p>Please feel to reach out via opening a new <a class=\"reference external\" href=\"https://github.com/GilbertHan1011/toothAtlasManuscript/issues/new/choose\">issue</a>.</p>"}
+selector_to_html = {"a[href=\"#citing-scatlas\"]": "<h1 class=\"tippy-header\" style=\"margin-top: 0;\">Citing scAtlas<a class=\"headerlink\" href=\"#citing-scatlas\" title=\"Permalink to this heading\">\u00b6</a></h1><p><a class=\"reference external\" href=\"https://www.biorxiv.org/content/10.1101/2024.05.28.596174v1.full\">Our work</a> has been posted on bioRxiv. If scAtlas is useful for your research, please consider citing our work as follows:</p>"}
 skip_classes = ["headerlink", "sd-stretched-link"]
 
 window.onload = function () {
