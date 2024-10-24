@@ -5,7 +5,7 @@ source("script/utils/seurat_utils.R")
 filesPath <- list.files("preprocess_data/",full.names = T)
 fileName <- list.files("preprocess_data/") %>% gsub(".Rds","",.)
 
-sce <-readH5AD("process/pre-intergration/big_data/20241007_mergeall_filter_gene_step1.h5ad")
+#sce <-readH5AD("process/pre-intergration/big_data/20241007_mergeall_filter_gene_step1.h5ad")
 
 runDblFinder <- function(name){
   path <- paste0("processed_data/preprocess_data/",name,".Rds")
@@ -21,8 +21,8 @@ lapply(fileName,runDblFinder)
 #runDblFinder("Deciduous_Li")
 
 
-lapply(fileName[20:25],runDblFinder)
+#lapply(fileName[20:25],runDblFinder)
 #
 # test <- readRDS("preprocess_data//Deciduous_Li.Rds")
 # test
-runDblFinder("Peridontal_Nagata")
+#runDblFinder("Peridontal_Nagata")

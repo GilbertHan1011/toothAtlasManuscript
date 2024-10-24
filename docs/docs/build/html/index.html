@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Metadata Collection" href="preprocess/metadata_process.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Introduction to scAtlas" href="Introduction/introduction.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
         <title>scAtlas 0.0.1 documentation</title>
@@ -154,8 +154,8 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo only-light" src="_static/img/tooth_log.png" alt="Light Logo"/>
-    <img class="sidebar-logo only-dark" src="_static/img/tooth_log.png" alt="Dark Logo"/>
+    <img class="sidebar-logo only-light" src="_static/tooth_log.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/tooth_log.png" alt="Dark Logo"/>
   </div>
   
   
@@ -167,13 +167,23 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Introduction/introduction.html">Introduction to scAtlas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="preprocess/metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/droplet.html">Droplet discovery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/first_round_annotation.html">First round annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/post_annotation.html">Post annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/batch_division.html">Batch division</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pre-integration/hypertune.html">Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration/20241024_coarse_label.html">First-level annotation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">About</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="about/team.html">Team</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about/cite.html">Citing scAtlas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing Guide</a></li>
 </ul>
 
 </div>
@@ -216,15 +226,57 @@
 in the amount of single-cell data generated, a high quality reference atlas can be valuable resource for
 research groups to derive insights from their data. Here, we hope to provide a pipeline for building
 large-scale single-cell atlases that can be used for a variety of applications.</p>
+</section>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="Introduction/introduction.html">Introduction to scAtlas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Introduction/introduction.html#why-atlas">Why atlas</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="preprocess/metadata_process.html">Metadata Collection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html#what-metadata-to-collect">What metadata to collect?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html#study-metadata">Study metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html#biological-covariates">Biological covariates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html#technical-covariates">Technical covariates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/first_round_preprocess.html">First round preprocess</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_preprocess.html#aim-of-first-round-preprocess">Aim of first round preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_preprocess.html#utils-that-used-in-this-step">Utils that used in this step</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_preprocess.html#basic-process-script">basic process script</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/droplet.html">Droplet discovery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/droplet.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/droplet.html#utils-that-used-in-this-step">Utils that used in this step</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/droplet.html#process-scripts">Process Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/droplet.html#why-this-step-is-necessary">Why this step is necessary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/first_round_annotation.html">First round annotation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_annotation.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_annotation.html#curated-marker-genes">Curated marker genes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_annotation.html#procedure">Procedure</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/post_annotation.html">Post annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/batch_division.html">Batch division</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pre-integration/hypertune.html">Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pre-integration/scib-benchmark.html">Integration methods benchmarking</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pre-integration/scib-benchmark.html#why-this-matters">Why this matters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pre-integration/scib-benchmark.html#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pre-integration/scib-benchmark.html#results">Results</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integration/20241024_coarse_label.html">First-level annotation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="integration/20241024_coarse_label.html#Set-environment">Set environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/20241024_coarse_label.html#Leiden-Cluster">Leiden Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/20241024_coarse_label.html#Validation">Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="integration/20241024_coarse_label.html#Save-data">Save data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
@@ -248,12 +300,12 @@ large-scale single-cell atlases that can be used for a variety of applications.<
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="preprocess/metadata_process.html">
+          <a class="next-page" href="Introduction/introduction.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Metadata Collection</div>
+                <div class="title">Introduction to scAtlas</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -291,7 +343,8 @@ large-scale single-cell atlases that can be used for a variety of applications.<
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Welcome to scAtlas’s documentation!</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
 </ul>
 </li>
 </ul>
@@ -313,9 +366,11 @@ large-scale single-cell atlases that can be used for a variety of applications.<
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/index.74e47309-95d1-4863-8031-ca5a2a6cb8a7.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script defer="defer" src="_static/tippy/index.947077c4-4cd4-4408-a14a-7b460606e5c6.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>

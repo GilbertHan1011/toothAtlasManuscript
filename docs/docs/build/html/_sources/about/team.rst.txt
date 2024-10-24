@@ -22,9 +22,9 @@ Principal Investigators
 
 Core Development Team
 ---------------------
-.. grid:: auto
+.. grid:: 3
 
-    .. grid-item-card:: :fab:`twitter` `Litian Han <https://twitter.com/GilbertHan7>`_
+    .. grid-item-card:: :fas:`blog` `Litian Han <https://gilberthan1011.github.io>`_
         :img-top: https://avatars.githubusercontent.com/u/39906045
 
         - :fas:`graduation-cap` `Google Scholar <https://scholar.google.com/citations?user=Dpzc2lUAAAAJ>`__

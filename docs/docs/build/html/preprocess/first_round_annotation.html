@@ -1,0 +1,390 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Post annotation" href="post_annotation.html" /><link rel="prev" title="Droplet discovery" href="droplet.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>First round annotation - scAtlas 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/override.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #003262;
+  --color-brand-content: #003262;
+  --admonition-font-size: var(--font-size-normal);
+  --admonition-title-font-size: var(--font-size-normal);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">scAtlas 0.0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/tooth_log.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/tooth_log.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction to scAtlas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="droplet.html">Droplet discovery</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">First round annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post_annotation.html">Post annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_division.html">Batch division</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pre-integration/hypertune.html">Hyperparameter tuning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">Cluster the datasets to get first level annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/team.html">Team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/cite.html">Citing scAtlas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing Guide</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="first-round-annotation">
+<h1>First round annotation<a class="headerlink" href="#first-round-annotation" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>In the first round annotation, we recommend to coarsely annotate the cell types. It serves two purposes:</p>
+<ol class="arabic simple">
+<li><p>Some integration algorithms are ultilized cell type information, for example, scANVI <span id="id1">[<a class="reference internal" href="../references.html#id14" title="Chenling Xu, Romain Lopez, Edouard Mehlman, Jeffrey Regier, Michael I Jordan, and Nir Yosef. Probabilistic harmonization and annotation of single-cell transcriptomics data with deep generative models. Molecular Systems Biology, 17(1):e9620, January 2021. doi:10.15252/msb.20209620.">Xu <em>et al.</em>, 2021</a>]</span> and scPoli <span id="id2">[<a class="reference internal" href="../references.html#id15" title="Carlo De Donno, Soroor Hediyeh-Zadeh, Amir Ali Moinfar, Marco Wagenstetter, Luke Zappia, Mohammad Lotfollahi, and Fabian J. Theis. Population-level integration of single-cell datasets enables multi-scale analysis across samples. Nature Methods, pages 1–10, October 2023. doi:10.1038/s41592-023-02035-2.">De Donno <em>et al.</em>, 2023</a>]</span>.</p></li>
+<li><p>It can help us to diagnose the integration results.</p></li>
+</ol>
+</section>
+<section id="curated-marker-genes">
+<h2>Curated marker genes<a class="headerlink" href="#curated-marker-genes" title="Permalink to this heading">#</a></h2>
+<p>Though the cell type may have great variance across tissues and ages, the main cell types are consistent across datasets. In the first round annotation, the annotation should be unified. Base on the literature, we summarized the cell types that commonly exist in the literature, and make a marker gene lists.</p>
+<iframe src="https://docs.google.com/spreadsheets/d/1LQ5yZiX8caeKhuV8e1-muWGyxcWoa_HHOgk4wfBFJSk/edit?usp=sharing" width="60%" height="400"></iframe>
+</section>
+<section id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="Permalink to this heading">#</a></h2>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">knitr</span><span class="o">::</span><span class="n">opts_chunk</span><span class="o">$</span><span class="nf">set</span><span class="p">(</span><span class="n">echo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">knitr</span><span class="o">::</span><span class="n">opts_knit</span><span class="o">$</span><span class="nf">set</span><span class="p">(</span><span class="n">root.dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/home/gilberthan/Desktop/disk2/202409_tooth/&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1"># set working directory</span>
+</pre></div>
+</div>
+<p>Load Environment</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="n">outputdir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;process/annotation/first_round_base/&quot;</span>
+<span class="n">baseName</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Tooth_Zheng&quot;</span><span class="w"> </span><span class="c1"># You should change this.</span>
+<span class="n">seurat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="s">&quot;preprocess_data/&quot;</span><span class="p">,</span><span class="n">baseName</span><span class="p">,</span><span class="s">&quot;.Rds&quot;</span><span class="p">))</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;script/utils/seurat_utils.R&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Visualization</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">markers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Sox9&quot;</span><span class="p">,</span><span class="s">&quot;Vcan&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1"># Mesenchyme</span>
+<span class="w">             </span><span class="s">&quot;Krt14&quot;</span><span class="p">,</span><span class="s">&quot;Pitx2&quot;</span><span class="p">,</span><span class="c1"># Epithelium</span>
+<span class="w">             </span><span class="s">&quot;C1qa&quot;</span><span class="p">,</span><span class="s">&quot;Napsa&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">#Immune</span>
+<span class="w">             </span><span class="s">&quot;Cdh5&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">#Endo</span>
+<span class="w">             </span><span class="s">&quot;Sox10&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1"># neuron</span>
+<span class="w">             </span><span class="s">&quot;Rgs5&quot;</span><span class="w"> </span><span class="c1"># perivasular</span>
+<span class="w">             </span><span class="p">)</span><span class="w"> </span>
+<span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">seurat</span><span class="p">,</span><span class="n">markers</span><span class="p">,</span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="n">outputdir</span><span class="p">,</span><span class="s">&quot;plot/&quot;</span><span class="p">,</span><span class="n">baseName</span><span class="p">,</span><span class="s">&quot;_EDA_FeatUmap.pdf&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../_images/first_anno1.png" /></p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">VlnPlot</span><span class="p">(</span><span class="n">seurat</span><span class="p">,</span><span class="n">markers</span><span class="p">,</span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">,</span><span class="n">flip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">T</span><span class="p">)</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="n">outputdir</span><span class="p">,</span><span class="s">&quot;plot/&quot;</span><span class="p">,</span><span class="n">baseName</span><span class="p">,</span><span class="s">&quot;_EDA_Vln.pdf&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../_images/first_anno2.png" /></p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">dput</span><span class="p">(</span><span class="nf">levels</span><span class="p">(</span><span class="n">seurat</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">newID</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Mesenchyme&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mesenchyme&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mesenchyme&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mesenchyme&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mesenchyme&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mesenchyme&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Immune&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Endothelium&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Perivasular&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">           </span><span class="s">&quot;Epithelium&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Mesenchyme&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Immune&quot;</span>
+<span class="p">)</span>
+<span class="n">seurat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">renameLabel</span><span class="p">(</span><span class="n">seurat</span><span class="p">,</span><span class="n">newID</span><span class="p">,</span><span class="s">&quot;coarse_anno_1&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1"># first parameter : seurat; Second parameter : new ID, which order same with level; third para : the slot you want to store in metadata</span>
+</pre></div>
+</div>
+<p>Validation</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">p1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seurat</span><span class="p">,</span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;coarse_anno_1&quot;</span><span class="p">)</span>
+<span class="n">p2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">DimPlot</span><span class="p">(</span><span class="n">seurat</span><span class="p">,</span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;orig.ident&quot;</span><span class="p">)</span>
+<span class="n">p1</span><span class="o">|</span><span class="n">p2</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="n">outputdir</span><span class="p">,</span><span class="s">&quot;plot/&quot;</span><span class="p">,</span><span class="n">baseName</span><span class="p">,</span><span class="s">&quot;_validation_umap.pdf&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../_images/first_anno3.png" /></p>
+<p>Store data</p>
+<p>Do NOT overwrite the seurat RDS!!!</p>
+<p>Just save the annotation information.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">label</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">seurat</span><span class="o">$</span><span class="n">coarse_anno_1</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">()</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Coarse_Label_1&quot;</span>
+
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="nf">paste0</span><span class="p">(</span><span class="n">outputdir</span><span class="p">,</span><span class="s">&quot;anno/&quot;</span><span class="p">,</span><span class="n">baseName</span><span class="p">,</span><span class="s">&quot;.csv&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>When read the label, it should be like this</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">loadLabel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="n">outputdir</span><span class="p">,</span><span class="s">&quot;anno/&quot;</span><span class="p">,</span><span class="n">baseName</span><span class="p">,</span><span class="s">&quot;.csv&quot;</span><span class="p">),</span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="n">loadLabel</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="post_annotation.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Post annotation</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="droplet.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Droplet discovery</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Gilbert Han
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fab fa-github" href="https://github.com/GilbertHan1011/toothAtlasManuscript" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">First round annotation</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#curated-marker-genes">Curated marker genes</a></li>
+<li><a class="reference internal" href="#procedure">Procedure</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f6245a2f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
+    <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
+    <script defer="defer" src="../_static/tippy/preprocess/first_round_annotation.0b31f042-aed8-410e-a373-0a3b29e80e2b.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

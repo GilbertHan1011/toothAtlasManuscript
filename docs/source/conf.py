@@ -29,9 +29,14 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_autodoc_typehints",
     "sphinx_tippy",
-    "sphinx_design"
+    "sphinx_design",
+    "nbsphinx",
+    "IPython.sphinxext.ipython_console_highlighting"
 ]
 
+exclude_patterns = ['_build', '**.ipynb_checkpoints']
+nbsphinx_allow_errors = True
+nbsphinx_execute = 'never'
 master_doc = "index"
 pygments_style = "tango"
 pygments_dark_style = "monokai"
@@ -40,11 +45,10 @@ nitpicky = True
 
 templates_path = ['_templates']
 source_suffix = {
-    ".rst": "restructuredtext",
-    ".ipynb": "myst-nb",
+    ".rst": "restructuredtext"
 }
 
-exclude_patterns = []
+
 
 # -- Options for HTML output
 
@@ -75,8 +79,8 @@ html_show_sphinx = False
 html_show_sourcelink = False
 html_theme_options = {
     "sidebar_hide_name": True,
-    "light_logo": "img/tooth_log.png", 
-    "dark_logo": "img/tooth_log.png",
+    "light_logo": "tooth_log.png", 
+    "dark_logo": "tooth_log.png",
     "light_css_variables": {
         "color-brand-primary": "#003262",
         "color-brand-content": "#003262",

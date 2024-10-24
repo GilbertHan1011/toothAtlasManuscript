@@ -13,13 +13,24 @@ in the amount of single-cell data generated, a high quality reference atlas can 
 research groups to derive insights from their data. Here, we hope to provide a pipeline for building 
 large-scale single-cell atlases that can be used for a variety of applications.
 
-
+Contents
+------------
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   Introduction/introduction
    preprocess/metadata_process
+   preprocess/first_round_preprocess
+   preprocess/droplet
+   preprocess/first_round_annotation
+   preprocess/post_annotation
+   preprocess/batch_division
+   pre-integration/hypertune
+   pre-integration/scib-benchmark
+   integration/20241024_coarse_label
    references
+
 
 .. toctree::
    :caption: About
@@ -28,6 +39,7 @@ large-scale single-cell atlases that can be used for a variety of applications.
 
    about/team
    about/cite
+   contributing
 
 Indices and tables
 ==================
