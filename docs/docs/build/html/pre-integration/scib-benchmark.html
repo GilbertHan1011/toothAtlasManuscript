@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Cluster the datasets to get first level annotation" href="../integration/20241024_coarse_label.html" /><link rel="prev" title="Hyperparameter tuning" href="hypertune.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="First-level annotation" href="../integration/20241024_coarse_label.html" /><link rel="prev" title="Hyperparameter tuning" href="hypertune.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
         <title>Integration methods benchmarking - scAtlas 0.0.1 documentation</title>
@@ -176,7 +176,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../preprocess/batch_division.html">Batch division</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hypertune.html">Hyperparameter tuning</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Integration methods benchmarking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">Cluster the datasets to get first level annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">About</span></p>
@@ -222,9 +222,111 @@
 <h1>Integration methods benchmarking<a class="headerlink" href="#integration-methods-benchmarking" title="Permalink to this heading">#</a></h1>
 <section id="why-this-matters">
 <h2>Why this matters<a class="headerlink" href="#why-this-matters" title="Permalink to this heading">#</a></h2>
+<p>For atlas level scRNA analysis, integration algrithoms are essential to keep biological signals while removing technical noises <span id="id1">[<a class="reference internal" href="../references.html#id19" title="Malte D. Luecken, M. Büttner, K. Chaichoompu, A. Danese, M. Interlandi, M. F. Mueller, D. C. Strobl, L. Zappia, M. Dugas, M. Colomé-Tatché, and Fabian J. Theis. Benchmarking atlas-level data integration in single-cell genomics. Nature Methods, 19(1):41–50, January 2022. doi:10.1038/s41592-021-01336-8.">Luecken <em>et al.</em>, 2022</a>]</span>. The performance of integration methods highly depends on the data itself <span id="id2">[<a class="reference internal" href="../references.html#id19" title="Malte D. Luecken, M. Büttner, K. Chaichoompu, A. Danese, M. Interlandi, M. F. Mueller, D. C. Strobl, L. Zappia, M. Dugas, M. Colomé-Tatché, and Fabian J. Theis. Benchmarking atlas-level data integration in single-cell genomics. Nature Methods, 19(1):41–50, January 2022. doi:10.1038/s41592-021-01336-8.">Luecken <em>et al.</em>, 2022</a>]</span>. Therefore we recommend to benchmark integration methods before you start integration.</p>
+<p>Here, we use <a class="reference external" href="https://github.com/theislab/scib-pipeline">scib benchmarking pipeline</a> to perform integration benchmark.</p>
 </section>
 <section id="process">
 <h2>Process<a class="headerlink" href="#process" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://github.com/theislab/scib-pipeline">scib-pipeline</a> offers a handy snakemake pipeline to perform integration benchmark. However, it lacks maintainance since two years ago. You might have to take some times to fix the pacakge dependencies conflicts.</p>
+<p>The process is as follows:</p>
+<ol class="arabic simple">
+<li><p>setup environment and modify the configuration file.</p></li>
+<li><p>run the pipeline.</p></li>
+<li><p>visualize the results.</p></li>
+</ol>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading">#</a></h3>
+<p>The scib-pipeline can allows you to tune three hyperparameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HVG</span> <span class="pre">numbers</span></code>: the number of highly variable genes to use for integration.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">benchmarking</span> <span class="pre">methods</span></code>: the integration methods to benchmark.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scale_or_not</span></code>: whether to scale the data before integration.
+Here are our benchmarking strategy:
+<img alt="png" src="../_images/benchmark_strategy.png" /></p></li>
+</ul>
+<p>Our configuration file is as follows:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ROOT</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/gilberthan/Desktop/disk2/202409_tooth_raw/scib</span>
+<span class="nt">r_env </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scib-R4.0</span><span class="w"> </span>
+<span class="nt">py_env </span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scib-pipeline-R4.0</span>
+<span class="nt">timing</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+
+<span class="nt">FEATURE_SELECTION</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">hvg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2000</span>
+<span class="w">  </span><span class="c1">#  full_feature: 6000</span>
+
+<span class="nt">SCALING</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unscaled</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scaled</span>
+
+<span class="nt">METHODS</span><span class="p">:</span><span class="w"> </span><span class="c1"># method name : ouput type(s)</span>
+<span class="w">  </span><span class="nt">scanorama</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">output_type</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">embed</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+<span class="w">  </span><span class="nt">harmony</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">R</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">output_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">embed</span>
+<span class="w">  </span><span class="nt">bbknn</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">output_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">knn</span>
+<span class="w">  </span><span class="nt">scvi</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">no_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">output_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">embed</span>
+<span class="w">  </span><span class="nt">scanvi</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">no_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">output_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">embed</span>
+<span class="w">    </span><span class="nt">use_celltype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">conos</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">no_scale</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">R</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">output_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">knn</span>
+<span class="w">  </span><span class="nt">seuratrpca</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">R</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">output_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+<span class="w">  </span><span class="nt">combat</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">output_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+<span class="w">  </span><span class="nt">fastmnn</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">R</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">output_type</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">embed</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">full</span>
+
+<span class="nt">DATA_SCENARIOS</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">test_small</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">batch_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sample</span>
+<span class="w">    </span><span class="nt">label_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coarse_anno_1</span>
+<span class="w">    </span><span class="nt">organism</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mouse</span>
+<span class="w">    </span><span class="nt">assay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expression</span>
+<span class="w">    </span><span class="nt">file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/home/gilberthan/Desktop/disk2/202409_tooth/process/pre-intergration/big_data/20241008_core_pp_log1p_half_gene_small_HVG.h5ad</span>
+</pre></div>
+</div>
+</section>
+<section id="run-the-pipeline">
+<h3>Run the pipeline<a class="headerlink" href="#run-the-pipeline" title="Permalink to this heading">#</a></h3>
+<p>The running code is simple:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>--configfile<span class="w"> </span>configs/toothAtlas.yaml<span class="w"> </span>--cores<span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+</section>
+<section id="visualize-the-results">
+<h3>Visualize the results<a class="headerlink" href="#visualize-the-results" title="Permalink to this heading">#</a></h3>
+<p>We use the the code in <a class="reference external" href="https://github.com/theislab/scib-reproducibility">scib-reproducibility</a> to visualize the results.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">setwd</span><span class="p">(</span><span class="s">&quot;script/utils/scib/&quot;</span><span class="p">)</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&#39;plotBestMethodsRNA.R&#39;</span><span class="p">)</span><span class="w"> </span><span class="c1">#== code from scib-reproducibility</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&#39;plotSingleTaskRNA.R&#39;</span><span class="p">)</span><span class="w"> </span><span class="c1">#== code from scib-reproducibility</span>
+<span class="n">metricTest</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;../202409_tooth_raw/scib/metrics.csv&quot;</span><span class="p">)</span><span class="o">%&gt;%</span><span class="nf">column_to_rownames</span><span class="p">(</span><span class="s">&quot;X&quot;</span><span class="p">)</span>
+<span class="c1">#setwd(&quot;script/scib_script/visualization/&quot;)</span>
+
+<span class="nf">dir.create</span><span class="p">(</span><span class="s">&quot;../../../process/pre-intergration/scib_metrics/&quot;</span><span class="p">)</span>
+<span class="nf">plotSingleTaskRNA</span><span class="p">(</span>
+<span class="w">  </span><span class="n">csv_metrics_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;../../../../202409_tooth_raw/scib/metrics.csv&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">outdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;../../../process/pre-intergration/scib_metrics/&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">weight_batch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.4</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="results">
 <h2>Results<a class="headerlink" href="#results" title="Permalink to this heading">#</a></h2>
@@ -241,7 +343,7 @@
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Cluster the datasets to get first level annotation</div>
+                <div class="title">First-level annotation</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -290,7 +392,12 @@
             <ul>
 <li><a class="reference internal" href="#">Integration methods benchmarking</a><ul>
 <li><a class="reference internal" href="#why-this-matters">Why this matters</a></li>
-<li><a class="reference internal" href="#process">Process</a></li>
+<li><a class="reference internal" href="#process">Process</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a></li>
+<li><a class="reference internal" href="#run-the-pipeline">Run the pipeline</a></li>
+<li><a class="reference internal" href="#visualize-the-results">Visualize the results</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#results">Results</a></li>
 </ul>
 </li>
@@ -313,7 +420,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../_static/tippy/pre-integration/scib-benchmark.91228a01-595a-4f78-8051-960aebd6a750.js"></script>
+    <script defer="defer" src="../_static/tippy/pre-integration/scib-benchmark.36a7fa5f-a5b8-407e-af8f-6b8eb29ca87e.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

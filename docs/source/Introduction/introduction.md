@@ -5,3 +5,4 @@ One of the most exciting technological innovations in recent years is the rapid 
 - They enable comparative analyses between different conditions, such as healthy versus diseased states, yielding valuable biological insights. {cite:p}`sikkemaIntegratedCellAtlas2023`
 - Atlases offer a unified framework for trajectory analysis and gene module discovery, facilitating a deeper understanding of cellular dynamics.{cite:p}`Han2024.05.28.596174`
 
+

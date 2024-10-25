@@ -1,0 +1,53 @@
+ROOT: /home/gilberthan/Desktop/disk2/202409_tooth_raw/scib
+r_env : scib-R4.0 
+py_env : scib-pipeline-R4.0
+timing: true
+
+FEATURE_SELECTION:
+  hvg: 2000
+  #  full_feature: 6000
+
+SCALING:
+  - unscaled
+  - scaled
+
+METHODS: # method name : ouput type(s)
+  scanorama:
+    output_type:
+      - embed
+      - full
+  harmony:
+    R: true
+    output_type: embed
+  bbknn:
+    output_type: knn
+  scvi:
+    no_scale: true
+    output_type: embed
+  scanvi:
+    no_scale: true
+    output_type: embed
+    use_celltype: true
+  conos:
+    no_scale: true
+    R: true
+    output_type: knn
+  seuratrpca:
+    R: true
+    output_type: full
+  combat:
+    output_type: full
+  fastmnn:
+    R: true
+    output_type:
+      - embed
+      - full
+
+DATA_SCENARIOS:
+  test_small:
+    batch_key: Sample
+    label_key: coarse_anno_1
+    organism: mouse
+    assay: expression
+    file: /home/gilberthan/Desktop/disk2/202409_tooth/process/pre-intergration/big_data/20241008_core_pp_log1p_half_gene_small_HVG.h5ad
+
