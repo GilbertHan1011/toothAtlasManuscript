@@ -20,15 +20,10 @@ Contents
    :caption: Contents:
 
    Introduction/introduction
-   preprocess/metadata_process
-   preprocess/first_round_preprocess
-   preprocess/droplet
-   preprocess/first_round_annotation
-   preprocess/post_annotation
-   preprocess/batch_division
-   pre-integration/hypertune
-   pre-integration/scib-benchmark
+   preprocess/index
+   pre-integration/index
    integration/20241024_coarse_label
+   annotation/index
    references
 
 
@@ -41,9 +36,4 @@ Contents
    about/cite
    contributing
 
-Indices and tables
-==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

@@ -168,15 +168,27 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Introduction/introduction.html">Introduction to scAtlas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/metadata_process.html">Metadata Collection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/first_round_preprocess.html">First round preprocess</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/droplet.html">Droplet discovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/first_round_annotation.html">First round annotation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/post_annotation.html">Post annotation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/batch_division.html">Batch division</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pre-integration/hypertune.html">Hyperparameter tuning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="preprocess/index.html">Preprocess</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Preprocess</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/droplet.html">Droplet discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_annotation.html">First round annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/post_annotation.html">Post annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/batch_division.html">Batch division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/normalization.html">Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pre-integration/index.html">Pre-integration</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Pre-integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pre-integration/hypertune.html">Hyperparameter tuning</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="integration/20241024_coarse_label.html">First-level annotation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="annotation/index.html">Annotation</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="annotation/20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotation/step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster level</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">About</span></p>
@@ -236,40 +248,19 @@ large-scale single-cell atlases that can be used for a variety of applications.<
 <li class="toctree-l2"><a class="reference internal" href="Introduction/introduction.html#why-atlas">Why atlas</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/metadata_process.html">Metadata Collection</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html#what-metadata-to-collect">What metadata to collect?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html#study-metadata">Study metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html#biological-covariates">Biological covariates</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html#technical-covariates">Technical covariates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocess/index.html">Preprocess</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/droplet.html">Droplet discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_annotation.html">First round annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/post_annotation.html">Post annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/batch_division.html">Batch division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="preprocess/normalization.html">Normalization</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/first_round_preprocess.html">First round preprocess</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_preprocess.html#aim-of-first-round-preprocess">Aim of first round preprocess</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_preprocess.html#utils-that-used-in-this-step">Utils that used in this step</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_preprocess.html#basic-process-script">basic process script</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/droplet.html">Droplet discovery</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/droplet.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/droplet.html#utils-that-used-in-this-step">Utils that used in this step</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/droplet.html#process-scripts">Process Scripts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/droplet.html#why-this-step-is-necessary">Why this step is necessary</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/first_round_annotation.html">First round annotation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_annotation.html#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_annotation.html#curated-marker-genes">Curated marker genes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="preprocess/first_round_annotation.html#procedure">Procedure</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/post_annotation.html">Post annotation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="preprocess/batch_division.html">Batch division</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pre-integration/hypertune.html">Hyperparameter tuning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pre-integration/scib-benchmark.html">Integration methods benchmarking</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pre-integration/scib-benchmark.html#why-this-matters">Why this matters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pre-integration/scib-benchmark.html#process">Process</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pre-integration/scib-benchmark.html#results">Results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pre-integration/index.html">Pre-integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pre-integration/hypertune.html">Hyperparameter tuning</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="integration/20241024_coarse_label.html">First-level annotation</a><ul>
@@ -279,20 +270,17 @@ large-scale single-cell atlases that can be used for a variety of applications.<
 <li class="toctree-l2"><a class="reference internal" href="integration/20241024_coarse_label.html#Save-data">Save data</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="annotation/index.html">Annotation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="annotation/20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="annotation/step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster level</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 </div>
 </section>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">#</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
 </section>
 
         </article>
@@ -349,7 +337,6 @@ large-scale single-cell atlases that can be used for a variety of applications.<
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
           </div>
@@ -369,7 +356,7 @@ large-scale single-cell atlases that can be used for a variety of applications.<
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/index.6e91cd7d-887d-49a8-9f50-b4e7844287f7.js"></script>
+    <script defer="defer" src="_static/tippy/index.79a73761-5180-4b9c-a116-0bd8cb094688.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

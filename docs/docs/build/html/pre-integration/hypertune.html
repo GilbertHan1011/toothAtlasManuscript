@@ -142,7 +142,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -176,7 +176,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../preprocess/batch_division.html">Batch division</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Hyperparameter tuning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scib-benchmark.html">Integration methods benchmarking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">Cluster the datasets to get first level annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">About</span></p>
@@ -212,7 +212,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -220,6 +220,16 @@
         <article role="main">
           <section id="hyperparameter-tuning">
 <h1>Hyperparameter tuning<a class="headerlink" href="#hyperparameter-tuning" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Now that we have known the best integration method, we need to know what parameters we should set for the integration.
+Fortunately, <a class="reference external" href="https://docs.scvi-tools.org/en/stable/tutorials/notebooks/tuning/autotune_scvi.html">scvi-tools</a> offers a hyperparameter tuning tool for users to find the best parameters.</p>
+<p>Here, we devided the hyperparameter tuning into two parts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HVG</span> <span class="pre">numbers</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">n_latent</span></code> These two parameters are important than others, so we use grid hypertune methods to select parameters.</p></li>
+<li><p>``: the batch size for the integration.</p></li>
+</ul>
+</section>
 </section>
 
         </article>
@@ -267,8 +277,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Hyperparameter tuning</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -283,7 +312,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../_static/tippy/pre-integration/hypertune.71f55aab-c6a6-43a7-af59-5bb5a4e96f6c.js"></script>
+    <script defer="defer" src="../_static/tippy/pre-integration/hypertune.87bf740c-765c-4b37-ab1d-70018eb2ec1d.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

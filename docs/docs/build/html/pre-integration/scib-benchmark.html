@@ -309,7 +309,8 @@ Here are our benchmarking strategy:
 </section>
 <section id="visualize-the-results">
 <h3>Visualize the results<a class="headerlink" href="#visualize-the-results" title="Permalink to this heading">#</a></h3>
-<p>We use the the code in <a class="reference external" href="https://github.com/theislab/scib-reproducibility">scib-reproducibility</a> to visualize the results.</p>
+<p>We use the the code in <a class="reference external" href="https://github.com/theislab/scib-reproducibility">scib-reproducibility</a> to visualize the results.
+The utils files can be found in <a class="reference external" href="https://github.com/GilbertHan1011/toothAtlasManuscript/tree/master/utils/scib">github</a>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
 <span class="nf">setwd</span><span class="p">(</span><span class="s">&quot;script/utils/scib/&quot;</span><span class="p">)</span>
@@ -330,6 +331,9 @@ Here are our benchmarking strategy:
 </section>
 <section id="results">
 <h2>Results<a class="headerlink" href="#results" title="Permalink to this heading">#</a></h2>
+<p>This pipeline will generate beautiful figures.
+<img alt="png" src="../_images/scib-benchmark.png" />
+This results show that <code class="docutils literal notranslate"><span class="pre">scANVI</span></code> performs the best on this dataset, aligning with the previous findings <span id="id3">[<a class="reference internal" href="../references.html#id19" title="Malte D. Luecken, M. Büttner, K. Chaichoompu, A. Danese, M. Interlandi, M. F. Mueller, D. C. Strobl, L. Zappia, M. Dugas, M. Colomé-Tatché, and Fabian J. Theis. Benchmarking atlas-level data integration in single-cell genomics. Nature Methods, 19(1):41–50, January 2022. doi:10.1038/s41592-021-01336-8.">Luecken <em>et al.</em>, 2022</a>]</span>. Besides, <code class="docutils literal notranslate"><span class="pre">scANVI</span></code> can integrate with <code class="docutils literal notranslate"><span class="pre">scArches</span></code><span id="id4">[<a class="reference internal" href="../references.html#id20" title="Mohammad Lotfollahi, Mohsen Naghipourfar, Malte D. Luecken, Matin Khajavi, Maren Büttner, Marco Wagenstetter, Žiga Avsec, Adam Gayoso, Nir Yosef, Marta Interlandi, Sergei Rybakov, Alexander V. Misharin, and Fabian J. Theis. Mapping single-cell data to reference atlases by transfer learning. Nature Biotechnology, 40(1):121–130, January 2022. doi:10.1038/s41587-021-01001-7.">Lotfollahi <em>et al.</em>, 2022</a>]</span> for users to easily ultilize our reference atlas to annotate their own data. Therefore, we adapted <code class="docutils literal notranslate"><span class="pre">scANVI</span></code> as our integration method.</p>
 </section>
 </section>
 
@@ -420,7 +424,7 @@ Here are our benchmarking strategy:
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../_static/tippy/pre-integration/scib-benchmark.36a7fa5f-a5b8-407e-af8f-6b8eb29ca87e.js"></script>
+    <script defer="defer" src="../_static/tippy/pre-integration/scib-benchmark.541b20ae-8475-4665-9294-f8c5261b8394.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

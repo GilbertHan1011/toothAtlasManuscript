@@ -12,7 +12,7 @@
   "feature_set_size": 2000,
   "feature_set_file": "/beegfs/scratch/bruening_scratch/lsteuernagel/data/hypoMap_v2c_harmonization/feature_set.json",
   "assay_name": "RNA",
-  "integration_name": "scANVI",
+  "integration_name": "X_SCANVI",
   "categorical_covariates": [],
   "continuous_covariates": [],
   "n_layers": 2,

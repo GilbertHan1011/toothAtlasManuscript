@@ -86,6 +86,7 @@ snakemake --configfile configs/toothAtlas.yaml --cores 10
 
 ### Visualize the results
 We use the the code in [scib-reproducibility](https://github.com/theislab/scib-reproducibility) to visualize the results.
+The utils files can be found in [github](https://github.com/GilbertHan1011/toothAtlasManuscript/tree/master/utils/scib).
 ```R
 rm(list = ls())
 library(tidyverse)
@@ -107,3 +108,6 @@ plotSingleTaskRNA(
 
 
 ## Results
+This pipeline will generate beautiful figures.
+![png](../img/scib-benchmark.png)
+This results show that `scANVI` performs the best on this dataset, aligning with the previous findings {cite:p}`lueckenBenchmarkingAtlaslevelData2022`. Besides, `scANVI` can integrate with `scArches`{cite:p}`lotfollahiMappingSinglecellData2022` for users to easily ultilize our reference atlas to annotate their own data. Therefore, we adapted `scANVI` as our integration method.

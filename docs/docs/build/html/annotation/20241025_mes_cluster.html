@@ -1,0 +1,485 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Step 1: Choose the optimal cluster level" href="step1_choose_optimal_cluster_level.html" /><link rel="prev" title="Annotation" href="index.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>Step 0 : Leiden Clustering in Mesenchyme - scAtlas 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/override.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #003262;
+  --color-brand-content: #003262;
+  --admonition-font-size: var(--font-size-normal);
+  --admonition-title-font-size: var(--font-size-normal);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">scAtlas 0.0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/tooth_log.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/tooth_log.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction to scAtlas</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../preprocess/index.html">Preprocess</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Preprocess</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/droplet.html">Droplet discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_annotation.html">First round annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/post_annotation.html">Post annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/batch_division.html">Batch division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/normalization.html">Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pre-integration/index.html">Pre-integration</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Pre-integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pre-integration/hypertune.html">Hyperparameter tuning</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Annotation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Step 0 : Leiden Clustering in Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster level</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/team.html">Team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/cite.html">Citing scAtlas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing Guide</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="Step-0-:-Leiden-Clustering-in-Mesenchyme">
+<h1>Step 0 : Leiden Clustering in Mesenchyme<a class="headerlink" href="#Step-0-:-Leiden-Clustering-in-Mesenchyme" title="Permalink to this heading">#</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import relevant modules</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">louvain</span>
+<span class="kn">import</span> <span class="nn">igraph</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;  # For high-resolution displays
+<span class="o">%</span><span class="k">config</span> InlineBackend.print_figure_kwargs = {&#39;dpi&#39;: 100}  # Set DPI
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;../../processed_data/integrated_data/20241024_mesenchyme.h5ad&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Since we subset mesenchyme from full anndata, so we rerun the <code class="docutils literal notranslate"><span class="pre">sc.pp.neighbors</span></code> for better clusterring.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pp</span><span class="o">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span><span class="n">use_rep</span><span class="o">=</span><span class="s2">&quot;X_SCANVI&quot;</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">leiden</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2024-10-25 12:59:17.501921: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-10-25 12:59:19.354310: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/tmp/ipykernel_309558/140703081.py:2: FutureWarning: In the future, the default backend for leiden will be igraph instead of leidenalg.
+
+ To achieve the future defaults please pass: flavor=&#34;igraph&#34; and n_iterations=2.  directed must also be False to work with igraph&#39;s implementation.
+  sc.tl.leiden(adata)
+</pre></div></div>
+</div>
+<p>We gradually increased the resolution to get cluster number from 1 to 100. When cluster number increasing, the boundary between clusters may be vague. So we set 100 as the maximal number.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">json_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;config/mesenchyme_parameter.json&quot;</span><span class="p">)</span>
+<span class="c1"># read json into dictionary</span>
+<span class="n">json_str</span> <span class="o">=</span> <span class="n">json_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">parameter_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_str</span><span class="p">)</span>
+
+<span class="n">global_seed</span> <span class="o">=</span> <span class="n">parameter_dict</span><span class="p">[</span><span class="s2">&quot;global_seed&quot;</span><span class="p">]</span>
+<span class="n">target_clusterN</span> <span class="o">=</span> <span class="n">parameter_dict</span><span class="p">[</span><span class="s2">&quot;target_clusterN&quot;</span><span class="p">]</span>
+<span class="n">start_res</span> <span class="o">=</span> <span class="n">parameter_dict</span><span class="p">[</span><span class="s2">&quot;start_res&quot;</span><span class="p">]</span>
+<span class="n">end_res</span> <span class="o">=</span> <span class="n">parameter_dict</span><span class="p">[</span><span class="s2">&quot;end_res&quot;</span><span class="p">]</span>
+<span class="n">step_size</span> <span class="o">=</span> <span class="n">parameter_dict</span><span class="p">[</span><span class="s2">&quot;step_size&quot;</span><span class="p">]</span>
+<span class="n">include_low_res</span> <span class="o">=</span> <span class="n">parameter_dict</span><span class="p">[</span><span class="s2">&quot;include_low_res&quot;</span><span class="p">]</span>
+<span class="n">n_neighbors</span> <span class="o">=</span> <span class="n">parameter_dict</span><span class="p">[</span><span class="s2">&quot;k_param&quot;</span><span class="p">]</span>
+<span class="n">min_cells_valid</span> <span class="o">=</span> <span class="n">parameter_dict</span><span class="p">[</span><span class="s2">&quot;min_cells_valid&quot;</span><span class="p">]</span>
+<span class="n">additional_clustering_suffix</span> <span class="o">=</span> <span class="n">parameter_dict</span><span class="p">[</span><span class="s2">&quot;additional_clustering_suffix&quot;</span><span class="p">]</span>
+
+<span class="c1">#define resolution range, hardcoded atm</span>
+<span class="n">resolutions</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">step_size</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">step_size</span><span class="p">)</span><span class="o">*</span><span class="n">start_res</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">step_size</span><span class="p">)</span><span class="o">*</span><span class="n">end_res</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+<span class="k">if</span><span class="p">(</span><span class="n">include_low_res</span><span class="p">):</span>
+  <span class="n">low_res_list</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span><span class="mf">0.005</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.175</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.75</span><span class="p">]</span>
+  <span class="c1">#low_res_list = [0.001,0.005,0.0075,0.01,0.05,0.1,0.175,0.25,0.5,0.75,3,5,6,7,15,16,28,37,38,45,50]</span>
+  <span class="n">resolutions</span> <span class="o">=</span> <span class="n">low_res_list</span> <span class="o">+</span> <span class="n">resolutions</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">resolutions</span><span class="p">:</span>
+        <span class="n">key_name</span> <span class="o">=</span> <span class="s2">&quot;leiden_clusters_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">tl</span><span class="o">.</span><span class="n">leiden</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="n">res</span><span class="p">,</span><span class="n">key_added</span><span class="o">=</span><span class="n">key_name</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="n">global_seed</span><span class="p">,</span><span class="n">neighbors_key</span><span class="o">=</span><span class="s1">&#39;neighbors&#39;</span><span class="p">)</span> <span class="c1"># could use neighbors_key</span>
+        <span class="n">value_counts</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">key_name</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Ran leiden with resolution &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; and found &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">key_name</span><span class="p">])))</span><span class="o">+</span><span class="s2">&quot; total clusters with &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">value_counts</span><span class="p">[</span><span class="n">value_counts</span> <span class="o">&gt;</span> <span class="n">min_cells_valid</span><span class="p">]))</span><span class="o">+</span><span class="s2">&quot; valid clusters&quot;</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">value_counts</span><span class="p">[</span><span class="n">value_counts</span> <span class="o">&gt;</span> <span class="n">min_cells_valid</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">target_clusterN</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Reached &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">value_counts</span><span class="p">[</span><span class="n">value_counts</span> <span class="o">&gt;</span> <span class="n">min_cells_valid</span><span class="p">]))</span><span class="o">+</span><span class="s2">&quot; valid clusters&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ Ran leiden with resolution 0.001 and found 1 total clusters with 1 valid clusters
+ Ran leiden with resolution 0.005 and found 1 total clusters with 1 valid clusters
+ Ran leiden with resolution 0.01 and found 1 total clusters with 1 valid clusters
+ Ran leiden with resolution 0.05 and found 4 total clusters with 4 valid clusters
+ Ran leiden with resolution 0.1 and found 7 total clusters with 6 valid clusters
+ Ran leiden with resolution 0.175 and found 12 total clusters with 10 valid clusters
+ Ran leiden with resolution 0.25 and found 14 total clusters with 12 valid clusters
+ Ran leiden with resolution 0.5 and found 20 total clusters with 19 valid clusters
+ Ran leiden with resolution 0.75 and found 23 total clusters with 23 valid clusters
+ Ran leiden with resolution 1 and found 30 total clusters with 29 valid clusters
+ Ran leiden with resolution 2 and found 52 total clusters with 52 valid clusters
+ Ran leiden with resolution 3 and found 67 total clusters with 67 valid clusters
+ Ran leiden with resolution 4 and found 83 total clusters with 83 valid clusters
+ Ran leiden with resolution 5 and found 104 total clusters with 104 valid clusters
+ Reached 104 valid clusters
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+AnnData object with n_obs × n_vars = 166863 × 36303
+    obs: &#39;orig.ident&#39;, &#39;nCount_RNA&#39;, &#39;nFeature_RNA&#39;, &#39;coarse_anno_1&#39;, &#39;total_counts&#39;, &#39;log10_total_counts&#39;, &#39;n_genes_detected&#39;, &#39;mito_frac&#39;, &#39;ribo_frac&#39;, &#39;compl&#39;, &#39;size_factors&#39;, &#39;Sample&#39;, &#39;Project&#39;, &#39;Core_datasets&#39;, &#39;Mandibular_Maxillary&#39;, &#39;Molar_Incisor&#39;, &#39;Tooth position&#39;, &#39;Histology&#39;, &#39;Sex&#39;, &#39;Gene Type&#39;, &#39;Knockout_gene&#39;, &#39;Cre&#39;, &#39;Treatment&#39;, &#39;FACs&#39;, &#39;Age&#39;, &#39;Stage&#39;, &#39;Development stage&#39;, &#39;Disease&#39;, &#39;Strain&#39;, &#39;Dissociation_enzyme&#39;, &#39;Machine&#39;, &#39;Species&#39;, &#39;Related assay&#39;, &#39;Journal&#39;, &#39;Data Source&#39;, &#39;Data location&#39;, &#39;new_totals_log&#39;, &#39;n_genes_by_counts&#39;, &#39;log1p_n_genes_by_counts&#39;, &#39;log1p_total_counts&#39;, &#39;pct_counts_in_top_50_genes&#39;, &#39;pct_counts_in_top_100_genes&#39;, &#39;pct_counts_in_top_200_genes&#39;, &#39;pct_counts_in_top_500_genes&#39;, &#39;scDblFinder_class&#39;, &#39;leiden&#39;, &#39;leiden_clusters_0.001&#39;, &#39;leiden_clusters_0.005&#39;, &#39;leiden_clusters_0.01&#39;, &#39;leiden_clusters_0.05&#39;, &#39;leiden_clusters_0.1&#39;, &#39;leiden_clusters_0.175&#39;, &#39;leiden_clusters_0.25&#39;, &#39;leiden_clusters_0.5&#39;, &#39;leiden_clusters_0.75&#39;, &#39;leiden_clusters_1&#39;, &#39;anno_level_1&#39;, &#39;leiden_clusters_2&#39;, &#39;leiden_clusters_3&#39;, &#39;leiden_clusters_4&#39;, &#39;leiden_clusters_5&#39;
+    var: &#39;gene_symbols&#39;, &#39;n_cells&#39;, &#39;n_cells_by_counts&#39;, &#39;mean_counts&#39;, &#39;log1p_mean_counts&#39;, &#39;pct_dropout_by_counts&#39;, &#39;total_counts&#39;, &#39;log1p_total_counts&#39;, &#39;highly_variable&#39;, &#39;means&#39;, &#39;dispersions&#39;, &#39;dispersions_norm&#39;, &#39;highly_variable_nbatches&#39;, &#39;highly_variable_intersection&#39;
+    uns: &#39;Project_colors&#39;, &#39;X_name&#39;, &#39;anno_level_1_colors&#39;, &#39;hvg&#39;, &#39;leiden&#39;, &#39;leiden_clusters_0.001&#39;, &#39;leiden_clusters_0.001_colors&#39;, &#39;leiden_clusters_0.005&#39;, &#39;leiden_clusters_0.005_colors&#39;, &#39;leiden_clusters_0.01&#39;, &#39;leiden_clusters_0.01_colors&#39;, &#39;leiden_clusters_0.05&#39;, &#39;leiden_clusters_0.05_colors&#39;, &#39;leiden_clusters_0.1&#39;, &#39;leiden_clusters_0.175&#39;, &#39;leiden_clusters_0.175_colors&#39;, &#39;leiden_clusters_0.1_colors&#39;, &#39;leiden_clusters_0.25&#39;, &#39;leiden_clusters_0.25_colors&#39;, &#39;leiden_clusters_0.5&#39;, &#39;leiden_clusters_0.5_colors&#39;, &#39;leiden_clusters_0.75&#39;, &#39;leiden_clusters_1&#39;, &#39;neighbors&#39;, &#39;scDblFinder_class_colors&#39;, &#39;umap&#39;, &#39;leiden_clusters_2&#39;, &#39;leiden_clusters_3&#39;, &#39;leiden_clusters_4&#39;, &#39;leiden_clusters_5&#39;
+    obsm: &#39;X_SCANVI&#39;, &#39;X_umap&#39;
+    layers: &#39;counts&#39;, &#39;logcounts&#39;
+    obsp: &#39;connectivities&#39;, &#39;distances&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">umap</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;leiden_clusters_0.05&#39;</span><span class="p">,</span><span class="s1">&#39;leiden_clusters_0.175&#39;</span><span class="p">,</span>  <span class="s1">&#39;leiden_clusters_0.5&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;leiden_clusters_1&#39;</span><span class="p">],</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/annotation_20241025_mes_cluster_10_0.png" class="no-scaled-link" src="../_images/annotation_20241025_mes_cluster_10_0.png" style="width: 655px; height: 426px;" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meta_subset</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;leiden_clusters_&quot;</span><span class="p">))</span>
+<span class="n">meta_subset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../../processed_data/metadata/20241025_mes_leiden_metadata.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="o">.</span><span class="n">write_h5ad</span><span class="p">(</span><span class="s2">&quot;../../processed_data/integrated_data/20241024_mesenchyme.h5ad&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="step1_choose_optimal_cluster_level.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Step 1: Choose the optimal cluster level</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Annotation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Gilbert Han
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fab fa-github" href="https://github.com/GilbertHan1011/toothAtlasManuscript" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f6245a2f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
+    <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
+    <script defer="defer" src="../_static/tippy/annotation/20241025_mes_cluster.97ee7e69-689b-4138-b023-2465f9b3ddad.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
