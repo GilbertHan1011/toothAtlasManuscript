@@ -22,7 +22,7 @@ Contents
    Introduction/introduction
    preprocess/index
    pre-integration/index
-   integration/20241024_coarse_label
+   integration/index
    annotation/index
    references
 

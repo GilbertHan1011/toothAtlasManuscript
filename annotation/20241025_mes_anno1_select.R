@@ -128,7 +128,7 @@ seurat@meta.data = seurat@meta.data[,!grepl("leiden_clusters_",colnames(seurat@m
 #add
 seurat@meta.data = cbind(seurat@meta.data,mrtree_input_labels)
 
-data.table::fwrite(mrtree_input_labels,"processed_data/metadata//20241025_mes_anno_mrtree_input_label.csv")
+data.table::fwrite(mrtree_input_labels,"processed_data/metadata//20241025_mes_anno_mrtree_input_label.csv",sep = ",")
 
 saveRDS(seurat,"processed_data/integrated_data/20241024_mesenchyme.Rds")
 

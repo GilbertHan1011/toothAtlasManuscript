@@ -183,10 +183,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../pre-integration/hypertune.html">Hyperparameter tuning</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../annotation/index.html">Annotation</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../integration/index.html">Integration</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../annotation/index.html">Annotation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../annotation/20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../annotation/step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step2_mtree.html">Step 2: MRTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step3_marker_detection.html">Step 3: Marker Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step4_prune_tree.html">Step 4: Prune Tree</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -233,24 +239,14 @@
           <section id="preprocess">
 <h1>Preprocess<a class="headerlink" href="#preprocess" title="Permalink to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">preprocess</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="metadata_process.html">Metadata Collection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="metadata_process.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metadata_process.html#what-metadata-to-collect">What metadata to collect?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="metadata_process.html#study-metadata">Study metadata</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="metadata_process.html#study-name-sample-name">Study name &amp; Sample name</a></li>
-<li class="toctree-l3"><a class="reference internal" href="metadata_process.html#data-accession">Data accession</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="metadata_process.html#biological-covariates">Biological covariates</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="metadata_process.html#tissue-information">Tissue information</a></li>
-<li class="toctree-l3"><a class="reference internal" href="metadata_process.html#age">Age</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="metadata_process.html#technical-covariates">Technical covariates</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="metadata_process.html#sequencing-platform">Sequencing platform</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_process.html#study-metadata">Study metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_process.html#biological-covariates">Biological covariates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata_process.html#technical-covariates">Technical covariates</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="first_round_preprocess.html">First round preprocess</a><ul>
@@ -273,7 +269,12 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="post_annotation.html">Post annotation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="batch_division.html">Batch division</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_division.html">Batch division</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="batch_division.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_division.html#methods">Methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_division.html#conclusion">Conclusion</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="normalization.html">Normalization</a></li>
 </ul>
 </div>
@@ -340,7 +341,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../_static/tippy/preprocess/index.22995b63-c3c2-45c5-8701-7cef04663c42.js"></script>
+    <script defer="defer" src="../_static/tippy/preprocess/index.b078a1be-afb2-4207-ac11-fac9c13ddb68.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

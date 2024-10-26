@@ -1,4 +1,4 @@
-# Step 1: Choose the optimal cluster level
+# Step 1: Choose the optimal cluster levels
 ## Introduction
 In this step, we will select the optimal cluster level from the previous [clustering results](20241025_mes_cluster.ipynb) to annotate the mesenchyme cells.
 

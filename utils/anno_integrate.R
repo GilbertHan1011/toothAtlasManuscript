@@ -9,7 +9,7 @@
 #' @return
 
 read_embedding = function(filename_withpath,seurat_object=NULL,seurat_object_metadata=NULL){
-  
+
   #get metadata
   if(!is.null(seurat_object_metadata)){
     metadata = seurat_object_metadata
@@ -78,7 +78,7 @@ clear_clustering = function(x,min_cells,nn_idx){
       new_x[which_idx]=clusters_vote
     }
   }
-  
+
   return(new_x)
 }
 
@@ -117,20 +117,20 @@ annotate_tree = function(edgelist,labelmat,markers_comparisons_all,markers_compa
     dplyr::add_count(name="ncells") %>% dplyr::distinct(clusterlevel,cluster,ncells)
   edgelist = dplyr::left_join(edgelist,cluster_levels,by=c("to"="cluster")) %>% dplyr::arrange(level)
   all_nodes = unique(edgelist$to)
-  
+
   # annotation
   edgelist = edgelist %>% dplyr::arrange(level) # ensure top down order for tree traversal with for loop!+
-  
+
   # list to store intermediate results
   annotation_list = list()
   descriptive_markers_list = list()
-  
+
   message("Running annotation")
   message("Using ",length(manual_names)," manually provided names to overwrite annotation for specific clusters.")
-  
+
   # for each node in edgelist:
   for(n in 1:length(all_nodes)){
-    
+
     # get information
     current_node = all_nodes[n]
     parent_node = edgelist$from[edgelist$to==current_node]
@@ -138,7 +138,7 @@ annotate_tree = function(edgelist,labelmat,markers_comparisons_all,markers_compa
     children_nodes = scUtils::find_children(current_node,edgelist)
     direct_children_nodes = edgelist$to[edgelist$from==current_node]
     current_level = edgelist$clusterlevel[edgelist$to==current_node]
-    
+
     message("n: ",n," ",current_node)
     # get specific genes
     potential_descriptive_markers =markers_comparisons_all %>% dplyr::filter(cluster_id == current_node) %>% dplyr::arrange(desc(specificity)) %>%
@@ -147,11 +147,11 @@ annotate_tree = function(edgelist,labelmat,markers_comparisons_all,markers_compa
     potential_descriptive_markers$pct.2_min = potential_descriptive_markers$pct.2
     potential_descriptive_markers$pct.2_min[potential_descriptive_markers$pct.2_min < min_pct2_score] = min_pct2_score
     potential_descriptive_markers$score = (potential_descriptive_markers$pct.1 / potential_descriptive_markers$pct.2_min) * potential_descriptive_markers$avg_log2FC
-    
+
     # initiate vector with genes that should be excluded!
     exclude_genes=c(manual_exclude_genes)
     # message("nrow(potential_descriptive_markers) 1: ",nrow(potential_descriptive_markers))
-    
+
     # eliminate parent and sibling names
     reserved_genes=c()
     parent_name=""
@@ -229,18 +229,18 @@ annotate_tree = function(edgelist,labelmat,markers_comparisons_all,markers_compa
         # fallback if nor sibling markers are available
         potential_descriptive_markers$score_siblings = 0
       }
-      
+
       # get ranks by score
       if(nrow(potential_descriptive_markers)>0){
         # limit score_siblings_children and score_siblings to omit strong outliers
         potential_descriptive_markers$score_siblings_children[potential_descriptive_markers$score_siblings_children > limit_factor*potential_descriptive_markers$score] = limit_factor*potential_descriptive_markers$score[potential_descriptive_markers$score_siblings_children > limit_factor*potential_descriptive_markers$score]
         potential_descriptive_markers$score_siblings[potential_descriptive_markers$score_siblings > limit_factor*potential_descriptive_markers$score] = limit_factor*potential_descriptive_markers$score[potential_descriptive_markers$score_siblings > limit_factor*potential_descriptive_markers$score]
-        
+
         # calculate average score as: score + score_siblings - score_siblings_children
         potential_descriptive_markers$avg_score = potential_descriptive_markers$score + potential_descriptive_markers$score_siblings  - potential_descriptive_markers$score_siblings_children
         potential_descriptive_markers$mult_score = potential_descriptive_markers$score * (1+potential_descriptive_markers$score_siblings) /  (1+potential_descriptive_markers$score_siblings_children)
-        
-        
+
+
         # prepare for selection: exclude all genes in exclude_genes vector, filter score again after all adjustements and arrange by score
         potential_descriptive_markers =potential_descriptive_markers %>%
           dplyr::filter(! gene %in% exclude_genes & avg_score > min_specificity  & score_siblings_children < max_score_siblings_children) %>% dplyr::arrange(desc(avg_score))
@@ -277,7 +277,7 @@ annotate_tree = function(edgelist,labelmat,markers_comparisons_all,markers_compa
       cluster_name = paste0(parent_name,".",name_gene)
       message(current_node,": name: ",cluster_name)
     }
-    
+
     # add to list
     annotation_list[[current_node]] = cluster_name
     if(nrow(potential_descriptive_markers)){
@@ -286,7 +286,7 @@ annotate_tree = function(edgelist,labelmat,markers_comparisons_all,markers_compa
   }
   # also save a list of the good marker genes
   descriptive_markers_df = as.data.frame(do.call(rbind,descriptive_markers_list))
-  
+
   # bind results and format
   annotation_df = as.data.frame(do.call(rbind,annotation_list))
   colnames(annotation_df) = "V1"
@@ -332,22 +332,22 @@ annotate_tree = function(edgelist,labelmat,markers_comparisons_all,markers_compa
 #' @return updated vector of labels
 
 findMarkers_tree2 = function(seurat_object,edgelist,labelmat,n_cores=1,use_stratified=TRUE,test.use="wilcox-stratified",batch_var="Batch_ID",latent_vars_seurat=NULL,genes_to_include=NULL,assay="RNA",slot="data",...){
-  
+
   require(doParallel)
   require(tidyselect)
   require(foreach)
-  
+
   # info:
   message(n_cores)
-  
+
   # set edglist
   edgelist = edgelist[,c("from","to")]
-  
+
   # genes
   if(is.null(genes_to_include)){
     genes_to_include = rownames(seurat_object@assays[[assay]]$counts)
   }
-  
+
   # add labelmat to seurat
   if(any(colnames(labelmat) %in% colnames(seurat_object@meta.data))){
     if(!all(colnames(labelmat) %in% colnames(seurat_object@meta.data))){
@@ -356,7 +356,7 @@ findMarkers_tree2 = function(seurat_object,edgelist,labelmat,n_cores=1,use_strat
   }else{
     seurat_object@meta.data = cbind(seurat_object@meta.data,labelmat )
   }
-  
+
   # init
   current_node="all"
   colnames(edgelist) = c("from","to")
@@ -364,10 +364,10 @@ findMarkers_tree2 = function(seurat_object,edgelist,labelmat,n_cores=1,use_strat
   edgelist = dplyr::left_join(edgelist,label_mat_long,by=c("to"="cluster")) %>% dplyr::distinct(from,to,clusterlevel)
   all_nodes = unique(edgelist[,2])
   #all_nodes = all_nodes[!all_nodes %in% c("all","root")]
-  
+
   comparisons_siblings = NULL
   comparisons_all = NULL
-  
+
   registerDoParallel(cores=n_cores)
   comparison_types = c("Sibling","All")
   return_list=list()
@@ -385,7 +385,7 @@ findMarkers_tree2 = function(seurat_object,edgelist,labelmat,n_cores=1,use_strat
       current_level = edgelist$clusterlevel[edgelist$to==current_node]
       # set ident to current level!
       Idents(seurat_object) = current_level
-      
+
       #decide what to cal against:
       cluster_1 = current_node
       if(comp == "Sibling"){
@@ -451,7 +451,7 @@ findMarkers_tree2 = function(seurat_object,edgelist,labelmat,n_cores=1,use_strat
       #   # Choose a return value in case of error
       #   return(NULL)
       # })
-      
+
       # return
       #current_markers
     }
@@ -459,4 +459,29 @@ findMarkers_tree2 = function(seurat_object,edgelist,labelmat,n_cores=1,use_strat
   }
   # return
   return(return_list)
+}
+
+
+#== script from https://github.com/lsteuernagel/scUtils
+find_children = function(nodes,edges){
+  current_children = edges$to[edges$from %in% nodes]
+  #print(paste0(current_children,collapse = "|"))
+  if(length(current_children)>0){
+    all_children = c(current_children,find_children(current_children,edges))
+  }else{
+    all_children = current_children
+  }
+  return(all_children)
+}
+writeList_to_JSON = function(list_with_rows,filename){
+  jsonfile = jsonlite::toJSON(list_with_rows, pretty = TRUE, auto_unbox = TRUE,digits = NA)
+  writeLines(jsonfile,con = paste0(filename))
+}
+
+#== function in prune tree
+entropy_fun = function(x,logfun ="log2"){
+  log_vec = do.call(logfun,list(x))
+  log_vec[is.infinite(log_vec)] = 0
+  log_vec[is.nan(log_vec)] = 0
+  return(-sum(x * log_vec))
 }

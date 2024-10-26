@@ -6,6 +6,6 @@ Pre-integration
     :maxdepth: 2
     :glob:
 
-   scib-benchmark
-   hypertune
-   
+    scib-benchmark
+    hypertune
+

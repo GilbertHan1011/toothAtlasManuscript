@@ -186,7 +186,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Annotation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
-<li class="toctree-l2"><a class="reference internal" href="step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step2_mtree.html">Step 2: MRTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step3_marker_detection.html">Step 3: Marker Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step4_prune_tree.html">Step 4: Prune Tree</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -232,12 +235,35 @@
         <article role="main">
           <section id="annotation">
 <h1>Annotation<a class="headerlink" href="#annotation" title="Permalink to this heading">#</a></h1>
+<p>In this section, we will adapt the annotation pipeline from <a class="reference external" href="https://github.com/lsteuernagel/scHarmonization/">scHarmonization</a> <span id="id1">[<a class="reference internal" href="../references.html#id22" title="Lukas Steuernagel, Brian Y. H. Lam, Paul Klemm, Georgina K. C. Dowsett, Corinna A. Bauder, John A. Tadross, Tamara Sotelo Hitschfeld, Almudena del Rio Martin, Weiyi Chen, Alain J. de Solis, Henning Fenselau, Peter Davidsen, Irene Cimino, Sara N. Kohnke, Debra Rimmington, Anthony P. Coll, Andreas Beyer, Giles S. H. Yeo, and Jens C. Brüning. HypoMap—a unified single-cell gene expression atlas of the murine hypothalamus. Nature Metabolism, 4(10):1402–1419, October 2022. doi:10.1038/s42255-022-00657-y.">Steuernagel <em>et al.</em>, 2022</a>]</span> to our data.
+You can just run this pipeline directly. Here, I just break down the pipeline into several steps for better understanding.</p>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">annotation</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
-<li class="toctree-l1"><a class="reference internal" href="step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster level</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster levels</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="step1_choose_optimal_cluster_level.html#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="step1_choose_optimal_cluster_level.html#process">Process</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="step2_mtree.html">Step 2: MRTree</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="step2_mtree.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step2_mtree.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step2_mtree.html#output">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step2_mtree.html#script">Script</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="step3_marker_detection.html">Step 3: Marker Detection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="step3_marker_detection.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step3_marker_detection.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step3_marker_detection.html#output">Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step3_marker_detection.html#script">Script</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="step4_prune_tree.html">Step 4: Prune Tree</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="step4_prune_tree.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step4_prune_tree.html#input">Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step4_prune_tree.html#output">Output</a></li>
 </ul>
 </li>
 </ul>
@@ -305,7 +331,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../_static/tippy/annotation/index.4249bcf2-0382-48d9-ac1e-f3781efc50b6.js"></script>
+    <script defer="defer" src="../_static/tippy/annotation/index.7fe7af2a-61ab-4e32-a217-261b6d51d7b6.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Integration methods benchmarking" href="scib-benchmark.html" /><link rel="prev" title="Batch division" href="../preprocess/batch_division.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="First-level annotation" href="../integration/20241024_coarse_label.html" /><link rel="prev" title="Integration methods benchmarking" href="scib-benchmark.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
         <title>Hyperparameter tuning - scAtlas 0.0.1 documentation</title>
@@ -168,15 +168,30 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction to scAtlas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/metadata_process.html">Metadata Collection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/first_round_preprocess.html">First round preprocess</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/droplet.html">Droplet discovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/first_round_annotation.html">First round annotation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/post_annotation.html">Post annotation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/batch_division.html">Batch division</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Hyperparameter tuning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../preprocess/index.html">Preprocess</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Preprocess</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/droplet.html">Droplet discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_annotation.html">First round annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/post_annotation.html">Post annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/batch_division.html">Batch division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/normalization.html">Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Pre-integration</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Pre-integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Hyperparameter tuning</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../annotation/index.html">Annotation</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step2_mtree.html">Step 2: MRTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step3_marker_detection.html">Step 3: Marker Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step4_prune_tree.html">Step 4: Prune Tree</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">About</span></p>
@@ -226,9 +241,18 @@
 Fortunately, <a class="reference external" href="https://docs.scvi-tools.org/en/stable/tutorials/notebooks/tuning/autotune_scvi.html">scvi-tools</a> offers a hyperparameter tuning tool for users to find the best parameters.</p>
 <p>Here, we devided the hyperparameter tuning into two parts:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">HVG</span> <span class="pre">numbers</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">n_latent</span></code> These two parameters are important than others, so we use grid hypertune methods to select parameters.</p></li>
-<li><p>``: the batch size for the integration.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HVG</span> <span class="pre">numbers</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">n_latent</span></code> These two parameters are important than others, so we use grid search methods to select parameters, and used scib to evaluate the integration results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">n_hidden</span></code>, <code class="docutils literal notranslate"><span class="pre">n_layers</span></code>, <code class="docutils literal notranslate"><span class="pre">dropout_rate</span></code> … We used <a class="reference external" href="https://docs.scvi-tools.org/en/stable/tutorials/notebooks/tuning/autotune_scvi.html">scvi-tools</a> to tune these parameters.</p></li>
 </ul>
+</section>
+<section id="tuning-for-hvg-numbers-and-n-latent">
+<h2>Tuning for HVG numbers and n_latent<a class="headerlink" href="#tuning-for-hvg-numbers-and-n-latent" title="Permalink to this heading">#</a></h2>
+<p>Firstly, we used grid search methods to select the best parameters for HVG numbers and n_latent. The full script is in this <a class="reference internal" href="20241018_gridHypertune.html"><span class="doc std std-doc">page</span></a>.</p>
+<p>Next, we used <a class="reference external" href="https://github.com/YosefLab/scib-metrics">scib-metrics</a> to plot benchamarking results. <a class="reference internal" href="20241019_plot_benchmark.html"><span class="doc std std-doc">Plot benchmarking results</span></a></p>
+</section>
+<section id="tuning-other-parameters">
+<h2>Tuning other parameters<a class="headerlink" href="#tuning-other-parameters" title="Permalink to this heading">#</a></h2>
+<p><a class="reference internal" href="20241018_hypertune_para.html"><span class="doc std std-doc">Tuning with scvi-tools</span></a></p>
 </section>
 </section>
 
@@ -237,23 +261,23 @@ Fortunately, <a class="reference external" href="https://docs.scvi-tools.org/en/
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="scib-benchmark.html">
+          <a class="next-page" href="../integration/20241024_coarse_label.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Integration methods benchmarking</div>
+                <div class="title">First-level annotation</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../preprocess/batch_division.html">
+          <a class="prev-page" href="scib-benchmark.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Batch division</div>
+                <div class="title">Integration methods benchmarking</div>
                 
               </div>
             </a>
@@ -291,6 +315,8 @@ Fortunately, <a class="reference external" href="https://docs.scvi-tools.org/en/
             <ul>
 <li><a class="reference internal" href="#">Hyperparameter tuning</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#tuning-for-hvg-numbers-and-n-latent">Tuning for HVG numbers and n_latent</a></li>
+<li><a class="reference internal" href="#tuning-other-parameters">Tuning other parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -312,7 +338,7 @@ Fortunately, <a class="reference external" href="https://docs.scvi-tools.org/en/
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../_static/tippy/pre-integration/hypertune.87bf740c-765c-4b37-ab1d-70018eb2ec1d.js"></script>
+    <script defer="defer" src="../_static/tippy/pre-integration/hypertune.6d4e1f8c-74d8-4b36-b41d-a4c2336cd3b3.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

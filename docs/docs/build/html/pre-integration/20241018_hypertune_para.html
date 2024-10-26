@@ -1,0 +1,1535 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>Hypertune 2 : with scvi-tools - scAtlas 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/override.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #003262;
+  --color-brand-content: #003262;
+  --admonition-font-size: var(--font-size-normal);
+  --admonition-title-font-size: var(--font-size-normal);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">scAtlas 0.0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/tooth_log.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/tooth_log.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction to scAtlas</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../preprocess/index.html">Preprocess</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Preprocess</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/droplet.html">Droplet discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_annotation.html">First round annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/post_annotation.html">Post annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/batch_division.html">Batch division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/normalization.html">Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Pre-integration</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Pre-integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hypertune.html">Hyperparameter tuning</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../annotation/index.html">Annotation</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step2_mtree.html">Step 2: MRTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step3_marker_detection.html">Step 3: Marker Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step4_prune_tree.html">Step 4: Prune Tree</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/team.html">Team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/cite.html">Citing scAtlas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing Guide</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="Hypertune-2-:-with-scvi-tools">
+<h1>Hypertune 2 : with scvi-tools<a class="headerlink" href="#Hypertune-2-:-with-scvi-tools" title="Permalink to this heading">#</a></h1>
+<p>In this script, we used scvi-tools to tune the parameters like n_hidden, n_layers, dropout_rate, gene_likelihood and dispersion. Training loss the the metrics that to evaluate the training performance.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">t1</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">scvi</span>
+<span class="kn">from</span> <span class="nn">scvi</span> <span class="kn">import</span> <span class="n">autotune</span>
+<span class="kn">from</span> <span class="nn">hyperopt</span> <span class="kn">import</span> <span class="n">hp</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">anndata</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ray</span>
+<span class="kn">from</span> <span class="nn">ray</span> <span class="kn">import</span> <span class="n">tune</span>
+
+<span class="kn">import</span> <span class="nn">scarches</span> <span class="k">as</span> <span class="nn">sca</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sb</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;axes.titlesize&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;axes.labelsize&#39;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adata</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;../../process/pre-intergration/big_data/20241008_core_pp_log1p_half_gene_small_HVG.h5ad&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">condition_key</span> <span class="o">=</span> <span class="s2">&quot;Sample&quot;</span>
+<span class="n">labels_key</span> <span class="o">=</span> <span class="s2">&quot;coarse_anno_1&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_cls</span> <span class="o">=</span> <span class="n">sca</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">SCVI</span>
+<span class="n">tuner</span> <span class="o">=</span> <span class="n">scvi</span><span class="o">.</span><span class="n">autotune</span><span class="o">.</span><span class="n">ModelTuner</span><span class="p">(</span><span class="n">model_cls</span><span class="p">)</span>
+<span class="n">tuner</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">model_cls</span><span class="o">.</span><span class="n">setup_anndata</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+<span class="n">dispersions</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;gene&quot;</span><span class="p">,</span> <span class="s2">&quot;gene-batch&quot;</span><span class="p">]</span>
+<span class="n">space</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;n_latent&quot;</span><span class="p">:</span>  <span class="n">tune</span><span class="o">.</span><span class="n">qrandint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>   <span class="c1"># [5, 20]</span>
+                <span class="s2">&quot;n_hidden&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">]),</span>
+                <span class="s2">&quot;n_layers&quot;</span><span class="p">:</span><span class="n">tune</span><span class="o">.</span><span class="n">qrandint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+                <span class="s2">&quot;dropout_rate&quot;</span><span class="p">:</span><span class="n">tune</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]),</span>
+                <span class="s2">&quot;gene_likelihood&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;zinb&quot;</span><span class="p">,</span> <span class="s2">&quot;nb&quot;</span><span class="p">]),</span>
+                <span class="s2">&quot;dispersion&quot;</span><span class="p">:</span> <span class="n">tune</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">dispersions</span><span class="p">)</span>
+        <span class="p">}</span>
+
+
+<span class="n">adata</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;counts&#39;</span><span class="p">]</span>
+<span class="n">adata</span><span class="o">.</span><span class="n">raw</span> <span class="o">=</span> <span class="n">adata</span>
+<span class="n">raw</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">to_adata</span><span class="p">()</span>
+<span class="n">raw</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;counts&#39;</span><span class="p">]</span>
+<span class="n">adata</span><span class="o">.</span><span class="n">raw</span> <span class="o">=</span> <span class="n">raw</span>
+<span class="n">sca</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">SCVI</span><span class="o">.</span><span class="n">setup_anndata</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">batch_key</span><span class="o">=</span><span class="n">condition_key</span><span class="p">,</span> <span class="n">labels_key</span><span class="o">=</span><span class="n">labels_key</span><span class="p">)</span>
+<span class="n">nlatent</span><span class="o">=</span><span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">ModelTuner registry for SCVI
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-style: italic">                  Tunable hyperparameters                  </span>
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold">      Hyperparameter      </span>┃<span style="font-weight: bold"> Default value </span>┃<span style="font-weight: bold">    Source    </span>┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│<span style="color: #0087ff; text-decoration-color: #0087ff">         n_hidden         </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">      128      </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">         n_latent         </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">      10       </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">         n_layers         </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">       1       </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">       dropout_rate       </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">      0.1      </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">        dispersion        </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     gene      </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">     gene_likelihood      </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     zinb      </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">   latent_distribution    </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">    normal     </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">    encode_covariates     </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     False     </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff"> deeply_inject_covariates </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     True      </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">      use_batch_norm      </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     both      </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">      use_layer_norm      </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     none      </span>│<span style="color: #008000; text-decoration-color: #008000">     VAE      </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">        optimizer         </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     Adam      </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">            lr            </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     0.001     </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">       weight_decay       </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     1e-06     </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">           eps            </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     0.01      </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">    n_steps_kl_warmup     </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     None      </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">    n_epochs_kl_warmup    </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">      400      </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">   reduce_lr_on_plateau   </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     False     </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">        lr_factor         </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">      0.6      </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">       lr_patience        </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">      30       </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">       lr_threshold       </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">      0.0      </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">          lr_min          </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">       0       </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">      max_kl_weight       </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">      1.0      </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+│<span style="color: #0087ff; text-decoration-color: #0087ff">      min_kl_weight       </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">      0.0      </span>│<span style="color: #008000; text-decoration-color: #008000"> TrainingPlan </span>│
+└──────────────────────────┴───────────────┴──────────────┘
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-style: italic">       Available metrics        </span>
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
+┃<span style="font-weight: bold">     Metric      </span>┃<span style="font-weight: bold">    Mode    </span>┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
+│<span style="color: #0087ff; text-decoration-color: #0087ff"> validation_loss </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">    min     </span>│
+└─────────────────┴────────────┘
+</pre></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-style: italic">                         Default search space                         </span>
+┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃<span style="font-weight: bold"> Hyperparameter </span>┃<span style="font-weight: bold"> Sample function </span>┃<span style="font-weight: bold">  Arguments  </span>┃<span style="font-weight: bold"> Keyword arguments </span>┃
+┡━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│<span style="color: #0087ff; text-decoration-color: #0087ff">    n_hidden    </span>│<span style="color: #af00d7; text-decoration-color: #af00d7">     choice      </span>│<span style="color: #008000; text-decoration-color: #008000"> [[64, 128]] </span>│<span style="color: #ff8700; text-decoration-color: #ff8700">        {}         </span>│
+└────────────────┴─────────────────┴─────────────┴───────────────────┘
+</pre></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/gilberthan/anaconda3/envs/py311/lib/python3.11/abc.py:119: FutureWarning: SparseDataset is deprecated and will be removed in late 2024. It has been replaced by the public classes CSRDataset and CSCDataset.
+
+For instance checks, use `isinstance(X, (anndata.experimental.CSRDataset, anndata.experimental.CSCDataset))` instead.
+
+For creation, use `anndata.experimental.sparse_dataset(X)` instead.
+
+  return _abc_instancecheck(cls, instance)
+WARNING:jax._src.xla_bridge:An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not installed. Falling back to cpu.
+/home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/fields/_layer_field.py:91: UserWarning: adata.X does not contain unnormalized count data. Are you sure this is what you want?
+  warnings.warn(
+/home/gilberthan/anaconda3/envs/py311/lib/python3.11/abc.py:119: FutureWarning: SparseDataset is deprecated and will be removed in late 2024. It has been replaced by the public classes CSRDataset and CSCDataset.
+
+For instance checks, use `isinstance(X, (anndata.experimental.CSRDataset, anndata.experimental.CSCDataset))` instead.
+
+For creation, use `anndata.experimental.sparse_dataset(X)` instead.
+
+  return _abc_instancecheck(cls, instance)
+/home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+  warnings.warn(
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">tuner</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;validation_loss&quot;</span><span class="p">,</span><span class="n">search_space</span><span class="o">=</span><span class="n">space</span><span class="p">,</span><span class="n">num_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div class="tuneStatus">
+  <div style="display: flex;flex-direction: row">
+    <div style="display: flex;flex-direction: column;">
+      <h3>Tune Status</h3>
+      <table>
+<tbody>
+<tr><td>Current time:</td><td>2024-10-18 19:40:59</td></tr>
+<tr><td>Running for: </td><td>02:17:39.85        </td></tr>
+<tr><td>Memory:      </td><td>15.3/125.4 GiB     </td></tr>
+</tbody>
+</table>
+    </div>
+    <div class="vDivider"></div>
+    <div class="systemInfo">
+      <h3>System Info</h3>
+      Using AsyncHyperBand: num_stopped=100<br>Bracket: Iter 64.000: -929.0069274902344 | Iter 32.000: -932.2415161132812 | Iter 16.000: -940.2549438476562 | Iter 8.000: -958.7998046875 | Iter 4.000: -986.1138916015625 | Iter 2.000: -1023.90087890625 | Iter 1.000: -1095.3003540039062<br>Logical resource usage: 1.0/36 CPUs, 0/1 GPUs (0.0/1.0 accelerator_type:G)
+    </div>
+
+  </div>
+  <div class="hDivider"></div>
+  <div class="trialStatus">
+    <h3>Trial Status</h3>
+    <table>
+<thead>
+<tr><th>Trial name            </th><th>status    </th><th>loc                 </th><th style="text-align: right;">  n_latent</th><th style="text-align: right;">  n_hidden</th><th style="text-align: right;">  n_layers</th><th style="text-align: right;">  dropout_rate</th><th>gene_likelihood  </th><th>dispersion  </th><th style="text-align: right;">  validation_loss</th></tr>
+</thead>
+<tbody>
+<tr><td>_trainable_9b5cf_00000</td><td>TERMINATED</td><td>192.168.1.100:581537</td><td style="text-align: right;">        22</td><td style="text-align: right;">        64</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1157.39 </td></tr>
+<tr><td>_trainable_9b5cf_00001</td><td>TERMINATED</td><td>192.168.1.100:581540</td><td style="text-align: right;">        12</td><td style="text-align: right;">        64</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1017.32 </td></tr>
+<tr><td>_trainable_9b5cf_00002</td><td>TERMINATED</td><td>192.168.1.100:581560</td><td style="text-align: right;">        14</td><td style="text-align: right;">        64</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.5</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1220.71 </td></tr>
+<tr><td>_trainable_9b5cf_00003</td><td>TERMINATED</td><td>192.168.1.100:581579</td><td style="text-align: right;">         6</td><td style="text-align: right;">        64</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">          962.424</td></tr>
+<tr><td>_trainable_9b5cf_00004</td><td>TERMINATED</td><td>192.168.1.100:581600</td><td style="text-align: right;">        24</td><td style="text-align: right;">       128</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1047.98 </td></tr>
+<tr><td>_trainable_9b5cf_00005</td><td>TERMINATED</td><td>192.168.1.100:581620</td><td style="text-align: right;">         4</td><td style="text-align: right;">       128</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene        </td><td style="text-align: right;">          958.33 </td></tr>
+<tr><td>_trainable_9b5cf_00006</td><td>TERMINATED</td><td>192.168.1.100:581630</td><td style="text-align: right;">        18</td><td style="text-align: right;">       256</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          913.237</td></tr>
+<tr><td>_trainable_9b5cf_00007</td><td>TERMINATED</td><td>192.168.1.100:581649</td><td style="text-align: right;">        28</td><td style="text-align: right;">       256</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1209.09 </td></tr>
+<tr><td>_trainable_9b5cf_00008</td><td>TERMINATED</td><td>192.168.1.100:581659</td><td style="text-align: right;">        24</td><td style="text-align: right;">        64</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1051.34 </td></tr>
+<tr><td>_trainable_9b5cf_00009</td><td>TERMINATED</td><td>192.168.1.100:581678</td><td style="text-align: right;">         8</td><td style="text-align: right;">       256</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1057.32 </td></tr>
+<tr><td>_trainable_9b5cf_00010</td><td>TERMINATED</td><td>192.168.1.100:581698</td><td style="text-align: right;">        12</td><td style="text-align: right;">        64</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1184    </td></tr>
+<tr><td>_trainable_9b5cf_00011</td><td>TERMINATED</td><td>192.168.1.100:581783</td><td style="text-align: right;">         6</td><td style="text-align: right;">        64</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1213.75 </td></tr>
+<tr><td>_trainable_9b5cf_00012</td><td>TERMINATED</td><td>192.168.1.100:581772</td><td style="text-align: right;">        12</td><td style="text-align: right;">       128</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1016.12 </td></tr>
+<tr><td>_trainable_9b5cf_00013</td><td>TERMINATED</td><td>192.168.1.100:581742</td><td style="text-align: right;">        30</td><td style="text-align: right;">       256</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          923.326</td></tr>
+<tr><td>_trainable_9b5cf_00014</td><td>TERMINATED</td><td>192.168.1.100:581802</td><td style="text-align: right;">         8</td><td style="text-align: right;">       256</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene        </td><td style="text-align: right;">          925.325</td></tr>
+<tr><td>_trainable_9b5cf_00015</td><td>TERMINATED</td><td>192.168.1.100:581803</td><td style="text-align: right;">        12</td><td style="text-align: right;">       256</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">          916.294</td></tr>
+<tr><td>_trainable_9b5cf_00016</td><td>TERMINATED</td><td>192.168.1.100:581813</td><td style="text-align: right;">        16</td><td style="text-align: right;">       256</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">          914.443</td></tr>
+<tr><td>_trainable_9b5cf_00017</td><td>TERMINATED</td><td>192.168.1.100:581814</td><td style="text-align: right;">        24</td><td style="text-align: right;">       256</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1047.1  </td></tr>
+<tr><td>_trainable_9b5cf_00018</td><td>TERMINATED</td><td>192.168.1.100:581815</td><td style="text-align: right;">        28</td><td style="text-align: right;">       128</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1131.9  </td></tr>
+<tr><td>_trainable_9b5cf_00019</td><td>TERMINATED</td><td>192.168.1.100:581825</td><td style="text-align: right;">        20</td><td style="text-align: right;">        64</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene        </td><td style="text-align: right;">          990.615</td></tr>
+<tr><td>_trainable_9b5cf_00020</td><td>TERMINATED</td><td>192.168.1.100:581826</td><td style="text-align: right;">        28</td><td style="text-align: right;">        64</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1020.32 </td></tr>
+<tr><td>_trainable_9b5cf_00021</td><td>TERMINATED</td><td>192.168.1.100:581827</td><td style="text-align: right;">         8</td><td style="text-align: right;">       128</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          927.165</td></tr>
+<tr><td>_trainable_9b5cf_00022</td><td>TERMINATED</td><td>192.168.1.100:581829</td><td style="text-align: right;">        16</td><td style="text-align: right;">        64</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">          943.946</td></tr>
+<tr><td>_trainable_9b5cf_00023</td><td>TERMINATED</td><td>192.168.1.100:581828</td><td style="text-align: right;">        20</td><td style="text-align: right;">        64</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.5</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1081.02 </td></tr>
+<tr><td>_trainable_9b5cf_00024</td><td>TERMINATED</td><td>192.168.1.100:581852</td><td style="text-align: right;">        12</td><td style="text-align: right;">        64</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1328.63 </td></tr>
+<tr><td>_trainable_9b5cf_00025</td><td>TERMINATED</td><td>192.168.1.100:581851</td><td style="text-align: right;">        16</td><td style="text-align: right;">        64</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1161.4  </td></tr>
+<tr><td>_trainable_9b5cf_00026</td><td>TERMINATED</td><td>192.168.1.100:581853</td><td style="text-align: right;">        20</td><td style="text-align: right;">       256</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1103.41 </td></tr>
+<tr><td>_trainable_9b5cf_00027</td><td>TERMINATED</td><td>192.168.1.100:581848</td><td style="text-align: right;">        28</td><td style="text-align: right;">       128</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          960.575</td></tr>
+<tr><td>_trainable_9b5cf_00028</td><td>TERMINATED</td><td>192.168.1.100:581850</td><td style="text-align: right;">        16</td><td style="text-align: right;">       256</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1001.03 </td></tr>
+<tr><td>_trainable_9b5cf_00029</td><td>TERMINATED</td><td>192.168.1.100:581849</td><td style="text-align: right;">        16</td><td style="text-align: right;">        64</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">          977.726</td></tr>
+<tr><td>_trainable_9b5cf_00030</td><td>TERMINATED</td><td>192.168.1.100:581854</td><td style="text-align: right;">         8</td><td style="text-align: right;">       128</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1204.24 </td></tr>
+<tr><td>_trainable_9b5cf_00031</td><td>TERMINATED</td><td>192.168.1.100:581855</td><td style="text-align: right;">        28</td><td style="text-align: right;">       128</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1058.02 </td></tr>
+<tr><td>_trainable_9b5cf_00032</td><td>TERMINATED</td><td>192.168.1.100:581857</td><td style="text-align: right;">         8</td><td style="text-align: right;">       128</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">          940.357</td></tr>
+<tr><td>_trainable_9b5cf_00033</td><td>TERMINATED</td><td>192.168.1.100:581856</td><td style="text-align: right;">        22</td><td style="text-align: right;">        64</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1292.65 </td></tr>
+<tr><td>_trainable_9b5cf_00034</td><td>TERMINATED</td><td>192.168.1.100:581858</td><td style="text-align: right;">        12</td><td style="text-align: right;">       128</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1060.09 </td></tr>
+<tr><td>_trainable_9b5cf_00035</td><td>TERMINATED</td><td>192.168.1.100:581859</td><td style="text-align: right;">         4</td><td style="text-align: right;">       128</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1013.24 </td></tr>
+<tr><td>_trainable_9b5cf_00036</td><td>TERMINATED</td><td>192.168.1.100:581851</td><td style="text-align: right;">         8</td><td style="text-align: right;">       256</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1145.38 </td></tr>
+<tr><td>_trainable_9b5cf_00037</td><td>TERMINATED</td><td>192.168.1.100:581856</td><td style="text-align: right;">         4</td><td style="text-align: right;">       128</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1038.29 </td></tr>
+<tr><td>_trainable_9b5cf_00038</td><td>TERMINATED</td><td>192.168.1.100:581537</td><td style="text-align: right;">         8</td><td style="text-align: right;">        64</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1152.86 </td></tr>
+<tr><td>_trainable_9b5cf_00039</td><td>TERMINATED</td><td>192.168.1.100:581560</td><td style="text-align: right;">        20</td><td style="text-align: right;">       128</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene        </td><td style="text-align: right;">          950.023</td></tr>
+<tr><td>_trainable_9b5cf_00040</td><td>TERMINATED</td><td>192.168.1.100:581852</td><td style="text-align: right;">         8</td><td style="text-align: right;">       128</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">          999.668</td></tr>
+<tr><td>_trainable_9b5cf_00041</td><td>TERMINATED</td><td>192.168.1.100:581783</td><td style="text-align: right;">        32</td><td style="text-align: right;">       128</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1108.16 </td></tr>
+<tr><td>_trainable_9b5cf_00042</td><td>TERMINATED</td><td>192.168.1.100:581815</td><td style="text-align: right;">        22</td><td style="text-align: right;">        64</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1272.01 </td></tr>
+<tr><td>_trainable_9b5cf_00043</td><td>TERMINATED</td><td>192.168.1.100:581698</td><td style="text-align: right;">        24</td><td style="text-align: right;">       128</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          971.454</td></tr>
+<tr><td>_trainable_9b5cf_00044</td><td>TERMINATED</td><td>192.168.1.100:581854</td><td style="text-align: right;">        16</td><td style="text-align: right;">       128</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">          968.721</td></tr>
+<tr><td>_trainable_9b5cf_00045</td><td>TERMINATED</td><td>192.168.1.100:581853</td><td style="text-align: right;">        14</td><td style="text-align: right;">        64</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">          945.089</td></tr>
+<tr><td>_trainable_9b5cf_00046</td><td>TERMINATED</td><td>192.168.1.100:581649</td><td style="text-align: right;">        28</td><td style="text-align: right;">       128</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.5</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1142.43 </td></tr>
+<tr><td>_trainable_9b5cf_00047</td><td>TERMINATED</td><td>192.168.1.100:581537</td><td style="text-align: right;">        12</td><td style="text-align: right;">       128</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">          936.475</td></tr>
+<tr><td>_trainable_9b5cf_00048</td><td>TERMINATED</td><td>192.168.1.100:581828</td><td style="text-align: right;">        16</td><td style="text-align: right;">        64</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1127.48 </td></tr>
+<tr><td>_trainable_9b5cf_00049</td><td>TERMINATED</td><td>192.168.1.100:581815</td><td style="text-align: right;">        24</td><td style="text-align: right;">       256</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.5</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1135.64 </td></tr>
+<tr><td>_trainable_9b5cf_00050</td><td>TERMINATED</td><td>192.168.1.100:581659</td><td style="text-align: right;">        12</td><td style="text-align: right;">       128</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1112.73 </td></tr>
+<tr><td>_trainable_9b5cf_00051</td><td>TERMINATED</td><td>192.168.1.100:581851</td><td style="text-align: right;">        24</td><td style="text-align: right;">        64</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1125.98 </td></tr>
+<tr><td>_trainable_9b5cf_00052</td><td>TERMINATED</td><td>192.168.1.100:581783</td><td style="text-align: right;">        20</td><td style="text-align: right;">       128</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          964.378</td></tr>
+<tr><td>_trainable_9b5cf_00053</td><td>TERMINATED</td><td>192.168.1.100:581678</td><td style="text-align: right;">        30</td><td style="text-align: right;">        64</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.5</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1248.71 </td></tr>
+<tr><td>_trainable_9b5cf_00054</td><td>TERMINATED</td><td>192.168.1.100:581649</td><td style="text-align: right;">        14</td><td style="text-align: right;">       128</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.5</td><td>nb               </td><td>gene        </td><td style="text-align: right;">          945.984</td></tr>
+<tr><td>_trainable_9b5cf_00055</td><td>TERMINATED</td><td>192.168.1.100:581600</td><td style="text-align: right;">         8</td><td style="text-align: right;">       256</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.5</td><td>nb               </td><td>gene        </td><td style="text-align: right;">          935.138</td></tr>
+<tr><td>_trainable_9b5cf_00056</td><td>TERMINATED</td><td>192.168.1.100:581858</td><td style="text-align: right;">        10</td><td style="text-align: right;">       256</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          928.145</td></tr>
+<tr><td>_trainable_9b5cf_00057</td><td>TERMINATED</td><td>192.168.1.100:581855</td><td style="text-align: right;">        26</td><td style="text-align: right;">        64</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1097.84 </td></tr>
+<tr><td>_trainable_9b5cf_00058</td><td>TERMINATED</td><td>192.168.1.100:581814</td><td style="text-align: right;">        24</td><td style="text-align: right;">       128</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">          922.421</td></tr>
+<tr><td>_trainable_9b5cf_00059</td><td>TERMINATED</td><td>192.168.1.100:581828</td><td style="text-align: right;">        28</td><td style="text-align: right;">        64</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1049.08 </td></tr>
+<tr><td>_trainable_9b5cf_00060</td><td>TERMINATED</td><td>192.168.1.100:581856</td><td style="text-align: right;">        26</td><td style="text-align: right;">       128</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1113.6  </td></tr>
+<tr><td>_trainable_9b5cf_00061</td><td>TERMINATED</td><td>192.168.1.100:581815</td><td style="text-align: right;">         4</td><td style="text-align: right;">       128</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1095.65 </td></tr>
+<tr><td>_trainable_9b5cf_00062</td><td>TERMINATED</td><td>192.168.1.100:581678</td><td style="text-align: right;">        12</td><td style="text-align: right;">       256</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">          935.41 </td></tr>
+<tr><td>_trainable_9b5cf_00063</td><td>TERMINATED</td><td>192.168.1.100:581855</td><td style="text-align: right;">        24</td><td style="text-align: right;">        64</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1147.85 </td></tr>
+<tr><td>_trainable_9b5cf_00064</td><td>TERMINATED</td><td>192.168.1.100:581659</td><td style="text-align: right;">         8</td><td style="text-align: right;">        64</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1098.45 </td></tr>
+<tr><td>_trainable_9b5cf_00065</td><td>TERMINATED</td><td>192.168.1.100:581851</td><td style="text-align: right;">        32</td><td style="text-align: right;">        64</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1037.75 </td></tr>
+<tr><td>_trainable_9b5cf_00066</td><td>TERMINATED</td><td>192.168.1.100:581826</td><td style="text-align: right;">        16</td><td style="text-align: right;">       256</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          923.414</td></tr>
+<tr><td>_trainable_9b5cf_00067</td><td>TERMINATED</td><td>192.168.1.100:581540</td><td style="text-align: right;">        16</td><td style="text-align: right;">        64</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1136.07 </td></tr>
+<tr><td>_trainable_9b5cf_00068</td><td>TERMINATED</td><td>192.168.1.100:581856</td><td style="text-align: right;">        30</td><td style="text-align: right;">        64</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1103.9  </td></tr>
+<tr><td>_trainable_9b5cf_00069</td><td>TERMINATED</td><td>192.168.1.100:581855</td><td style="text-align: right;">        12</td><td style="text-align: right;">        64</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">          938.829</td></tr>
+<tr><td>_trainable_9b5cf_00070</td><td>TERMINATED</td><td>192.168.1.100:581859</td><td style="text-align: right;">        16</td><td style="text-align: right;">       128</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1136.69 </td></tr>
+<tr><td>_trainable_9b5cf_00071</td><td>TERMINATED</td><td>192.168.1.100:581815</td><td style="text-align: right;">        12</td><td style="text-align: right;">       256</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1285.16 </td></tr>
+<tr><td>_trainable_9b5cf_00072</td><td>TERMINATED</td><td>192.168.1.100:581659</td><td style="text-align: right;">         8</td><td style="text-align: right;">       256</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1323.25 </td></tr>
+<tr><td>_trainable_9b5cf_00073</td><td>TERMINATED</td><td>192.168.1.100:581772</td><td style="text-align: right;">        32</td><td style="text-align: right;">       256</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1038.34 </td></tr>
+<tr><td>_trainable_9b5cf_00074</td><td>TERMINATED</td><td>192.168.1.100:581540</td><td style="text-align: right;">        12</td><td style="text-align: right;">       256</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene        </td><td style="text-align: right;">          929.569</td></tr>
+<tr><td>_trainable_9b5cf_00075</td><td>TERMINATED</td><td>192.168.1.100:581852</td><td style="text-align: right;">        24</td><td style="text-align: right;">       256</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1134.58 </td></tr>
+<tr><td>_trainable_9b5cf_00076</td><td>TERMINATED</td><td>192.168.1.100:581851</td><td style="text-align: right;">         4</td><td style="text-align: right;">       256</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">          990.987</td></tr>
+<tr><td>_trainable_9b5cf_00077</td><td>TERMINATED</td><td>192.168.1.100:581828</td><td style="text-align: right;">        12</td><td style="text-align: right;">        64</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1103.81 </td></tr>
+<tr><td>_trainable_9b5cf_00078</td><td>TERMINATED</td><td>192.168.1.100:581856</td><td style="text-align: right;">        24</td><td style="text-align: right;">       128</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1113.33 </td></tr>
+<tr><td>_trainable_9b5cf_00079</td><td>TERMINATED</td><td>192.168.1.100:581850</td><td style="text-align: right;">         8</td><td style="text-align: right;">       128</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          964.447</td></tr>
+<tr><td>_trainable_9b5cf_00080</td><td>TERMINATED</td><td>192.168.1.100:581859</td><td style="text-align: right;">         8</td><td style="text-align: right;">       128</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1110.94 </td></tr>
+<tr><td>_trainable_9b5cf_00081</td><td>TERMINATED</td><td>192.168.1.100:581659</td><td style="text-align: right;">        20</td><td style="text-align: right;">       256</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.7</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1039.48 </td></tr>
+<tr><td>_trainable_9b5cf_00082</td><td>TERMINATED</td><td>192.168.1.100:581815</td><td style="text-align: right;">        20</td><td style="text-align: right;">       256</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          915.251</td></tr>
+<tr><td>_trainable_9b5cf_00083</td><td>TERMINATED</td><td>192.168.1.100:581828</td><td style="text-align: right;">        10</td><td style="text-align: right;">       128</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.5</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1227.49 </td></tr>
+<tr><td>_trainable_9b5cf_00084</td><td>TERMINATED</td><td>192.168.1.100:581856</td><td style="text-align: right;">        16</td><td style="text-align: right;">       256</td><td style="text-align: right;">         5</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1035.95 </td></tr>
+<tr><td>_trainable_9b5cf_00085</td><td>TERMINATED</td><td>192.168.1.100:581852</td><td style="text-align: right;">        18</td><td style="text-align: right;">       128</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1100.31 </td></tr>
+<tr><td>_trainable_9b5cf_00086</td><td>TERMINATED</td><td>192.168.1.100:581772</td><td style="text-align: right;">        18</td><td style="text-align: right;">       128</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">          962.431</td></tr>
+<tr><td>_trainable_9b5cf_00087</td><td>TERMINATED</td><td>192.168.1.100:581859</td><td style="text-align: right;">         6</td><td style="text-align: right;">        64</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1104.53 </td></tr>
+<tr><td>_trainable_9b5cf_00088</td><td>TERMINATED</td><td>192.168.1.100:581828</td><td style="text-align: right;">        28</td><td style="text-align: right;">        64</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.1</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1034.49 </td></tr>
+<tr><td>_trainable_9b5cf_00089</td><td>TERMINATED</td><td>192.168.1.100:581852</td><td style="text-align: right;">         8</td><td style="text-align: right;">        64</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1290.54 </td></tr>
+<tr><td>_trainable_9b5cf_00090</td><td>TERMINATED</td><td>192.168.1.100:581859</td><td style="text-align: right;">        10</td><td style="text-align: right;">        64</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1143.2  </td></tr>
+<tr><td>_trainable_9b5cf_00091</td><td>TERMINATED</td><td>192.168.1.100:581659</td><td style="text-align: right;">         8</td><td style="text-align: right;">       128</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1111.92 </td></tr>
+<tr><td>_trainable_9b5cf_00092</td><td>TERMINATED</td><td>192.168.1.100:581852</td><td style="text-align: right;">        32</td><td style="text-align: right;">       128</td><td style="text-align: right;">         4</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene        </td><td style="text-align: right;">         1045.63 </td></tr>
+<tr><td>_trainable_9b5cf_00093</td><td>TERMINATED</td><td>192.168.1.100:581856</td><td style="text-align: right;">        28</td><td style="text-align: right;">       128</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">         1105.07 </td></tr>
+<tr><td>_trainable_9b5cf_00094</td><td>TERMINATED</td><td>192.168.1.100:581849</td><td style="text-align: right;">        28</td><td style="text-align: right;">       128</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.3</td><td>zinb             </td><td>gene        </td><td style="text-align: right;">          930.682</td></tr>
+<tr><td>_trainable_9b5cf_00095</td><td>TERMINATED</td><td>192.168.1.100:581859</td><td style="text-align: right;">        32</td><td style="text-align: right;">       256</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.7</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">          936.407</td></tr>
+<tr><td>_trainable_9b5cf_00096</td><td>TERMINATED</td><td>192.168.1.100:581828</td><td style="text-align: right;">        14</td><td style="text-align: right;">       256</td><td style="text-align: right;">         3</td><td style="text-align: right;">           0.3</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">          923.277</td></tr>
+<tr><td>_trainable_9b5cf_00097</td><td>TERMINATED</td><td>192.168.1.100:581659</td><td style="text-align: right;">        18</td><td style="text-align: right;">       256</td><td style="text-align: right;">         6</td><td style="text-align: right;">           0.5</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">         1135    </td></tr>
+<tr><td>_trainable_9b5cf_00098</td><td>TERMINATED</td><td>192.168.1.100:581851</td><td style="text-align: right;">        28</td><td style="text-align: right;">       128</td><td style="text-align: right;">         1</td><td style="text-align: right;">           0.1</td><td>zinb             </td><td>gene-batch  </td><td style="text-align: right;">          921.02 </td></tr>
+<tr><td>_trainable_9b5cf_00099</td><td>TERMINATED</td><td>192.168.1.100:581856</td><td style="text-align: right;">         4</td><td style="text-align: right;">       256</td><td style="text-align: right;">         2</td><td style="text-align: right;">           0.5</td><td>nb               </td><td>gene-batch  </td><td style="text-align: right;">         1023.9  </td></tr>
+</tbody>
+</table>
+  </div>
+</div>
+<style>
+.tuneStatus {
+  color: var(--jp-ui-font-color1);
+}
+.tuneStatus .systemInfo {
+  display: flex;
+  flex-direction: column;
+}
+.tuneStatus td {
+  white-space: nowrap;
+}
+.tuneStatus .trialStatus {
+  display: flex;
+  flex-direction: column;
+}
+.tuneStatus h3 {
+  font-weight: bold;
+}
+.tuneStatus .hDivider {
+  border-bottom-width: var(--jp-border-width);
+  border-bottom-color: var(--jp-border-color0);
+  border-bottom-style: solid;
+}
+.tuneStatus .vDivider {
+  border-left-width: var(--jp-border-width);
+  border-left-color: var(--jp-border-color0);
+  border-left-style: solid;
+  margin: 0.5em 1em 0.5em 1em;
+}
+</style></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/gilberthan/anaconda3/envs/py311/lib/python3.11/subprocess.py:1832: RuntimeWarning: os.fork() was called. os.fork() is incompatible with multithreaded code, and JAX is multithreaded, so this will likely lead to a deadlock.
+  self.pid = _fork_exec(
+2024-10-18 17:23:18,905 INFO worker.py:1724 -- Started a local Ray instance.
+2024-10-18 17:23:19,926 INFO tune.py:220 -- Initializing Ray automatically. For cluster usage or custom Ray initialization, call `ray.init(...)` before `Tuner(...)`.
+2024-10-18 17:23:19,929 INFO tune.py:583 -- [output] This uses the legacy output and progress reporter, as Jupyter notebooks are not supported by the new engine, yet. For more information, please see https://github.com/ray-project/ray/issues/36949
+<span class="ansi-cyan-fg">(pid=581659)</span> Global seed set to 0
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> &lt;frozen abc&gt;:119: FutureWarning: SparseDataset is deprecated and will be removed in late 2024. It has been replaced by the public classes CSRDataset and CSCDataset.
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span>
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> For instance checks, use `isinstance(X, (anndata.experimental.CSRDataset, anndata.experimental.CSCDataset))` instead.
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span>
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> For creation, use `anndata.experimental.sparse_dataset(X)` instead.
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span>
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not installed. Falling back to cpu.
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/ray/tune/integration/pytorch_lightning.py:194: UserWarning: `ray.tune.integration.pytorch_lightning.TuneReportCallback` is deprecated. Use `ray.tune.integration.pytorch_lightning.TuneReportCheckpointCallback` instead.
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(pid=581848)</span> Global seed set to 0<span class="ansi-green-fg"> [repeated 35x across cluster] (Ray deduplicates logs by default. Set RAY_DEDUP_LOGS=0 to disable log deduplication, or see https://docs.ray.io/en/master/ray-observability/ray-logging.html#log-deduplication for more options.)</span>
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> &lt;frozen abc&gt;:119: FutureWarning: SparseDataset is deprecated and will be removed in late 2024. It has been replaced by the public classes CSRDataset and CSCDataset.<span class="ansi-green-fg"> [repeated 71x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> <span class="ansi-green-fg"> [repeated 213x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> For instance checks, use `isinstance(X, (anndata.experimental.CSRDataset, anndata.experimental.CSCDataset))` instead.<span class="ansi-green-fg"> [repeated 71x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> For creation, use `anndata.experimental.sparse_dataset(X)` instead.<span class="ansi-green-fg"> [repeated 71x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> An NVIDIA GPU may be present on this machine, but a CUDA-enabled jaxlib is not installed. Falling back to cpu.<span class="ansi-green-fg"> [repeated 35x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 36x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 72x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/ray/tune/integration/pytorch_lightning.py:194: UserWarning: `ray.tune.integration.pytorch_lightning.TuneReportCallback` is deprecated. Use `ray.tune.integration.pytorch_lightning.TuneReportCheckpointCallback` instead.<span class="ansi-green-fg"> [repeated 35x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> GPU available: False, used: False<span class="ansi-green-fg"> [repeated 35x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> TPU available: False, using: 0 TPU cores<span class="ansi-green-fg"> [repeated 35x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> IPU available: False, using: 0 IPUs<span class="ansi-green-fg"> [repeated 35x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> HPU available: False, using: 0 HPUs<span class="ansi-green-fg"> [repeated 35x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581560)</span> GPU available: False, used: False<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581560)</span> TPU available: False, using: 0 TPU cores<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581560)</span> IPU available: False, using: 0 IPUs<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581560)</span> HPU available: False, using: 0 HPUs<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581783)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581783)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581783)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581783)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581783)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581783)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581698)</span> GPU available: False, used: False<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581698)</span> TPU available: False, using: 0 TPU cores<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581698)</span> IPU available: False, using: 0 IPUs<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581698)</span> HPU available: False, using: 0 HPUs<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581853)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581853)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581853)</span> GPU available: False, used: False<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581853)</span> TPU available: False, using: 0 TPU cores<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581853)</span> IPU available: False, using: 0 IPUs<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581853)</span> HPU available: False, using: 0 HPUs<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581649)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581649)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581537)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581537)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581649)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581649)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581649)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581649)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581537)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581537)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581537)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581537)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581678)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581678)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581649)</span> GPU available: False, used: False<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581649)</span> TPU available: False, using: 0 TPU cores<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581649)</span> IPU available: False, using: 0 IPUs<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581649)</span> HPU available: False, using: 0 HPUs<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> GPU available: False, used: False<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> TPU available: False, using: 0 TPU cores<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> IPU available: False, using: 0 IPUs<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> HPU available: False, using: 0 HPUs<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581814)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581814)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581814)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581814)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581814)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581814)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581678)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581678)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581678)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581678)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581826)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581826)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581826)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581826)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581826)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581826)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581540)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581540)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581540)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581540)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581855)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 3x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span> GPU available: False, used: False<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span> TPU available: False, using: 0 TPU cores<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span> IPU available: False, using: 0 IPUs<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span> HPU available: False, using: 0 HPUs<span class="ansi-green-fg"> [repeated 4x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581540)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581540)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581540)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581540)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581540)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581540)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581850)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581850)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581850)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581850)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581850)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581850)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span>   warnings.warn(<span class="ansi-green-fg"> [repeated 2x across cluster]</span>
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581815)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581772)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581852)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581849)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581849)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581849)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581849)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581849)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581849)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581859)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581828)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581659)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581851)</span> HPU available: False, using: 0 HPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> /home/gilberthan/anaconda3/envs/py311/lib/python3.11/site-packages/scvi/data/_utils.py:121: UserWarning: Training will be faster when sparse matrix is formatted as CSR. It is safe to cast before model initialization.
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span>   warnings.warn(
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> GPU available: False, used: False
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> TPU available: False, using: 0 TPU cores
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> IPU available: False, using: 0 IPUs
+<span class="ansi-cyan-fg">(_trainable pid=581856)</span> HPU available: False, using: 0 HPUs
+2024-10-18 19:40:59,864 INFO tune.py:1042 -- Total run time: 8259.93 seconds (8259.83 seconds for the tuning loop).
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pltDf</span><span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_dataframe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pltDf</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>validation_loss</th>
+      <th>timestamp</th>
+      <th>checkpoint_dir_name</th>
+      <th>done</th>
+      <th>training_iteration</th>
+      <th>trial_id</th>
+      <th>date</th>
+      <th>time_this_iter_s</th>
+      <th>time_total_s</th>
+      <th>pid</th>
+      <th>...</th>
+      <th>node_ip</th>
+      <th>time_since_restore</th>
+      <th>iterations_since_restore</th>
+      <th>config/n_latent</th>
+      <th>config/n_hidden</th>
+      <th>config/n_layers</th>
+      <th>config/dropout_rate</th>
+      <th>config/gene_likelihood</th>
+      <th>config/dispersion</th>
+      <th>logdir</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1157.385498</td>
+      <td>1729243495</td>
+      <td>None</td>
+      <td>True</td>
+      <td>1</td>
+      <td>9b5cf_00000</td>
+      <td>2024-10-18_17-24-55</td>
+      <td>83.109610</td>
+      <td>83.109610</td>
+      <td>581537</td>
+      <td>...</td>
+      <td>192.168.1.100</td>
+      <td>83.109610</td>
+      <td>1</td>
+      <td>22</td>
+      <td>64</td>
+      <td>2</td>
+      <td>0.7</td>
+      <td>nb</td>
+      <td>gene-batch</td>
+      <td>9b5cf_00000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1017.316406</td>
+      <td>1729243743</td>
+      <td>None</td>
+      <td>True</td>
+      <td>4</td>
+      <td>9b5cf_00001</td>
+      <td>2024-10-18_17-29-03</td>
+      <td>81.365171</td>
+      <td>330.014071</td>
+      <td>581540</td>
+      <td>...</td>
+      <td>192.168.1.100</td>
+      <td>330.014071</td>
+      <td>4</td>
+      <td>12</td>
+      <td>64</td>
+      <td>2</td>
+      <td>0.3</td>
+      <td>nb</td>
+      <td>gene-batch</td>
+      <td>9b5cf_00001</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1220.706055</td>
+      <td>1729243497</td>
+      <td>None</td>
+      <td>True</td>
+      <td>1</td>
+      <td>9b5cf_00002</td>
+      <td>2024-10-18_17-24-57</td>
+      <td>84.150100</td>
+      <td>84.150100</td>
+      <td>581560</td>
+      <td>...</td>
+      <td>192.168.1.100</td>
+      <td>84.150100</td>
+      <td>1</td>
+      <td>14</td>
+      <td>64</td>
+      <td>4</td>
+      <td>0.5</td>
+      <td>nb</td>
+      <td>gene</td>
+      <td>9b5cf_00002</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>962.423584</td>
+      <td>1729249790</td>
+      <td>None</td>
+      <td>True</td>
+      <td>100</td>
+      <td>9b5cf_00003</td>
+      <td>2024-10-18_19-09-50</td>
+      <td>50.675084</td>
+      <td>6376.645573</td>
+      <td>581579</td>
+      <td>...</td>
+      <td>192.168.1.100</td>
+      <td>6376.645573</td>
+      <td>100</td>
+      <td>6</td>
+      <td>64</td>
+      <td>1</td>
+      <td>0.1</td>
+      <td>nb</td>
+      <td>gene-batch</td>
+      <td>9b5cf_00003</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1047.975952</td>
+      <td>1729243623</td>
+      <td>None</td>
+      <td>True</td>
+      <td>2</td>
+      <td>9b5cf_00004</td>
+      <td>2024-10-18_17-27-03</td>
+      <td>105.085532</td>
+      <td>210.981139</td>
+      <td>581600</td>
+      <td>...</td>
+      <td>192.168.1.100</td>
+      <td>210.981139</td>
+      <td>2</td>
+      <td>24</td>
+      <td>128</td>
+      <td>5</td>
+      <td>0.3</td>
+      <td>zinb</td>
+      <td>gene</td>
+      <td>9b5cf_00004</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95</th>
+      <td>936.406799</td>
+      <td>1729250773</td>
+      <td>None</td>
+      <td>True</td>
+      <td>100</td>
+      <td>9b5cf_00095</td>
+      <td>2024-10-18_19-26-13</td>
+      <td>43.710852</td>
+      <td>6559.341432</td>
+      <td>581859</td>
+      <td>...</td>
+      <td>192.168.1.100</td>
+      <td>6559.341432</td>
+      <td>100</td>
+      <td>32</td>
+      <td>256</td>
+      <td>1</td>
+      <td>0.7</td>
+      <td>nb</td>
+      <td>gene-batch</td>
+      <td>9b5cf_00095</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>923.276794</td>
+      <td>1729251072</td>
+      <td>None</td>
+      <td>True</td>
+      <td>100</td>
+      <td>9b5cf_00096</td>
+      <td>2024-10-18_19-31-12</td>
+      <td>41.354015</td>
+      <td>6833.547143</td>
+      <td>581828</td>
+      <td>...</td>
+      <td>192.168.1.100</td>
+      <td>6833.547143</td>
+      <td>100</td>
+      <td>14</td>
+      <td>256</td>
+      <td>3</td>
+      <td>0.3</td>
+      <td>nb</td>
+      <td>gene-batch</td>
+      <td>9b5cf_00096</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>1134.999146</td>
+      <td>1729244397</td>
+      <td>None</td>
+      <td>True</td>
+      <td>1</td>
+      <td>9b5cf_00097</td>
+      <td>2024-10-18_17-39-57</td>
+      <td>131.220823</td>
+      <td>131.220823</td>
+      <td>581659</td>
+      <td>...</td>
+      <td>192.168.1.100</td>
+      <td>131.220823</td>
+      <td>1</td>
+      <td>18</td>
+      <td>256</td>
+      <td>6</td>
+      <td>0.5</td>
+      <td>zinb</td>
+      <td>gene-batch</td>
+      <td>9b5cf_00097</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>921.020020</td>
+      <td>1729251326</td>
+      <td>None</td>
+      <td>True</td>
+      <td>100</td>
+      <td>9b5cf_00098</td>
+      <td>2024-10-18_19-35-26</td>
+      <td>38.174877</td>
+      <td>7045.110833</td>
+      <td>581851</td>
+      <td>...</td>
+      <td>192.168.1.100</td>
+      <td>7045.110833</td>
+      <td>100</td>
+      <td>28</td>
+      <td>128</td>
+      <td>1</td>
+      <td>0.1</td>
+      <td>zinb</td>
+      <td>gene-batch</td>
+      <td>9b5cf_00098</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>1023.900879</td>
+      <td>1729244489</td>
+      <td>None</td>
+      <td>True</td>
+      <td>2</td>
+      <td>9b5cf_00099</td>
+      <td>2024-10-18_17-41-29</td>
+      <td>86.017408</td>
+      <td>180.074112</td>
+      <td>581856</td>
+      <td>...</td>
+      <td>192.168.1.100</td>
+      <td>180.074112</td>
+      <td>2</td>
+      <td>4</td>
+      <td>256</td>
+      <td>2</td>
+      <td>0.5</td>
+      <td>nb</td>
+      <td>gene-batch</td>
+      <td>9b5cf_00099</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 21 columns</p>
+</div></div>
+</div>
+<section id="n_latent">
+<h2>n_latent<a class="headerlink" href="#n_latent" title="Permalink to this heading">#</a></h2>
+<p>Though we runned the latent number here, the results evaluated by scib is more reliable.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;config/n_latent&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;validation_loss&quot;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">pltDf</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;n_latent&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../../results/preIntergration/20241018_hyperpara/tune_latent.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_578663/3896256050.py:1: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sb.boxplot(x=&#34;config/n_latent&#34;,y=&#34;validation_loss&#34;,data=pltDf,palette=&#34;Set3&#34;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/pre-integration_20241018_hypertune_para_11_1.png" class="no-scaled-link" src="../_images/pre-integration_20241018_hypertune_para_11_1.png" style="width: 785px; height: 734px;" />
+</div>
+</div>
+</section>
+<section id="Gene-likelihood">
+<h2>Gene likelihood<a class="headerlink" href="#Gene-likelihood" title="Permalink to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;config/gene_likelihood&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;validation_loss&quot;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">pltDf</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;gene_likelihood&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../../results/preIntergration/20241018_hyperpara/tune_gene_likelihood.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_578663/1636474424.py:1: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sb.boxplot(x=&#34;config/gene_likelihood&#34;,y=&#34;validation_loss&#34;,data=pltDf,palette=&#34;Set3&#34;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/pre-integration_20241018_hypertune_para_13_1.png" class="no-scaled-link" src="../_images/pre-integration_20241018_hypertune_para_13_1.png" style="width: 785px; height: 734px;" />
+</div>
+</div>
+</section>
+<section id="Dropout-rate">
+<h2>Dropout rate<a class="headerlink" href="#Dropout-rate" title="Permalink to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;config/dropout_rate&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;validation_loss&quot;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">pltDf</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;dropout_rate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../../results/preIntergration/20241018_hyperpara/tune_dropout_rate.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_578663/280348728.py:1: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sb.boxplot(x=&#34;config/dropout_rate&#34;,y=&#34;validation_loss&#34;,data=pltDf,palette=&#34;Set3&#34;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/pre-integration_20241018_hypertune_para_15_1.png" class="no-scaled-link" src="../_images/pre-integration_20241018_hypertune_para_15_1.png" style="width: 785px; height: 734px;" />
+</div>
+</div>
+</section>
+<section id="Layer-number">
+<h2>Layer number<a class="headerlink" href="#Layer-number" title="Permalink to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;config/n_layers&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;validation_loss&quot;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">pltDf</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;n_layers&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../../results/preIntergration/20241018_hyperpara/tune_n_layers.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_578663/2391663652.py:1: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sb.boxplot(x=&#34;config/n_layers&#34;,y=&#34;validation_loss&#34;,data=pltDf,palette=&#34;Set3&#34;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/pre-integration_20241018_hypertune_para_17_1.png" class="no-scaled-link" src="../_images/pre-integration_20241018_hypertune_para_17_1.png" style="width: 785px; height: 734px;" />
+</div>
+</div>
+</section>
+<section id="Dispersion">
+<h2>Dispersion<a class="headerlink" href="#Dispersion" title="Permalink to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;config/dispersion&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;validation_loss&quot;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">pltDf</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;dispersion&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../../results/preIntergration/20241018_hyperpara/tune_dispersion.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_578663/3184648673.py:1: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sb.boxplot(x=&#34;config/dispersion&#34;,y=&#34;validation_loss&#34;,data=pltDf,palette=&#34;Set3&#34;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/pre-integration_20241018_hypertune_para_19_1.png" class="no-scaled-link" src="../_images/pre-integration_20241018_hypertune_para_19_1.png" style="width: 785px; height: 733px;" />
+</div>
+</div>
+</section>
+<section id="Iteration">
+<h2>Iteration<a class="headerlink" href="#Iteration" title="Permalink to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sb</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;iterations_since_restore&quot;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;validation_loss&quot;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">pltDf</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;iteration&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;../../results/preIntergration/20241018_hyperpara/tune_iteration.pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/tmp/ipykernel_578663/973697805.py:1: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sb.boxplot(x=&#34;iterations_since_restore&#34;,y=&#34;validation_loss&#34;,data=pltDf,palette=&#34;Set3&#34;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/pre-integration_20241018_hypertune_para_21_1.png" class="no-scaled-link" src="../_images/pre-integration_20241018_hypertune_para_21_1.png" style="width: 785px; height: 733px;" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pltDf</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;../../process/pre-intergration/hypertune//20241008_tune_loss_metric.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Gilbert Han
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fab fa-github" href="https://github.com/GilbertHan1011/toothAtlasManuscript" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Hypertune 2 : with scvi-tools</a><ul>
+<li><a class="reference internal" href="#n_latent">n_latent</a></li>
+<li><a class="reference internal" href="#Gene-likelihood">Gene likelihood</a></li>
+<li><a class="reference internal" href="#Dropout-rate">Dropout rate</a></li>
+<li><a class="reference internal" href="#Layer-number">Layer number</a></li>
+<li><a class="reference internal" href="#Dispersion">Dispersion</a></li>
+<li><a class="reference internal" href="#Iteration">Iteration</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f6245a2f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
+    <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
+    <script defer="defer" src="../_static/tippy/pre-integration/20241018_hypertune_para.4c973c00-76be-43a5-8d3a-57da541dc70e.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

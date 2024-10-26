@@ -168,15 +168,28 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction to scAtlas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/metadata_process.html">Metadata Collection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/first_round_preprocess.html">First round preprocess</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/droplet.html">Droplet discovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/first_round_annotation.html">First round annotation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/post_annotation.html">Post annotation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../preprocess/batch_division.html">Batch division</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pre-integration/hypertune.html">Hyperparameter tuning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">Cluster the datasets to get first level annotation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../preprocess/index.html">Preprocess</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Preprocess</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/droplet.html">Droplet discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_annotation.html">First round annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/post_annotation.html">Post annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/batch_division.html">Batch division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/normalization.html">Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pre-integration/index.html">Pre-integration</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Pre-integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pre-integration/hypertune.html">Hyperparameter tuning</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../annotation/index.html">Annotation</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step2_mtree.html">Step 2: MRTree</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">About</span></p>
@@ -220,18 +233,23 @@
         <article role="main">
           <section id="citing-scatlas">
 <h1>Citing scAtlas<a class="headerlink" href="#citing-scatlas" title="Permalink to this heading">#</a></h1>
-<p><a class="reference external" href="https://www.biorxiv.org/content/10.1101/2024.05.28.596174v1.full">Our work</a> has been posted on bioRxiv. If scAtlas is useful for your research, please consider citing our work as follows:</p>
-<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="w"> </span><span class="p">{</span><span class="nl">Han2024.05.28.596174</span><span class="p">,</span>
-<span class="w">    </span><span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Han, Litian and Ji, Yaoting and Yu, Yiqian and Ni, Yueqi and Zeng, Hao and Zhang, Xiaoxin and Liu, Huan and Zhang, Yufeng}</span><span class="p">,</span>
-<span class="w">    </span><span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Trajectory-centric Framework TrajAtlas reveals multi-scale differentiation heterogeneity among cells, genes, and gene module in osteogenesis}</span><span class="p">,</span>
-<span class="w">    </span><span class="na">elocation-id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2024.05.28.596174}</span><span class="p">,</span>
-<span class="w">    </span><span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2024}</span><span class="p">,</span>
-<span class="w">    </span><span class="na">doi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1101/2024.05.28.596174}</span><span class="p">,</span>
-<span class="w">    </span><span class="na">publisher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Cold Spring Harbor Laboratory}</span><span class="p">,</span>
-<span class="w">    </span><span class="na">abstract</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Osteoblast differentiation is crucial for bone formation and maintaining skeletal integrity. Although it is now understood that this process exhibits significant heterogeneity across developmental stages and tissue microenvironments, the underlying mechanisms remain largely unexplored. In the present study, we introduce TrajAtlas, a comprehensive framework that addresses this gap in knowledge. TrajAtlas comprises four modules: a reference atlas (Differentiation Atlas), a differentiation model (Differentiation Model), a tool for differential pseudotime analysis (TrajDiff), and a method for pseudotemporal gene module detection (TRAVMap). By leveraging single-cell technologies, TrajAtlas offers a systematic approach to exploring the multi-scale heterogeneity among cells, genes, and gene modules within population-level trajectories across diverse tissues and age groups. We systematically investigate the impact of age and injury on osteogenesis, providing new insights into osteoporosis and bone regeneration. In conclusion, our comprehensive framework offers novel insights into osteogenesis and provides a valuable resource for understanding the complexities of bone formation.Author Summary Osteoblasts, the cells responsible for bone formation, can originate from various cellular sources. However, it{\textquoteright}s unclear how different progenitor cells differentiate into osteoblasts, and how this process is influenced by factors such as age and tissue location. This knowledge gap stems from the lack of comprehensive databases and tools to decipher the differentiation process. In this study, we introduce TrajAtlas, a comprehensive framework designed to bridge this gap. To explore the cellular origins of osteoblasts, we constructed an atlas centered on osteogenesis. To answer how progenitor cells differentiate to osteoblasts, we developed a model that reveals the dynamic regulatory landscape during this process. To elucidate the influence of age and tissue location on differentiation, we built a tool for differential analysis. Furthermore, to identify conserved patterns of differentiation, we developed an approach to detect pseudotemporal gene modules. We validated the effectiveness of this framework by applying it to more datasets, unveiling novel cell states associated with injury. Notably, this framework focuses on dynamic processes, with the potential for broader applications in studying cell differentiation and complementing cell-centric analyses.Competing Interest StatementThe authors have declared no competing interest.}</span><span class="p">,</span>
-<span class="w">    </span><span class="na">URL</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{https://www.biorxiv.org/content/early/2024/06/02/2024.05.28.596174}</span><span class="p">,</span>
-<span class="w">    </span><span class="na">eprint</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{https://www.biorxiv.org/content/early/2024/06/02/2024.05.28.596174.full.pdf}</span><span class="p">,</span>
-<span class="w">    </span><span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{bioRxiv}</span>
+<p><a class="reference external" href="https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1011319">Our work</a> has been posted on Plos Genetics. If scAtlas is useful for your research, please consider citing our work as follows:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">hanTrajectorycentricFrameworkTrajAtlas2024</span><span class="p">,</span>
+<span class="na">title</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Trajectory-Centric Framework {{TrajAtlas}} Reveals Multi-Scale Differentiation Heterogeneity among Cells, Genes, and Gene Modules in Osteogenesis}</span><span class="p">,</span>
+<span class="na">author</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Han, Litian and Ji, Yaoting and Yu, Yiqian and Ni, Yueqi and Zeng, Hao and Zhang, Xiaoxin and Liu, Huan and Zhang, Yufeng}</span><span class="p">,</span>
+<span class="na">year</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2024}</span><span class="p">,</span>
+<span class="na">month</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nv">oct</span><span class="p">,</span>
+<span class="na">journal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{PLOS Genetics}</span><span class="p">,</span>
+<span class="na">volume</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{20}</span><span class="p">,</span>
+<span class="na">number</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10}</span><span class="p">,</span>
+<span class="na">pages</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{e1011319}</span><span class="p">,</span>
+<span class="na">publisher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Public Library of Science}</span><span class="p">,</span>
+<span class="na">issn</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{1553-7404}</span><span class="p">,</span>
+<span class="na">doi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{10.1371/journal.pgen.1011319}</span><span class="p">,</span>
+<span class="na">urldate</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{2024-10-26}</span><span class="p">,</span>
+<span class="na">abstract</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Osteoblasts, the key cells responsible for bone formation and the maintenance of skeletal integrity, originate from a diverse array of progenitor cells. However, the mechanisms underlying osteoblast differentiation from these multiple osteoprogenitors remain poorly understood. To address this knowledge gap, we developed a comprehensive framework to investigate osteoblast differentiation at multiple scales, encompassing cells, genes, and gene modules. We constructed a reference atlas focused on differentiation, which incorporates various osteoprogenitors and provides a seven-level cellular taxonomy. To reconstruct the differentiation process, we developed a model that identifies the transcription factors and pathways involved in differentiation from different osteoprogenitors. Acknowledging that covariates such as age and tissue type can influence differentiation, we created an algorithm to detect differentially expressed genes throughout the differentiation process. Additionally, we implemented methods to identify conserved pseudotemporal gene modules across multiple samples. Overall, our framework systematically addresses the heterogeneity observed during osteoblast differentiation from diverse sources, offering novel insights into the complexities of bone formation and serving as a valuable resource for understanding osteogenesis.}</span><span class="p">,</span>
+<span class="na">langid</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{english}</span><span class="p">,</span>
+<span class="na">keywords</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{Cell differentiation,Chondrocytes,Gene expression,Musculoskeletal injury,Ossification,Osteoblast differentiation,Osteoblasts,Transcription factors}</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -298,7 +316,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../_static/tippy/about/cite.d3af1172-2ff1-4c26-9cfb-3173d536adc9.js"></script>
+    <script defer="defer" src="../_static/tippy/about/cite.8da3de8a-5768-4680-bfa5-cd48272f6c99.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

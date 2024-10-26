@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Hyperparameter tuning" href="../pre-integration/hypertune.html" /><link rel="prev" title="Post annotation" href="post_annotation.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Normalization" href="normalization.html" /><link rel="prev" title="Post annotation" href="post_annotation.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
         <title>Batch division - scAtlas 0.0.1 documentation</title>
@@ -142,7 +142,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -168,15 +168,33 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction to scAtlas</a></li>
-<li class="toctree-l1"><a class="reference internal" href="metadata_process.html">Metadata Collection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="first_round_preprocess.html">First round preprocess</a></li>
-<li class="toctree-l1"><a class="reference internal" href="droplet.html">Droplet discovery</a></li>
-<li class="toctree-l1"><a class="reference internal" href="first_round_annotation.html">First round annotation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="post_annotation.html">Post annotation</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Batch division</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pre-integration/hypertune.html">Hyperparameter tuning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">Cluster the datasets to get first level annotation</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Preprocess</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Preprocess</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="droplet.html">Droplet discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_round_annotation.html">First round annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="post_annotation.html">Post annotation</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Batch division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normalization.html">Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pre-integration/index.html">Pre-integration</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Pre-integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pre-integration/hypertune.html">Hyperparameter tuning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../integration/index.html">Integration</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../annotation/index.html">Annotation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step2_mtree.html">Step 2: MRTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step3_marker_detection.html">Step 3: Marker Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step4_prune_tree.html">Step 4: Prune Tree</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">About</span></p>
@@ -212,7 +230,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -220,6 +238,26 @@
         <article role="main">
           <section id="batch-division">
 <h1>Batch division<a class="headerlink" href="#batch-division" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Batch correction algorithms have the potential to remove not only technical variation but also biological variation <span id="id1">[<a class="reference internal" href="../references.html#id24" title="Hui Li, Davis J. McCarthy, Heejung Shim, and Susan Wei. Trade-off between conservation of biological variation and batch effect removal in deep generative modeling for single-cell transcriptomics. BMC Bioinformatics, 23(1):1–22, November 2022. doi:10.1186/s12859-022-05003-3.">Li <em>et al.</em>, 2022</a>]</span>. In our reference atlas, it is crucial to distinguish cell states with fine resolution, making it essential to differentiate between technical and biological variation. Our atlas includes multi-level batch covariates, such as datasets, samples, age, and tissue location. Deciding which levels of variation to retain and which to correct can significantly impact the results. Although batch division is not a common step in regular single-cell RNA sequencing (scRNA-seq) data analysis, constructing comprehensive atlases often involves this step <span id="id2">[<a class="reference internal" href="../references.html#id22" title="Lukas Steuernagel, Brian Y. H. Lam, Paul Klemm, Georgina K. C. Dowsett, Corinna A. Bauder, John A. Tadross, Tamara Sotelo Hitschfeld, Almudena del Rio Martin, Weiyi Chen, Alain J. de Solis, Henning Fenselau, Peter Davidsen, Irene Cimino, Sara N. Kohnke, Debra Rimmington, Anthony P. Coll, Andreas Beyer, Giles S. H. Yeo, and Jens C. Brüning. HypoMap—a unified single-cell gene expression atlas of the murine hypothalamus. Nature Metabolism, 4(10):1402–1419, October 2022. doi:10.1038/s42255-022-00657-y.">Steuernagel <em>et al.</em>, 2022</a>]</span> <span id="id3">[<a class="reference internal" href="../references.html#id13" title="Lisa Sikkema, Ciro Ramírez-Suástegui, Daniel C. Strobl, Tessa E. Gillett, Luke Zappia, Elo Madissoon, Nikolay S. Markov, Laure-Emmanuelle Zaragosi, Yuge Ji, Meshal Ansari, Marie-Jeanne Arguel, Leonie Apperloo, Martin Banchero, Christophe Bécavin, Marijn Berg, Evgeny Chichelnitskiy, Mei-i Chung, Antoine Collin, Aurore C. A. Gay, Janine Gote-Schniering, Baharak Hooshiar Kashani, Kemal Inecik, Manu Jain, Theodore S. Kapellos, Tessa M. Kole, Sylvie Leroy, Christoph H. Mayr, Amanda J. Oliver, Michael von Papen, Lance Peter, Chase J. Taylor, Thomas Walzthoeni, Chuan Xu, Linh T. Bui, Carlo De Donno, Leander Dony, Alen Faiz, Minzhe Guo, Austin J. Gutierrez, Lukas Heumos, Ni Huang, Ignacio L. Ibarra, Nathan D. Jackson, Preetish Kadur Lakshminarasimha Murthy, Mohammad Lotfollahi, Tracy Tabib, Carlos Talavera-López, Kyle J. Travaglini, Anna Wilbrey-Clark, Kaylee B. Worlock, Masahiro Yoshida, Maarten van den Berge, Yohan Bossé, Tushar J. Desai, Oliver Eickelberg, Naftali Kaminski, Mark A. Krasnow, Robert Lafyatis, Marko Z. Nikolic, Joseph E. Powell, Jayaraj Rajagopal, Mauricio Rojas, Orit Rozenblatt-Rosen, Max A. Seibold, Dean Sheppard, Douglas P. Shepherd, Don D. Sin, Wim Timens, Alexander M. Tsankov, Jeffrey Whitsett, Yan Xu, Nicholas E. Banovich, Pascal Barbry, Thu Elizabeth Duong, Christine S. Falk, Kerstin B. Meyer, Jonathan A. Kropski, Dana Pe'er, Herbert B. Schiller, Purushothama Rao Tata, Joachim L. Schultze, Sara A. Teichmann, Alexander V. Misharin, Martijn C. Nawijn, Malte D. Luecken, and Fabian J. Theis. An integrated cell atlas of the lung in health and disease. Nature Medicine, 29(6):1563–1577, June 2023. doi:10.1038/s41591-023-02327-2.">Sikkema <em>et al.</em>, 2023</a>]</span>.</p>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Permalink to this heading">#</a></h2>
+<section id="quantifying-the-source-of-variance">
+<h3>Quantifying the Source of Variance<a class="headerlink" href="#quantifying-the-source-of-variance" title="Permalink to this heading">#</a></h3>
+<p>Inspired by two excellent papers <span id="id4">[<a class="reference internal" href="../references.html#id13" title="Lisa Sikkema, Ciro Ramírez-Suástegui, Daniel C. Strobl, Tessa E. Gillett, Luke Zappia, Elo Madissoon, Nikolay S. Markov, Laure-Emmanuelle Zaragosi, Yuge Ji, Meshal Ansari, Marie-Jeanne Arguel, Leonie Apperloo, Martin Banchero, Christophe Bécavin, Marijn Berg, Evgeny Chichelnitskiy, Mei-i Chung, Antoine Collin, Aurore C. A. Gay, Janine Gote-Schniering, Baharak Hooshiar Kashani, Kemal Inecik, Manu Jain, Theodore S. Kapellos, Tessa M. Kole, Sylvie Leroy, Christoph H. Mayr, Amanda J. Oliver, Michael von Papen, Lance Peter, Chase J. Taylor, Thomas Walzthoeni, Chuan Xu, Linh T. Bui, Carlo De Donno, Leander Dony, Alen Faiz, Minzhe Guo, Austin J. Gutierrez, Lukas Heumos, Ni Huang, Ignacio L. Ibarra, Nathan D. Jackson, Preetish Kadur Lakshminarasimha Murthy, Mohammad Lotfollahi, Tracy Tabib, Carlos Talavera-López, Kyle J. Travaglini, Anna Wilbrey-Clark, Kaylee B. Worlock, Masahiro Yoshida, Maarten van den Berge, Yohan Bossé, Tushar J. Desai, Oliver Eickelberg, Naftali Kaminski, Mark A. Krasnow, Robert Lafyatis, Marko Z. Nikolic, Joseph E. Powell, Jayaraj Rajagopal, Mauricio Rojas, Orit Rozenblatt-Rosen, Max A. Seibold, Dean Sheppard, Douglas P. Shepherd, Don D. Sin, Wim Timens, Alexander M. Tsankov, Jeffrey Whitsett, Yan Xu, Nicholas E. Banovich, Pascal Barbry, Thu Elizabeth Duong, Christine S. Falk, Kerstin B. Meyer, Jonathan A. Kropski, Dana Pe'er, Herbert B. Schiller, Purushothama Rao Tata, Joachim L. Schultze, Sara A. Teichmann, Alexander V. Misharin, Martijn C. Nawijn, Malte D. Luecken, and Fabian J. Theis. An integrated cell atlas of the lung in health and disease. Nature Medicine, 29(6):1563–1577, June 2023. doi:10.1038/s41591-023-02327-2.">Sikkema <em>et al.</em>, 2023</a>]</span> <span id="id5">[<a class="reference internal" href="../references.html#id25" title="Maren Büttner, Zhichao Miao, F. Alexander Wolf, Sarah A. Teichmann, and Fabian J. Theis. A test metric for assessing single-cell RNA-seq batch correction. Nature Methods, 16(1):43–49, January 2019. doi:10.1038/s41592-018-0254-1.">Büttner <em>et al.</em>, 2019</a>]</span>, we adopted two methods to determine the appropriate batch covariates. First, we conducted principal component regression to calculate the fraction of variance explained by the covariate of interest within the first 50 principal components. Our analysis revealed that, in some samples, the variance in cell type was considerably greater than the variance across samples. Consequently, it is more appropriate to treat the entire dataset as a single batch rather than treating each of the six samples as separate batches. Conversely, in the CranioSoxc_Angelozzi dataset, sample variance was even greater than cell type variance. Therefore, it is more appropriate to treat each of the six samples as individual batches in this case.</p>
+</section>
+<section id="quantifying-batch-effects-through-kbet">
+<h3>Quantifying Batch Effects through kBET<a class="headerlink" href="#quantifying-batch-effects-through-kbet" title="Permalink to this heading">#</a></h3>
+<p>We utilized kBET, which is based on k-nearest neighbors, to assess whether all batches are well-mixed. In the BMSC-Specification_Kishor dataset, we observed that the rejection rates were similar between the observed and expected values. In contrast, for the CranioSoxc_Angelozzi dataset, the rejection rates were significantly higher than expected.</p>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<p>By applying these methods, we meticulously evaluated each dataset to effectively minimize technical variation while preserving biological variation. This careful consideration ensures that our reference atlas maintains high resolution in distinguishing cell states, which is essential for accurate biological interpretation.</p>
+<p><img alt="png" src="../_images/batch.png" /></p>
+</section>
 </section>
 
         </article>
@@ -227,12 +265,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../pre-integration/hypertune.html">
+          <a class="next-page" href="normalization.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Hyperparameter tuning</div>
+                <div class="title">Normalization</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -267,8 +305,33 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Batch division</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#methods">Methods</a><ul>
+<li><a class="reference internal" href="#quantifying-the-source-of-variance">Quantifying the Source of Variance</a></li>
+<li><a class="reference internal" href="#quantifying-batch-effects-through-kbet">Quantifying Batch Effects through kBET</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -283,7 +346,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../_static/tippy/preprocess/batch_division.57933c3e-e015-42f3-b503-b0800d6f9a99.js"></script>
+    <script defer="defer" src="../_static/tippy/preprocess/batch_division.c640b079-37f7-4f1b-999b-8cc5ca64138b.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
