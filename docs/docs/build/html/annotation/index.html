@@ -142,7 +142,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -183,13 +183,21 @@
 <li class="toctree-l2"><a class="reference internal" href="../pre-integration/hypertune.html">Hyperparameter tuning</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Annotation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../integration/index.html">Integration</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Annotation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
 <li class="toctree-l2"><a class="reference internal" href="step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster levels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="step2_mtree.html">Step 2: MRTree</a></li>
 <li class="toctree-l2"><a class="reference internal" href="step3_marker_detection.html">Step 3: Marker Detection</a></li>
 <li class="toctree-l2"><a class="reference internal" href="step4_prune_tree.html">Step 4: Prune Tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level1_anno.html">Level 1 Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level2_anno.html">Level 2 annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level3_anno.html">Level 3 annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level4_anno.html">Level 4 annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level5_anno.html">Level 5 annotation</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
@@ -227,7 +235,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -268,6 +276,36 @@ You can just run this pipeline directly. Here, I just break down the pipeline in
 </li>
 </ul>
 </div>
+<section id="details-of-each-level-annotation">
+<h2>Details of Each Level Annotation<a class="headerlink" href="#details-of-each-level-annotation" title="Permalink to this heading">#</a></h2>
+<p>In this section, we explain the details of each level annotation.
+You can explore the marker genes of each cluster in the <a class="reference external" href="https://zyflab.shinyapps.io/tooth/">shiny app</a>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Cluster details</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Level1_anno.html">Level 1 Annotation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Level1_anno.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level1_anno.html#embryonic-mesenchyme">Embryonic Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level1_anno.html#postnatal-mesenchyme">Postnatal Mesenchyme</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Level2_anno.html">Level 2 annotation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Level2_anno.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level2_anno.html#bud-mesenchyme-cap-mesenchyme">Bud Mesenchyme &amp; Cap Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level2_anno.html#apical-pulp-distal-pulp">Apical pulp &amp; Distal pulp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level2_anno.html#odontoblast">Odontoblast</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level2_anno.html#chondrocyte">Chondrocyte</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level2_anno.html#epithelium-like">Epithelium-like</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level2_anno.html#stress-related">Stress-related</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level2_anno.html#low-quality">Low quality</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Level3_anno.html">Level 3 annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Level4_anno.html">Level 4 annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Level5_anno.html">Level 5 annotation</a></li>
+</ul>
+</div>
+</section>
 </section>
 
         </article>
@@ -315,8 +353,27 @@ You can just run this pipeline directly. Here, I just break down the pipeline in
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Annotation</a><ul>
+<li><a class="reference internal" href="#details-of-each-level-annotation">Details of Each Level Annotation</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -331,7 +388,7 @@ You can just run this pipeline directly. Here, I just break down the pipeline in
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../_static/tippy/annotation/index.7fe7af2a-61ab-4e32-a217-261b6d51d7b6.js"></script>
+    <script defer="defer" src="../_static/tippy/annotation/index.9cff6b46-d7b7-4722-8904-2fb0c7565ca2.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

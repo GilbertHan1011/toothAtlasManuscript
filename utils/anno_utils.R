@@ -86,26 +86,33 @@ anno_bind <- function(object,cluster_select, group_select,threshold_add=0.2){
 }
 
 #== load json parameters---------
-load_json <- function(jsonPath){
-  parameter_list = jsonlite::read_json(jsonPath)
-  parameter_list = lapply(parameter_list,function(x){if(is.list(x)){return(unlist(x))}else{return(x)}})
+load_json <- function(jsonPath) {
+  parameter_list <- jsonlite::read_json(jsonPath)
+  parameter_list <- lapply(parameter_list, function(x) {
+    if (is.list(x)) {
+      return(unlist(x))
+    } else {
+      return(x)
+    }
+  })
 
-  n_cores_markers = parameter_list$n_cores_markers
-  assay_markers = parameter_list$assay_markers
-  assay_slot =parameter_list$assay_slot
-  logfc.threshold = parameter_list$logfc.threshold
-  min.pct =parameter_list$min.pct
-  min.diff.pct = parameter_list$min.diff.pct
-  max.cells.per.ident = parameter_list$max.cells.per.ident
-  min.cells.feature = parameter_list$min.cells.feature
-  min.cells.group =  parameter_list$min.cells.group
-  base = parameter_list$base
-  only.pos = parameter_list$only.pos
-  batch_var = parameter_list$batch_var
-  test.use = parameter_list$test.use
-  specificity_base = parameter_list$specificity_base
-  message("test.use ",test.use," ... ",parameter_list$test.use)
-  add_batch_as_latent = parameter_list$add_batch_as_latent
-  additional_suffix = parameter_list$additional_suffix
+  # Assign parameter_list to the global environment
+  assign("parameter_list", parameter_list, envir = .GlobalEnv)
+
+  # List of specific parameters to load into global environment
+  params_to_load <- c("n_cores_markers", "assay_markers", "assay_slot", "logfc.threshold",
+                      "min.pct", "min.diff.pct", "max.cells.per.ident", "min.cells.feature",
+                      "min.cells.group", "base", "only.pos", "batch_var", "test.use",
+                      "specificity_base", "add_batch_as_latent", "additional_suffix")
+
+  # Assign specified parameters to the global environment
+  for (param_name in params_to_load) {
+    if (param_name %in% names(parameter_list)) {
+      assign(param_name, parameter_list[[param_name]], envir = .GlobalEnv)
+    }
+  }
+
+  # Print a message about test.use
+  message("test.use ", get("test.use", envir = .GlobalEnv), " ... ", parameter_list$test.use)
 }
 

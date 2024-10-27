@@ -14,3 +14,21 @@ You can just run this pipeline directly. Here, I just break down the pipeline in
     step2_mtree
     step3_marker_detection
     step4_prune_tree
+
+
+
+Details of Each Level Annotation
+--------------------------------
+
+In this section, we explain the details of each level annotation. 
+You can explore the marker genes of each cluster in the `shiny app <https://zyflab.shinyapps.io/tooth/>`_.
+
+.. toctree::
+    :caption: Cluster details
+    :maxdepth: 2
+
+    Level1_anno
+    Level2_anno
+    Level3_anno
+    Level4_anno
+    Level5_anno

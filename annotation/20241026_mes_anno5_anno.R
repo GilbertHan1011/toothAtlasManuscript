@@ -5,19 +5,22 @@ library(tidyverse)
 
 source("script/utils/anno_utils.R")
 source("script/utils/stratified_wilcoxon_functions.R")
+source("script/utils/anno_integrate.R")
 process_dir <- "process/annotation/mes_annotation/annotation_mid_file/"
 load_json("script/annotation/config/mesenchyme_parameter.json")
 full_seurat <- readRDS("processed_data/integrated_data/20241024_mesenchyme.Rds")
 updated_cluster_object <- readRDS(paste0(parameter_list$harmonization_folder_path,"annotation_mid_file/",
                                          parameter_list$new_name_suffix,"_pruned_mrtree_clustering_results",".rds"))
-edgelist_updated_new_labels <- updated_cluster_object$labelmat
+edgelist_updated_new_labels <- updated_cluster_object$edgelist
 labelmat_updated_new_labels <- updated_cluster_object$labelmat
 genes_to_include <- read.csv("process/annotation/mes_annotation/annotation_mid_file/20241025_gene_include.csv",row.names = 1) %>% unlist
+full_seurat$C2 <- labelmat_updated_new_labels[,1]
+DimPlot(full_seurat,group.by = "C2")
 #== find marker--------------------------
 all_markers_mrtree_list_update = findMarkers_tree2(full_seurat,
                                                    edgelist=edgelist_updated_new_labels[,1:2],
                                                    labelmat = labelmat_updated_new_labels,
-                                                   n_cores = 4,
+                                                   n_cores = 15,
                                                    assay=assay_markers,
                                                    slot=assay_slot,
                                                    test.use = test.use,
@@ -40,6 +43,7 @@ comparisons_all_update$specificity = ((comparisons_all_update$pct.1 + specificit
 comparisons_siblings_update$specificity = ((comparisons_siblings_update$pct.1 + specificity_base) /
                                              (comparisons_siblings_update$pct.2 + specificity_base)) * comparisons_siblings_update$avg_log2FC
 
+View(comparisons_siblings_update)
 write.csv(comparisons_all_update,paste0(process_dir,"comparisons_all_update.csv"))
 write.csv(comparisons_all_update,paste0(process_dir,"comparisons_sibling_update.csv"))
 

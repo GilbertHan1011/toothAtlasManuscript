@@ -1,0 +1,203 @@
+---
+title: "20241026_annotation"
+output: html_document
+date: "2024-10-26"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+## C9
+
+``` {r}
+DimPlot(full_seurat,group.by = "C9",label = T)
+ggsave("../../results/annotation/anno_explore/C9_cluster.pdf",width = 5,height = 4)
+```
+
+### C9-1,C9-2 Cap, bud mesenchyme 
+```{r}
+DimPlot(full_seurat,group.by = c("Age","Development.stage"))
+```
+```{R}
+meta <- full_seurat@meta.data[,c("C9","Development.stage")]
+
+# Define the order for C9 stages
+c9_order <- c("C9-1", "C9-2", "C9-3", "C9-4", "C9-5", "C9-6", "C9-7", "C9-8","C9-9")
+
+# Define the order for Development stages
+dev_stage_order <- c("Thickening", "Bud", "Cap", "Bell", "Erupted")
+
+# Prepare the data
+plot_data <- meta %>%
+  group_by(C9, Development.stage) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  group_by(C9) %>%
+  mutate(proportion = count / sum(count)) %>%
+  ungroup()
+
+# Set factor levels for C9 and Development.stage
+plot_data$C9 <- factor(plot_data$C9, levels = c9_order)
+plot_data$Development.stage <- factor(plot_data$Development.stage, levels = dev_stage_order)
+
+# Create the proportional stacked bar plot
+ggplot(plot_data, aes(x = C9, y = proportion, fill = Development.stage)) +
+  geom_bar(stat = "identity", position = "fill") +
+  labs(title = "Proportion of Development Stages by C9 Stage",
+       x = "C9 Stage",
+       y = "Proportion",
+       fill = "Development Stage") +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Spectral") +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label = scales::percent(proportion, accuracy = 0.1)),
+            position = position_fill(vjust = 0.5),
+            size = 3.5) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave("../../results/annotation/anno_explore/C9_age_bar.pdf",width = 6,height = 4)
+```
+```{R}
+FeaturePlot(full_seurat,features = c("Hic1","Tbx18"))
+ggsave("../../results/annotation/anno_explore/C9_1_gene.pdf",width = 8,height = 4)
+```
+
+```{R}
+FeaturePlot(full_seurat,features = c("Epha3","Fxyd7","Foxf1","Crym","Egr3","Fgf3"))
+ggsave("../../results/annotation/anno_explore/C9_2_gene.pdf",width = 6,height = 8)
+```
+
+### C9-6 Apical pulp
+``` {R}
+FeaturePlot(full_seurat,features = c("Smoc2","Shisa2","Igfbp3"))
+```
+
+### C9-8 -- Odontoblast
+```{r}
+p1 <- DimPlot(full_seurat,group.by = "C9",cells.highlight = colnames(full_seurat)[full_seurat$C9=="C9-8"])
+p2 <- FeaturePlot(full_seurat,c("Phex"))
+p1|p2
+ggsave("../../results/annotation/anno_explore/C9_8_gene.pdf",width = 8,height = 4)
+```
+
+### C9-5 -- RBC
+
+```{r}
+FeaturePlot(full_seurat,c("Hbb-bs","Hba-a2"))
+```
+###
+```{r}
+DimPlot(full_seurat,group.by = "Development.stage")
+```
+
+```{r}
+FeaturePlot(full_seurat,c("Tfap2b","Lhx6"))
+```
+
+
+### C9-9 Epi like
+
+
+
+```{r}
+FeaturePlot(full_seurat,c("Krt14","Prrx1","Igfbp5","Ifitm3"))
+```
+
+
+### C9-3 Chondrocyte
+
+``` {r}
+
+FeaturePlot(full_seurat,c("Matn3","Col2a1","Sox5"),ncol = 3)
+ggsave("../../results/annotation/anno_explore/C9_3_gene.pdf",width = 9,height = 3)
+```
+
+
+``` {r}
+FeaturePlot(full_seurat,c("Zic1","Zic3","Irx2"))
+```
+
+## Embryo Dental pulp
+```{r}
+DimPlot(full_seurat,group.by = "C19",label = T)
+```
+
+
+```{r}
+FeaturePlot(full_seurat,c("Fgf3","Crym"),ncol = 2)
+```
+
+```{r}
+FeaturePlot(full_seurat,c("Epha3","Fxyd7"))
+```
+
+```{r}
+VlnPlot(full_seurat,features = c("Epha3","Fxyd7","Foxf1"),group.by = "C19",stack = T,flip = T)
+```
+
+
+``` {r}
+
+FeaturePlot(full_seurat,c("Sostdc1"))
+```
+
+
+```{r}
+FeaturePlot(full_seurat,c("Scx"))
+```
+
+
+
+### C19-13: Apical pulp
+```{r}
+FeaturePlot(full_seurat,c("Smoc2","Shisa2","Igfbp3","Sox9","Itga4","Igfbp5"),ncol = 3)
+ggsave("../../results/annotation/anno_explore/C9_67_gene.pdf",width = 8,height = 4)
+```
+
+### "C9-7": "Distal pulp"
+
+``` {r}
+FeaturePlot(full_seurat,)
+```
+
+### C19-12: Coronal papilla(E16.5)
+```{r}
+FeaturePlot(full_seurat,c("Lmo1"))
+```
+### C19-3 : C1qtnf3+ Mes
+```{r}
+VlnPlot(full_seurat,features = c("C1qtnf3"),group.by = "C19",flip = T)
+```
+``` {r}
+FeaturePlot(full_seurat,c("Sox9","Itga4"))
+```
+
+### C19-5 Dental follicle
+``` {r}
+FeaturePlot(full_seurat,c("Acta2","Bmp3","Hhip","Igfbp5"))
+```
+
+
+```{r}
+FeaturePlot(full_seurat,c("S100a4","Ebf3"))
+```
+
+
+
+``` {r}
+FeaturePlot(full_seurat,c("Dkk1","Notum"))
+```
+
+
+```{r}
+DimPlot(full_seurat,group.by = "C29",label = T)
+```
+
+
+``` {r}
+FeaturePlot(full_seurat,c("Twist1","Dpt","Irx1","Zic1","Foxc1"))
+```
+
+
