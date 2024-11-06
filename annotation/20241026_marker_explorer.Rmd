@@ -300,10 +300,12 @@ p1 <- FeaturePlot(full_seurat,c("Tfap2b"))
 p2 <- FeaturePlot(full_seurat,c("Hic1"))
 p3 <- FeaturePlot(full_seurat,c("Pax3"))
 
-p4 <- DimPlot(full_seurat,group.by = "C19",cells.highlight = colnames(full_seurat)[full_seurat$C19=="C19-18"])
-p5 <- DimPlot(full_seurat,group.by = "C19",cells.highlight = colnames(full_seurat)[full_seurat$C19=="C19-18"])
-p6 <- DimPlot(full_seurat,group.by = "C19",cells.highlight = colnames(full_seurat)[full_seurat$C19=="C19-18"])
+p4 <- DimPlot(full_seurat,group.by = "C19",cells.highlight = colnames(full_seurat)[full_seurat$C19=="C19-6"])
+p5 <- DimPlot(full_seurat,group.by = "C19",cells.highlight = colnames(full_seurat)[full_seurat$C19=="C19-1"])
+p6 <- DimPlot(full_seurat,group.by = "C19",cells.highlight = colnames(full_seurat)[full_seurat$C19=="C19-2"])
 
+(p1|p4)/(p2|p5)/(p3|p6)
+ggsave("../../results/annotation/anno_explore/C19_mes.pdf",width = 6,height =8)
 ```
 
 ``` {r}
@@ -311,5 +313,11 @@ FeaturePlot(full_seurat,c("Twist1","Dpt","Irx1","Zic1","Foxc1"))
 ```
 
 
+```{r}
 
+p1 <- FeaturePlot(full_seurat,c("Kit","Pclo"))
+p2 <- DimPlot(full_seurat,group.by = "C19",cells.highlight = colnames(full_seurat)[full_seurat$C19=="C19-16"])
+p1+p2
+ggsave("../../results/annotation/anno_explore/C19_16.pdf",width = 6,height =6)
+```
 

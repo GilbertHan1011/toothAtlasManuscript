@@ -5,7 +5,7 @@ library(tidyverse)
 
 source("script/utils/anno_utils.R")
 source("script/utils/stratified_wilcoxon_functions.R")
-source("script/utils/anno_integrate.R")
+  source("script/utils/anno_integrate.R")
 process_dir <- "process/annotation/mes_annotation/annotation_mid_file/"
 load_json("script/annotation/config/mesenchyme_parameter.json")
 full_seurat <- readRDS("processed_data/integrated_data/20241024_mesenchyme.Rds")
@@ -47,6 +47,10 @@ View(comparisons_siblings_update)
 write.csv(comparisons_all_update,paste0(process_dir,"comparisons_all_update.csv"))
 write.csv(comparisons_all_update,paste0(process_dir,"comparisons_sibling_update.csv"))
 
+comparisons_siblings <- read.csv(paste0(process_dir,"comparisons_sibling_update.csv"),row.names = 1)
+comparisons_all <- read.csv(paste0(process_dir,"comparisons_all_update.csv"),row.names = 1)
+
+
 
 #== label--------------------------------
 full_seurat$C2 <- labelmat_updated_new_labels[,1]
@@ -66,61 +70,13 @@ DimPlot(full_seurat,group.by = "C92",label = T)
 #DimPlot(full_seurat)
 
 
-# identify indices of elements that meet the condition
-idx <- which(C36_pred > 0.4, arr.ind = TRUE)
+group_select <- c("Mandibular_Maxillary", "Molar_Incisor", "Histology",  "Treatment",
+                  "Age", "Stage", "Development.stage", "coarse_anno_1")
 
-# extract row and column names
-rows <- rownames(C36_pred)[idx[, 1]]
-cols <- colnames(C36_pred)[idx[, 2]]
+annoBindDf <- anno_bind(full_seurat,c("C2","C9","C19","C29","C57","C92"),group_select)
 
-# print row and column names
-for (i in 1:length(rows)) {
-  cat("Value", C36_pred[rows[i], cols[i]], "in", cols[i], "column and", rows[i], "row exceeds the threshold of", 0.5, "\n")
-}
+percentPlotFun(full_seurat, "C19", "Age")
 
-# identify indices of elements that meet the condition
-idx <- which(C36_pred > 0.4, arr.ind = TRUE)
-
-# extract row and column names
-rows <- rownames(C36_pred)[idx[, 1]]
-cols <- colnames(C36_pred)[idx[, 2]]
-
-# print row and column names
-for (i in 1:length(rows)) {
-  cat("Value", C36_pred[rows[i], cols[i]], "in", cols[i], "column and", rows[i], "row exceeds the threshold of", 0.5, "\n")
-}
-
-
-prediction_large <- multilevel_predict(full_seurat,"X_scANVI",level = train_level,pred_level = "C2",subsample_size = 1500)
-prediction_large <- prediction_large[, -which(names(prediction_large) == "ident")]
-full_seurat$merge_id_level3
-group_select <- c("Organ", "Tissue", "Tissue.Specific.", "Stage","Age",
-                  "Age.In.Detail.","Species","Origin", "coarse_label",train_level)
-
-annoBindDf <- anno_bind(full_seurat,c("C2","C7","C19","C36","C49","C90","C137"),group_select)
-Idents(full_seurat) <- full_seurat$C19
-cell_19_7 <- WhichCells(full_seurat,idents = "C19-5")
-DimPlot(full_seurat,cells.highlight  = cell_19_7)
-full_seurat$merge_id_level3
-cell_late_mes <- colnames(full_seurat)[full_seurat$merge_id_level3=="C_Sox18+ Dermis"]
-DimPlot(full_seurat,cells.highlight  = cell_late_mes)
-
-cell_test <- WhichCells(full_seurat,idents = "LA_Tspan11.Dpt.Fibroblast")
-DimPlot(full_seurat,cells.highlight  = cell_test)
-
-percentPlotFun(full_seurat, "C36", "Organ")
-
-Idents(full_seurat) <- full_seurat$C90
-cell_90_33 <- WhichCells(full_seurat,idents = "C90-33")
-DimPlot(full_seurat,cells.highlight  = cell_90_33)
-
-Idents(full_seurat) <- full_seurat$anno_level_5
-cell_test <- WhichCells(full_seurat,idents = "LE_Aldh1a3.Hypertrophic.Chondrocyte")
-DimPlot(full_seurat,cells.highlight  = cell_test)
-percentPlotFun(full_seurat,cluster_id = "C6",group_id = "Tissue")
-DimPlot(full_seurat,group.by = "K65",label = T)
-FeaturePlot(full_seurat,"Col10a1")
-FeaturePlot(full_seurat,c("Prg4","Igfbp6"))
 
 
 df <- table(full_seurat$C6,full_seurat$Age.In.Detail.)%>%t%>%as.matrix()
@@ -132,34 +88,9 @@ df_long <- df%>%rownames_to_column("Age")%>%
   pivot_longer(cols = -Age,names_to = "Cluster")
 
 
-#
-# # test on full
-# # parameter_list = jsonlite::read_json("data/parameters_annotation_v2_1.json")
-# # parameter_list = lapply(parameter_list,function(x){if(is.list(x)){return(unlist(x))}else{return(x)}})
-#
-# # read features to excludes
-features_exclude_list= balance_exclude_genes
-# # features_exclude_list= unlist(jsonlite::read_json(parameter_list$genes_to_exclude_file))
-# #features_exclude_list = lapply(features_exclude_list,function(x){if(is.list(x)){return(unlist(x))}else{return(x)}})
-#
-# # load seurat
-# full_seurat = readRDS(paste0(parameter_list$harmonization_folder_path,parameter_list$new_name_suffix,".rds"))
-#
-# # load mrtree clustering
-# mrtree_result = readRDS(paste0(parameter_list$harmonization_folder_path,parameter_list$new_name_suffix,"_",parameter_list$marker_suffix,"_mrtree_clustering_results",".rds"))
-#
-# # mrtree_result = readRDS(paste0(parameter_list$harmonization_folder_path,parameter_list$new_name_suffix,"_",parameter_list$marker_suffix,"_mrtree_clustering_results",".rds"))
-#
-# message("All markers for: ",length(unique(markers_comparisons_all$cluster_id))," clusters available")
-# message("Sibling markers for: ",length(unique(markers_comparisons_siblings$cluster_id))," clusters available")
-#
-#
-# # parameter_list$marker_suffix,
-# additional_remove_genes = unlist(jsonlite::read_json(unlist(paste0(parameter_list$harmonization_folder_path,parameter_list$new_name_suffix,"raw","_additionally_removed_markers.json"))))
-# # gather some other genes that are not informative during annoation:
 other_genes_remove = rownames(full_seurat@assays$originalexp@counts)[grepl("RP|Gm|Hb[ab]|Rik|-ps",rownames(full_seurat@assays$originalexp@counts))]
 # make list of all genes that should be removed:
-all_exclusion_genes = unique(c(features_exclude_list,other_genes_remove))
+all_exclusion_genes = unique(c(other_genes_remove))
 
 
 
@@ -183,19 +114,19 @@ markers_comparisons_all <- comparisons_all
 ##########
 ### Run annotation
 ##########
-command_args<-commandArgs(TRUE)
-param_file = "script/annotation/config/parameters_wtintegrate.json"
-# read all parameters and filepaths
-parameter_list = jsonlite::read_json(param_file)
-# if some fields are lists --> unlist
-parameter_list = lapply(parameter_list,function(x){if(is.list(x)){return(unlist(x))}else{return(x)}})
+# command_args<-commandArgs(TRUE)
+# param_file = "script/annotation/config/parameters_wtintegrate.json"
+# # read all parameters and filepaths
+# parameter_list = jsonlite::read_json(param_file)
+# # if some fields are lists --> unlist
+# parameter_list = lapply(parameter_list,function(x){if(is.list(x)){return(unlist(x))}else{return(x)}})
 message("Starting annotation: ")
 print(parameter_list$manual_names_annotation_abbr)
 
 annotation_results = annotate_tree(edgelist = edgelist,#[1:32,],#edgelist = edgelist[1:291,],
                                    labelmat = labelmat_updated_new_labels,
-                                   markers_comparisons_all = comparisons_all_update,
-                                   markers_comparisons_siblings = comparisons_siblings_update,
+                                   markers_comparisons_all = markers_comparisons_all,
+                                   markers_comparisons_siblings = markers_comparisons_siblings,
                                    preferred_genes=character(0),
                                    manual_names= parameter_list$manual_names_annotation_abbr,
                                    overwrite_with_manual = TRUE,
@@ -215,9 +146,9 @@ annotation_df = annotation_results$annotation_df
 # update cluster names with ID
 annotation_df$clean_names_withID = paste0(annotation_df$cluster_id,": ",annotation_df$clean_names)
 # get labelmat and add cell ids
-labelmat_updated = cbind(Cell_ID=full_seurat@meta.data$cellid,mrtree_result$labelmat)
+labelmat_updated = cbind(Cell_ID=full_seurat@meta.data$Cell_ID,mrtree_result$labelmat)
 # make a per cell cluster annotation
-cell_cluster_map = labelmat_updated %>% as.data.frame() %>% tidyr::gather(-Cell_ID,key="clusterlevel",value="cluster_id")
+cell_cluster_map = labelmat_updated %>% as.data.frame() %>% tidyr::gather(-Cell_ID, key="clusterlevel",value="cluster_id")
 cell_cluster_map$clusterlevel = gsub("_pruned","",cell_cluster_map$clusterlevel)
 # make wide version of labelmat ( that can be added to seurat metadata)
 annotation_df_wide = annotation_df %>% dplyr::left_join(cell_cluster_map,by=c("clusterlevel"="clusterlevel","cluster_id"="cluster_id")) %>%
@@ -229,7 +160,7 @@ names(vec_with_numbers) = colnames(annotation_df_wide)
 sorted_colnames = names(sort(vec_with_numbers,na.last = FALSE))
 annotation_df_wide = annotation_df_wide[,sorted_colnames]
 # ensure order makes sense
-annotation_df_wide = annotation_df_wide[match(full_seurat@meta.data$cellid,annotation_df_wide$Cell_ID),]
+annotation_df_wide = annotation_df_wide[match(full_seurat@meta.data$Cell_ID,annotation_df_wide$Cell_ID),]
 
 # remove existing if running again on same object:
 # full_seurat@meta.data = full_seurat@meta.data[,!grepl("C*\\_named",colnames(full_seurat@meta.data))]
@@ -245,11 +176,18 @@ descriptive_markers_df = dplyr::left_join(descriptive_markers_df,annotation_df[,
 ### Save annotation
 ##########
 
-data.table::fwrite(annotation_df,file = paste0(parameter_list$harmonization_folder_path,parameter_list$new_name_suffix,"_",parameter_list$marker_suffix,"_annotation_result.txt") ,sep="\t")
+data.table::fwrite(annotation_df,file = paste0(parameter_list$harmonization_folder_path,
+                                               parameter_list$new_name_suffix,"_",parameter_list$marker_suffix,
+                                               "_annotation_result.txt") ,sep="\t")
 
-data.table::fwrite(annotation_df_wide,file = paste0(parameter_list$harmonization_folder_path,parameter_list$new_name_suffix,"_",parameter_list$marker_suffix,"_annotation_labelmat.txt") ,sep="\t")
+data.table::fwrite(annotation_df_wide,file = paste0(parameter_list$harmonization_folder_path,
+                                                    parameter_list$new_name_suffix,"_",parameter_list$marker_suffix,
+                                                    "_annotation_labelmat.txt") ,sep="\t")
 
-data.table::fwrite(descriptive_markers_df,file = paste0(parameter_list$harmonization_folder_path,parameter_list$new_name_suffix,"_",parameter_list$marker_suffix,"_annotation_markers_filtered.txt") ,sep="\t")
+data.table::fwrite(descriptive_markers_df,file = paste0(parameter_list$harmonization_folder_path,
+                                                        parameter_list$new_name_suffix,"_",
+                                                        parameter_list$marker_suffix,
+                                                        "_annotation_markers_filtered.txt") ,sep="\t")
 
 
 # #== annoated_manual----------------------------------
@@ -273,10 +211,8 @@ marker_update <- descriptive_markers_df%>%
 marker_update <- marker_update%>%column_to_rownames("cluster_id")
 annoBindDf <- anno_bind(full_seurat,c("C2","C6","C12","C21","C41"),group_select)
 annoBindDf <- merge(annoBindDf,marker_update, by = "row.names")
-write.csv(annoBindDf,"result/4.8_annotation/4.9_anno_bind_df.csv")
+write.csv(annoBindDf,paste0(parameter_list$harmonization_folder_path,
+                            parameter_list$new_name_suffix,"_",parameter_list$marker_suffix,
+                            "_anno_bind_df.csv"))
 
-
-
-mycolor<-colorRampPalette(brewer.pal(8,'Spectral'))(38)
-DimPlot(full_seurat,group.by = "Age.In.Detail.",cols = mycolor)
-
+saveRDS(full_seurat,"processed_data/integrated_data/20241106_mesenchyme.Rds")

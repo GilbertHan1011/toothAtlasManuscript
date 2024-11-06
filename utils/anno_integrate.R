@@ -135,7 +135,7 @@ annotate_tree = function(edgelist,labelmat,markers_comparisons_all,markers_compa
     current_node = all_nodes[n]
     parent_node = edgelist$from[edgelist$to==current_node]
     sibling_nodes = edgelist$to[edgelist$from==parent_node & edgelist$to != current_node]
-    children_nodes = scUtils::find_children(current_node,edgelist)
+    children_nodes = find_children(current_node,edgelist)
     direct_children_nodes = edgelist$to[edgelist$from==current_node]
     current_level = edgelist$clusterlevel[edgelist$to==current_node]
 

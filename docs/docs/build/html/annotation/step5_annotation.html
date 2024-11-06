@@ -1,0 +1,604 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>Step 5: Annotation - scAtlas 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/override.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #003262;
+  --color-brand-content: #003262;
+  --admonition-font-size: var(--font-size-normal);
+  --admonition-title-font-size: var(--font-size-normal);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">scAtlas 0.0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/tooth_log.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/tooth_log.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction to scAtlas</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../preprocess/index.html">Preprocess</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Preprocess</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/droplet.html">Droplet discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_annotation.html">First round annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/post_annotation.html">Post annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/batch_division.html">Batch division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/normalization.html">Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pre-integration/index.html">Pre-integration</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Pre-integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pre-integration/hypertune.html">Hyperparameter tuning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../integration/index.html">Integration</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="index.html">Annotation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step2_mtree.html">Step 2: MRTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step3_marker_detection.html">Step 3: Marker Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="step4_prune_tree.html">Step 4: Prune Tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level1_anno.html">Level 1 Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level2_anno.html">Level 2 annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level3_anno.html">Level 3 Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level4_anno.html">Level 4 annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Level5_anno.html">Level 5 annotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/team.html">Team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/cite.html">Citing scAtlas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing Guide</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="step-5-annotation">
+<h1>Step 5: Annotation<a class="headerlink" href="#step-5-annotation" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>In this step, we will annotate the mesenchymal cell clusters identified in the previous steps. The annotation process involves updating the Seurat object with new cluster labels, finding marker genes for the updated clusters, and calculating specificity for comparisons. We will also manually annotate the clusters and update marker scores.</p>
+</section>
+<section id="input">
+<h2>Input<a class="headerlink" href="#input" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">processed_data/integrated_data/20241024_mesenchyme.Rds</span></code>: The Seurat object containing integrated mesenchymal cell data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">process/annotation/mes_annotation/annotation_mid_file/20241025_gene_include.csv</span></code>: CSV file containing genes to include in the analysis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">process/annotation/mes_annotation/annotation_mid_file/[new_name_suffix]_pruned_mrtree_clustering_results.rds</span></code>: The pruned clustering results from Step 4.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">script/annotation/config/mesenchyme_parameter.json</span></code>: Configuration file with parameters for annotation.</p></li>
+</ul>
+</section>
+<section id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">process/annotation/mes_annotation/annotation_mid_file/comparisons_all_update.csv</span></code>: CSV file containing all marker comparisons.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">process/annotation/mes_annotation/annotation_mid_file/comparisons_sibling_update.csv</span></code>: CSV file containing sibling marker comparisons.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">result/4.26_annotation/4.26_annotation_orig.csv</span></code>: CSV file containing the original annotation data.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">processed_data/integrated_data/20241106_mesenchyme.Rds</span></code>: The updated Seurat object with annotations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">process/annotation/mes_annotation/annotation_mid_file/[new_name_suffix]_[marker_suffix]_annotation_result.txt</span></code>: Text file containing the annotation results.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">process/annotation/mes_annotation/annotation_mid_file/[new_name_suffix]_[marker_suffix]_annotation_labelmat.txt</span></code>: Text file containing the annotation label matrix.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">process/annotation/mes_annotation/annotation_mid_file/[new_name_suffix]_[marker_suffix]_annotation_markers_filtered.txt</span></code>: Text file containing the filtered annotation markers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">process/annotation/mes_annotation/annotation_mid_file/[new_name_suffix]_[marker_suffix]_anno_bind_df.csv</span></code>: CSV file containing the bound annotations.</p></li>
+</ul>
+</section>
+<section id="script">
+<h2>Script<a class="headerlink" href="#script" title="Permalink to this heading">#</a></h2>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#== Change age label---------------------------------</span>
+<span class="c1"># Clear the workspace</span>
+<span class="nf">rm</span><span class="p">(</span><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">ls</span><span class="p">())</span>
+
+<span class="c1"># Load required libraries</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+
+<span class="c1"># Load utility functions</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;script/utils/anno_utils.R&quot;</span><span class="p">)</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;script/utils/stratified_wilcoxon_functions.R&quot;</span><span class="p">)</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;script/utils/anno_integrate.R&quot;</span><span class="p">)</span>
+
+<span class="c1"># Define the directory for processed data</span>
+<span class="n">process_dir</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;process/annotation/mes_annotation/annotation_mid_file/&quot;</span>
+
+<span class="c1"># Load JSON parameters</span>
+<span class="nf">load_json</span><span class="p">(</span><span class="s">&quot;script/annotation/config/mesenchyme_parameter.json&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load the Seurat object containing integrated mesenchymal cell data</span>
+<span class="n">full_seurat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;processed_data/integrated_data/20241024_mesenchyme.Rds&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load the updated cluster object</span>
+<span class="n">updated_cluster_object</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="n">parameter_list</span><span class="o">$</span><span class="n">harmonization_folder_path</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;annotation_mid_file/&quot;</span><span class="p">,</span>
+<span class="w">                                         </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">new_name_suffix</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_pruned_mrtree_clustering_results.rds&quot;</span><span class="p">))</span>
+
+<span class="c1"># Extract edgelist and labelmat from the updated cluster object</span>
+<span class="n">edgelist_updated_new_labels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">updated_cluster_object</span><span class="o">$</span><span class="n">edgelist</span>
+<span class="n">labelmat_updated_new_labels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">updated_cluster_object</span><span class="o">$</span><span class="n">labelmat</span>
+
+<span class="c1"># Load genes to include</span>
+<span class="n">genes_to_include</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;process/annotation/mes_annotation/annotation_mid_file/20241025_gene_include.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">unlist</span>
+
+<span class="c1"># Update Seurat object with new labels</span>
+<span class="n">full_seurat</span><span class="o">$</span><span class="n">C2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">labelmat_updated_new_labels</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
+<span class="nf">DimPlot</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;C2&quot;</span><span class="p">)</span>
+
+<span class="c1">#== Find markers--------------------------</span>
+<span class="c1"># Find markers for the updated clusters</span>
+<span class="n">all_markers_mrtree_list_update</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">findMarkers_tree2</span><span class="p">(</span>
+<span class="w">  </span><span class="n">full_seurat</span><span class="p">,</span>
+<span class="w">  </span><span class="n">edgelist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edgelist_updated_new_labels</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">],</span>
+<span class="w">  </span><span class="n">labelmat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labelmat_updated_new_labels</span><span class="p">,</span>
+<span class="w">  </span><span class="n">n_cores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="p">,</span>
+<span class="w">  </span><span class="n">assay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assay_markers</span><span class="p">,</span>
+<span class="w">  </span><span class="n">slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">assay_slot</span><span class="p">,</span>
+<span class="w">  </span><span class="n">test.use</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">test.use</span><span class="p">,</span>
+<span class="w">  </span><span class="n">batch_var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">batch_var</span><span class="p">,</span>
+<span class="w">  </span><span class="n">latent_vars_seurat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">latent_vars_seurat</span><span class="p">,</span>
+<span class="w">  </span><span class="n">genes_to_include</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">genes_to_include</span><span class="p">,</span>
+<span class="w">  </span><span class="n">logfc.threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">logfc.threshold</span><span class="p">,</span>
+<span class="w">  </span><span class="n">min.pct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min.pct</span><span class="p">,</span>
+<span class="w">  </span><span class="n">min.diff.pct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min.diff.pct</span><span class="p">,</span>
+<span class="w">  </span><span class="n">max.cells.per.ident</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max.cells.per.ident</span><span class="p">,</span>
+<span class="w">  </span><span class="n">min.cells.feature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min.cells.feature</span><span class="p">,</span>
+<span class="w">  </span><span class="n">min.cells.group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">min.cells.group</span><span class="p">,</span>
+<span class="w">  </span><span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
+<span class="w">  </span><span class="n">only.pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">only.pos</span>
+<span class="p">)</span>
+
+<span class="c1"># Extract comparisons from the marker results</span>
+<span class="n">comparisons_all_update</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">all_markers_mrtree_list_update</span><span class="o">$</span><span class="n">comparisons_All</span>
+<span class="n">comparisons_siblings_update</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">all_markers_mrtree_list_update</span><span class="o">$</span><span class="n">comparisons_Sibling</span>
+
+<span class="c1"># Calculate specificity for comparisons</span>
+<span class="n">comparisons_all_update</span><span class="o">$</span><span class="n">specificity</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">((</span><span class="n">comparisons_all_update</span><span class="o">$</span><span class="n">pct.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">specificity_base</span><span class="p">)</span><span class="w"> </span><span class="o">/</span>
+<span class="w">                                        </span><span class="p">(</span><span class="n">comparisons_all_update</span><span class="o">$</span><span class="n">pct.2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">specificity_base</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">comparisons_all_update</span><span class="o">$</span><span class="n">avg_log2FC</span>
+<span class="n">comparisons_siblings_update</span><span class="o">$</span><span class="n">specificity</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p">((</span><span class="n">comparisons_siblings_update</span><span class="o">$</span><span class="n">pct.1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">specificity_base</span><span class="p">)</span><span class="w"> </span><span class="o">/</span>
+<span class="w">                                             </span><span class="p">(</span><span class="n">comparisons_siblings_update</span><span class="o">$</span><span class="n">pct.2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">specificity_base</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">comparisons_siblings_update</span><span class="o">$</span><span class="n">avg_log2FC</span>
+
+<span class="c1"># View and save comparisons</span>
+<span class="nf">View</span><span class="p">(</span><span class="n">comparisons_siblings_update</span><span class="p">)</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">comparisons_all_update</span><span class="p">,</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="n">process_dir</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;comparisons_all_update.csv&quot;</span><span class="p">))</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">comparisons_siblings_update</span><span class="p">,</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="n">process_dir</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;comparisons_sibling_update.csv&quot;</span><span class="p">))</span>
+
+<span class="c1"># Load saved comparisons</span>
+<span class="n">comparisons_siblings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="n">process_dir</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;comparisons_sibling_update.csv&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+<span class="n">comparisons_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="nf">paste0</span><span class="p">(</span><span class="n">process_dir</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;comparisons_all_update.csv&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span>
+
+<span class="c1">#== Label--------------------------------</span>
+<span class="c1"># Update Seurat object with new labels for different cluster levels</span>
+<span class="n">full_seurat</span><span class="o">$</span><span class="n">C2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">labelmat_updated_new_labels</span><span class="p">[,</span><span class="w"> </span><span class="m">1</span><span class="p">]</span>
+<span class="n">full_seurat</span><span class="o">$</span><span class="n">C9</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">labelmat_updated_new_labels</span><span class="p">[,</span><span class="w"> </span><span class="m">2</span><span class="p">]</span>
+<span class="n">full_seurat</span><span class="o">$</span><span class="n">C19</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">labelmat_updated_new_labels</span><span class="p">[,</span><span class="w"> </span><span class="m">3</span><span class="p">]</span>
+<span class="n">full_seurat</span><span class="o">$</span><span class="n">C29</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">labelmat_updated_new_labels</span><span class="p">[,</span><span class="w"> </span><span class="m">4</span><span class="p">]</span>
+<span class="n">full_seurat</span><span class="o">$</span><span class="n">C57</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">labelmat_updated_new_labels</span><span class="p">[,</span><span class="w"> </span><span class="m">5</span><span class="p">]</span>
+<span class="n">full_seurat</span><span class="o">$</span><span class="n">C92</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">labelmat_updated_new_labels</span><span class="p">[,</span><span class="w"> </span><span class="m">6</span><span class="p">]</span>
+
+<span class="c1"># Plot the clusters</span>
+<span class="nf">DimPlot</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;C2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">DimPlot</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;C9&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">DimPlot</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;C19&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">DimPlot</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;C29&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">DimPlot</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;C57&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">DimPlot</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;C92&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+
+<span class="c1"># Define groups for annotation binding</span>
+<span class="n">group_select</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;Mandibular_Maxillary&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Molar_Incisor&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Histology&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Treatment&quot;</span><span class="p">,</span>
+<span class="w">                  </span><span class="s">&quot;Age&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Stage&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Development.stage&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;coarse_anno_1&quot;</span><span class="p">)</span>
+
+<span class="c1"># Bind annotations</span>
+<span class="n">annoBindDf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">anno_bind</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;C2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C9&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C19&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C29&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C57&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C92&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">group_select</span><span class="p">)</span>
+<span class="nf">percentPlotFun</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C19&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Age&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create a table of cluster counts by age</span>
+<span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">table</span><span class="p">(</span><span class="n">full_seurat</span><span class="o">$</span><span class="n">C6</span><span class="p">,</span><span class="w"> </span><span class="n">full_seurat</span><span class="o">$</span><span class="n">Age.In.Detail.</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">()</span>
+<span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">t</span><span class="p">(</span><span class="nf">apply</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+<span class="n">df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Convert the table to long format</span>
+<span class="n">df_long</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">rownames_to_column</span><span class="p">(</span><span class="s">&quot;Age&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">pivot_longer</span><span class="p">(</span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">Age</span><span class="p">,</span><span class="w"> </span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Cluster&quot;</span><span class="p">)</span>
+
+<span class="c1"># Identify genes to remove based on patterns</span>
+<span class="n">other_genes_remove</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">full_seurat</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">originalexp</span><span class="o">@</span><span class="n">counts</span><span class="p">)[</span><span class="nf">grepl</span><span class="p">(</span><span class="s">&quot;RP|Gm|Hb[ab]|Rik|-ps&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">rownames</span><span class="p">(</span><span class="n">full_seurat</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">originalexp</span><span class="o">@</span><span class="n">counts</span><span class="p">))]</span>
+<span class="n">all_exclusion_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">unique</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">other_genes_remove</span><span class="p">))</span>
+
+<span class="c1">##########</span>
+<span class="c1">### Load parameters and packages</span>
+<span class="c1">##########</span>
+
+<span class="c1"># Load the MRTree clustering results</span>
+<span class="n">mrtree_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">updated_cluster_object</span>
+
+<span class="c1"># Extract edgelist and labelmat</span>
+<span class="n">edgelist</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mrtree_result</span><span class="o">$</span><span class="n">edgelist</span>
+<span class="n">labelmat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mrtree_result</span><span class="o">$</span><span class="n">labelmat</span>
+
+<span class="c1"># Process edgelist and cluster levels</span>
+<span class="n">edgelist</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">edgelist</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;from&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;to&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;level&quot;</span><span class="p">)]</span>
+<span class="n">cluster_levels</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">labelmat</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">tidyr</span><span class="o">::</span><span class="nf">pivot_longer</span><span class="p">(</span><span class="nf">everything</span><span class="p">(),</span><span class="w"> </span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;clusterlevel&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cluster&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">group_by</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">add_count</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ncells&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">distinct</span><span class="p">(</span><span class="n">clusterlevel</span><span class="p">,</span><span class="w"> </span><span class="n">cluster</span><span class="p">,</span><span class="w"> </span><span class="n">ncells</span><span class="p">)</span>
+<span class="n">edgelist</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">left_join</span><span class="p">(</span><span class="n">edgelist</span><span class="p">,</span><span class="w"> </span><span class="n">cluster_levels</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;to&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cluster&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">arrange</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+<span class="n">all_nodes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">unique</span><span class="p">(</span><span class="n">edgelist</span><span class="o">$</span><span class="n">to</span><span class="p">)</span>
+
+<span class="c1"># Load marker comparisons</span>
+<span class="n">markers_comparisons_siblings</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">comparisons_siblings</span>
+<span class="n">markers_comparisons_all</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">comparisons_all</span>
+
+<span class="c1">##########</span>
+<span class="c1">### Run annotation</span>
+<span class="c1">##########</span>
+
+<span class="c1"># Print starting message and parameters</span>
+<span class="nf">message</span><span class="p">(</span><span class="s">&quot;Starting annotation: &quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">parameter_list</span><span class="o">$</span><span class="n">manual_names_annotation_abbr</span><span class="p">)</span>
+
+<span class="c1"># Annotate the tree</span>
+<span class="n">annotation_results</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">annotate_tree</span><span class="p">(</span>
+<span class="w">  </span><span class="n">edgelist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edgelist</span><span class="p">,</span>
+<span class="w">  </span><span class="n">labelmat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">labelmat_updated_new_labels</span><span class="p">,</span>
+<span class="w">  </span><span class="n">markers_comparisons_all</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">markers_comparisons_all</span><span class="p">,</span>
+<span class="w">  </span><span class="n">markers_comparisons_siblings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">markers_comparisons_siblings</span><span class="p">,</span>
+<span class="w">  </span><span class="n">preferred_genes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">character</span><span class="p">(</span><span class="m">0</span><span class="p">),</span>
+<span class="w">  </span><span class="n">manual_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">manual_names_annotation_abbr</span><span class="p">,</span>
+<span class="w">  </span><span class="n">overwrite_with_manual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span>
+<span class="w">  </span><span class="n">manual_exclude_genes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all_exclusion_genes</span><span class="p">,</span>
+<span class="w">  </span><span class="n">max_pval_adj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">max_pval_adj</span><span class="p">,</span>
+<span class="w">  </span><span class="n">min_specificity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">min_specificity</span><span class="p">,</span>
+<span class="w">  </span><span class="n">min_specificity_sibling_children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">min_specificity_sibling_children</span><span class="p">,</span>
+<span class="w">  </span><span class="n">scale_preferred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">,</span>
+<span class="w">  </span><span class="n">limit_factor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">limit_factor</span><span class="p">,</span>
+<span class="w">  </span><span class="n">max_score_siblings_children</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">max_score_siblings_children</span><span class="p">,</span>
+<span class="w">  </span><span class="n">reverse_order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">reverse_order</span>
+<span class="p">)</span>
+
+<span class="c1"># Print message for formatting results</span>
+<span class="nf">message</span><span class="p">(</span><span class="s">&quot;Formating annotation results&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get annotation results</span>
+<span class="n">annotation_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotation_results</span><span class="o">$</span><span class="n">annotation_df</span>
+<span class="n">annotation_df</span><span class="o">$</span><span class="n">clean_names_withID</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="n">annotation_df</span><span class="o">$</span><span class="n">cluster_id</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">annotation_df</span><span class="o">$</span><span class="n">clean_names</span><span class="p">)</span>
+
+<span class="c1"># Update labelmat with cell IDs</span>
+<span class="n">labelmat_updated</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cbind</span><span class="p">(</span><span class="n">Cell_ID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">full_seurat</span><span class="o">@</span><span class="n">meta.data</span><span class="o">$</span><span class="n">Cell_ID</span><span class="p">,</span><span class="w"> </span><span class="n">mrtree_result</span><span class="o">$</span><span class="n">labelmat</span><span class="p">)</span>
+
+<span class="c1"># Create a per cell cluster annotation</span>
+<span class="n">cell_cluster_map</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">labelmat_updated</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">as.data.frame</span><span class="p">()</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">tidyr</span><span class="o">::</span><span class="nf">gather</span><span class="p">(</span><span class="o">-</span><span class="n">Cell_ID</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;clusterlevel&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cluster_id&quot;</span><span class="p">)</span>
+<span class="n">cell_cluster_map</span><span class="o">$</span><span class="n">clusterlevel</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;_pruned&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cell_cluster_map</span><span class="o">$</span><span class="n">clusterlevel</span><span class="p">)</span>
+
+<span class="c1"># Create a wide version of the labelmat for Seurat metadata</span>
+<span class="n">annotation_df_wide</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotation_df</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">left_join</span><span class="p">(</span><span class="n">cell_cluster_map</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;clusterlevel&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;clusterlevel&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;cluster_id&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cluster_id&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">select</span><span class="p">(</span><span class="n">Cell_ID</span><span class="p">,</span><span class="w"> </span><span class="n">clusterlevel</span><span class="p">,</span><span class="w"> </span><span class="n">clean_names_withID</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="n">tidyr</span><span class="o">::</span><span class="nf">spread</span><span class="p">(</span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clusterlevel</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clean_names_withID</span><span class="p">)</span>
+
+<span class="c1"># Update column names and sort them</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">annotation_df_wide</span><span class="p">)[</span><span class="m">2</span><span class="o">:</span><span class="nf">ncol</span><span class="p">(</span><span class="n">annotation_df_wide</span><span class="p">)]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">annotation_df_wide</span><span class="p">)[</span><span class="m">2</span><span class="o">:</span><span class="nf">ncol</span><span class="p">(</span><span class="n">annotation_df_wide</span><span class="p">)],</span><span class="w"> </span><span class="s">&quot;_named&quot;</span><span class="p">)</span>
+<span class="n">vec_with_numbers</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">stringr</span><span class="o">::</span><span class="nf">str_extract</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">annotation_df_wide</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;[0-9]+&quot;</span><span class="p">))</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">vec_with_numbers</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">colnames</span><span class="p">(</span><span class="n">annotation_df_wide</span><span class="p">)</span>
+<span class="n">sorted_colnames</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="nf">sort</span><span class="p">(</span><span class="n">vec_with_numbers</span><span class="p">,</span><span class="w"> </span><span class="n">na.last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">))</span>
+<span class="n">annotation_df_wide</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotation_df_wide</span><span class="p">[,</span><span class="w"> </span><span class="n">sorted_colnames</span><span class="p">]</span>
+<span class="n">annotation_df_wide</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotation_df_wide</span><span class="p">[</span><span class="nf">match</span><span class="p">(</span><span class="n">full_seurat</span><span class="o">@</span><span class="n">meta.data</span><span class="o">$</span><span class="n">Cell_ID</span><span class="p">,</span><span class="w"> </span><span class="n">annotation_df_wide</span><span class="o">$</span><span class="n">Cell_ID</span><span class="p">),]</span>
+
+<span class="c1"># Clean descriptive markers</span>
+<span class="n">descriptive_markers_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotation_results</span><span class="o">$</span><span class="n">descriptive_markers_df</span>
+<span class="n">descriptive_markers_df</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dplyr</span><span class="o">::</span><span class="nf">left_join</span><span class="p">(</span><span class="n">descriptive_markers_df</span><span class="p">,</span><span class="w"> </span><span class="n">annotation_df</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;cluster_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;clean_names&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;clean_names_withID&quot;</span><span class="p">)],</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;cluster_id&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cluster_id&quot;</span><span class="p">))</span>
+
+<span class="c1">##########</span>
+<span class="c1">### Save annotation</span>
+<span class="c1">##########</span>
+
+<span class="c1"># Save annotation results</span>
+<span class="n">data.table</span><span class="o">::</span><span class="nf">fwrite</span><span class="p">(</span><span class="n">annotation_df</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="n">parameter_list</span><span class="o">$</span><span class="n">harmonization_folder_path</span><span class="p">,</span>
+<span class="w">                                               </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">new_name_suffix</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">marker_suffix</span><span class="p">,</span>
+<span class="w">                                               </span><span class="s">&quot;_annotation_result.txt&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;\t&quot;</span><span class="p">)</span>
+
+<span class="n">data.table</span><span class="o">::</span><span class="nf">fwrite</span><span class="p">(</span><span class="n">annotation_df_wide</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="n">parameter_list</span><span class="o">$</span><span class="n">harmonization_folder_path</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">new_name_suffix</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">marker_suffix</span><span class="p">,</span>
+<span class="w">                                                    </span><span class="s">&quot;_annotation_labelmat.txt&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;\t&quot;</span><span class="p">)</span>
+
+<span class="n">data.table</span><span class="o">::</span><span class="nf">fwrite</span><span class="p">(</span><span class="n">descriptive_markers_df</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="n">parameter_list</span><span class="o">$</span><span class="n">harmonization_folder_path</span><span class="p">,</span>
+<span class="w">                                                        </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">new_name_suffix</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="p">,</span>
+<span class="w">                                                        </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">marker_suffix</span><span class="p">,</span>
+<span class="w">                                                        </span><span class="s">&quot;_annotation_markers_filtered.txt&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;\t&quot;</span><span class="p">)</span>
+
+<span class="c1">#== Annotate manually----------------------------------</span>
+<span class="c1"># Prepare annotation data for manual annotation</span>
+<span class="n">annotation_orig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotation_df_wide</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">annotation_orig</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotation_orig</span><span class="o">$</span><span class="n">Cell_ID</span>
+<span class="n">annotation_orig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotation_orig</span><span class="p">[</span><span class="m">-1</span><span class="p">]</span>
+<span class="n">annotation_orig</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotation_orig</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">mutate_each</span><span class="p">(</span><span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="n">stringr</span><span class="o">::</span><span class="nf">str_replace</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C[:digit:]+-[:digit:]+: &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">))</span>
+
+<span class="c1"># Add metadata to Seurat object</span>
+<span class="n">full_seurat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">AddMetaData</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="n">annotation_orig</span><span class="p">)</span>
+<span class="nf">DimPlot</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="n">group.by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;C2_named&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save annotation data</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">annotation_orig</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;result/4.26_annotation/4.26_annotation_orig.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">quote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">full_seurat</span><span class="o">@</span><span class="n">misc</span><span class="o">$</span><span class="n">annotation_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">annotation_df</span>
+<span class="n">full_seurat</span><span class="o">@</span><span class="n">misc</span><span class="o">$</span><span class="n">clustering_edgelist</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">edgelist</span>
+
+<span class="c1">#== Update score-------------------------</span>
+<span class="c1"># Update marker scores</span>
+<span class="n">marker_update</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">descriptive_markers_df</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">cluster_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">top_n</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">wt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">avg_score</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">cluster_id</span><span class="p">,</span><span class="w"> </span><span class="n">gene</span><span class="p">)</span>
+<span class="n">marker_update</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">marker_update</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">column_to_rownames</span><span class="p">(</span><span class="s">&quot;cluster_id&quot;</span><span class="p">)</span>
+
+<span class="c1"># Bind annotations and save</span>
+<span class="n">annoBindDf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">anno_bind</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;C2&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C6&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C12&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C21&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;C41&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">group_select</span><span class="p">)</span>
+<span class="n">annoBindDf</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">merge</span><span class="p">(</span><span class="n">annoBindDf</span><span class="p">,</span><span class="w"> </span><span class="n">marker_update</span><span class="p">,</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;row.names&quot;</span><span class="p">)</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">annoBindDf</span><span class="p">,</span><span class="w"> </span><span class="nf">paste0</span><span class="p">(</span><span class="n">parameter_list</span><span class="o">$</span><span class="n">harmonization_folder_path</span><span class="p">,</span>
+<span class="w">                            </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">new_name_suffix</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;_&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">parameter_list</span><span class="o">$</span><span class="n">marker_suffix</span><span class="p">,</span>
+<span class="w">                            </span><span class="s">&quot;_anno_bind_df.csv&quot;</span><span class="p">))</span>
+
+<span class="c1"># Save the updated Seurat object</span>
+<span class="nf">saveRDS</span><span class="p">(</span><span class="n">full_seurat</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;processed_data/integrated_data/20241106_mesenchyme.Rds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Gilbert Han
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fab fa-github" href="https://github.com/GilbertHan1011/toothAtlasManuscript" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Step 5: Annotation</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#input">Input</a></li>
+<li><a class="reference internal" href="#output">Output</a></li>
+<li><a class="reference internal" href="#script">Script</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f6245a2f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
+    <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
+    <script defer="defer" src="../_static/tippy/annotation/step5_annotation.a460cb92-cb41-4fb6-8133-9eea3fa3a0cb.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
