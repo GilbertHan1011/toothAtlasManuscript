@@ -1,4 +1,7 @@
 # Level 3 Annotation
+
+![png](../img/anno-level3_epi.png)
+
 ## Outer enamel epithelium
 This cluster is annotated base on the study described in {cite:p}`krivanekDentalCellType2020b`.
 ![png](../img/annotation_epi/C22-7.png)

@@ -18,16 +18,16 @@ Bud mesenchyme highly expressed the genes related to embroyic develpment, such a
 Cap mesenchyme exhibits notable differentiation potential. We observed that genes associated with dental follicle and dental papilla, as described in {cite:p}`jingSpatiotemporalSinglecellRegulatory2022`, are highly expressed in the C9-2 cluster.
 ![png](../img/annotation/C9-2-gene.png)
 
-## Apical pulp & Distal pulp
-Postnatal mesenchyme in [level 1](Level1_anno.md) annotation can be devided into two main clusters: C9-6 and C9-7. The most important factors that drive the heterogeneity of postnatal pulp may be the spatial location. Apical pulp and distal pulp are have different gene expression profiles {cite:p}`hermansEstablishmentInclusiveSinglecell2022` {cite:p}`zhengSinglecellRNAseqAnalysis2024`.
-We checked the expression of the marker genes of apical and distal pulp in these two clusters, which align with our expectation.
+## Apical papilla & Distal papilla
+Postnatal mesenchyme in [level 1](Level1_anno.md) annotation can be devided into two main clusters: C9-6 and C9-7. The most important factors that drive the heterogeneity of postnatal papilla may be the spatial location. Apical papilla and distal papilla are have different gene expression profiles {cite:p}`hermansEstablishmentInclusiveSinglecell2022` {cite:p}`zhengSinglecellRNAseqAnalysis2024`.
+We checked the expression of the marker genes of apical and distal papilla in these two clusters, which align with our expectation.
 
-**Apical Pulp**
+**Apical papilla**
 - **Smoc2** {cite:p}`zhengSinglecellRNAseqAnalysis2024`
 - **Shisa2** {cite:p}`hermansEstablishmentInclusiveSinglecell2022`
 - **Igfbp3** {cite:p}`zhengSinglecellRNAseqAnalysis2024`
 
-**Distal Pulp**
+**Distal papilla**
 - **Sox9** {cite:p}`hermansEstablishmentInclusiveSinglecell2022`
 - **Itga4** {cite:p}`hermansEstablishmentInclusiveSinglecell2022`
 - **Igfbp5** {cite:p}`hermansEstablishmentInclusiveSinglecell2022`

@@ -1,8 +1,9 @@
 # Level 3 Annotation
 
 ## Motivation
-In level 3 annotation, we aim to identify subclusters of mesenchyme cells.
 ![png](../img/annotation/C19_clusters.png)
+In level 3 annotation, we aim to identify subclusters of mesenchyme cells.
+![png](../img/annotation/anno_level1_level3.png)
 
 ## Osteoblast
 We discovered a cell cluster that highly expresses osteogenesis markers, such as *Cd200* {cite:p}`debnathDiscoveryPeriostealStem2018a`, *Alpl* {cite:p}`liuAlplPreventsBone2018`, and *Ifitm5* {cite:p}`ayturkSingleCellRNASequencinga`.
@@ -18,8 +19,12 @@ We named this cluster based on the following reasons:
 2. It exhibited high expression of genes associated with differentiation-related signaling pathways.
 ![png](../img/annotation/C19-15.png)
 
+## Dental follicle
+This cluster expressed dental follicle markers, such as *Bmp3*, *Hhip* {cite:p}`jingSpatiotemporalSinglecellRegulatory2022`.
+![png](../img/annotation/C19-5.png)
+
 ## Coronal Papilla
-We annotated the coronal papilla based on the expression of _Lmo_ {cite:p}`jingSpatiotemporalSinglecellRegulatory2022`.
+We annotated the coronal papilla based on the expression of *Lmo* {cite:p}`jingSpatiotemporalSinglecellRegulatory2022`.
 ![png](../img/annotation/C19-12.png)
 
 ## Kit+ Papilla
