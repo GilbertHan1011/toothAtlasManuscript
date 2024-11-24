@@ -52,3 +52,17 @@ saveRDS(mes_lineage_postnatal_2,"process/trajectory/20241124_slingshot/postnatal
 write.csv(as.data.frame(mes$pseduo_merge),"process/trajectory/20241124_slingshot/20241124_pseudotime.csv")
 write.csv(as.data.frame(mes$pseduo_merge),"process/trajectory/20241124_slingshot/20241124_pseudotime.csv")
 write.csv(as.data.frame(mes$pseduo_merge),"processed_data//trajectory/20241124_pseudotime.csv")
+
+
+# I found that the former one may not be faithful to reflect biology. So I run it again.
+mes_lineage_embryo2 <- slingshot(load_mes_red_mat[embryo, c(2,4:5)],
+                                clusterLabels = factor(mes$C9_named)[embryo],
+                                start.clus ="Bud Mes",end.clus=c("Odontoblast"))
+pseudo_embryo2 <- mes_lineage_embryo2@assays@data$pseudotime[,1]
+mes$pseduo_merge2 <- NA
+mes$pseduo_merge2[embryo] <- pseudo_embryo2
+mes$pseduo_merge2[!embryo] <- pseudo[,2]
+FeaturePlot(mes,"pseduo_merge2")&scale_colour_gradientn(colours = rev(brewer.pal(n = 11, name = "Spectral")),
+                                                       values = c(0,0.2,0.4,0.65,1.0))
+saveRDS(mes_lineage_embryo2,"process/trajectory/20241124_slingshot/embryo_slingshot2.Rds")
+write.csv(as.data.frame(mes$pseduo_merge),"processed_data//trajectory/20241124_pseudotime_rerun.csv")
