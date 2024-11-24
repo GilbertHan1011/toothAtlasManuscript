@@ -74,10 +74,10 @@
   "manual_names_annotation": {
       "C2-1": "Embryonic Mesenchyme",
       "C2-2": "Postnatal Mesenchyme",
-      "C9-1": "Bud Mesenchyme",
-      "C9-2": "Cap Mesenchyme and follicle",
+      "C9-1": "Undifferentiated Mesenchyme",
+      "C9-2": "Differentiated papilla and follicle",
       "C9-3": "Chondrocyte",
-      "C9-4": "Vascular-like",
+      "C9-4": "Stress-related",
       "C9-5": "Low quality",
       "C9-6": "Apical papilla",
       "C9-7": "Distal papilla",

@@ -1,0 +1,438 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Connectivity inference with PAGA" href="20241119_paga.html" /><link rel="prev" title="Trajectory Reduction" href="trajecoty_reduction.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>Stemness and Start Point Inference - scAtlas 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/override.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  --color-brand-primary: #003262;
+  --color-brand-content: #003262;
+  --admonition-font-size: var(--font-size-normal);
+  --admonition-title-font-size: var(--font-size-normal);
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #272822;
+  --color-code-foreground: #f8f8f2;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">scAtlas 0.0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/tooth_log.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/tooth_log.png" alt="Dark Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Introduction/introduction.html">Introduction to scAtlas</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../preprocess/index.html">Preprocess</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Preprocess</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/metadata_process.html">Metadata Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_preprocess.html">First round preprocess</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/droplet.html">Droplet discovery</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/first_round_annotation.html">First round annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/post_annotation.html">Post annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/batch_division.html">Batch division</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../preprocess/normalization.html">Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pre-integration/index.html">Pre-integration</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Pre-integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pre-integration/scib-benchmark.html">Integration methods benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pre-integration/hypertune.html">Hyperparameter tuning</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../integration/index.html">Integration</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Integration</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../integration/20241024_coarse_label.html">First-level annotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../annotation/index.html">Annotation</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of Annotation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/20241025_mes_cluster.html">Step 0 : Leiden Clustering in Mesenchyme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step1_choose_optimal_cluster_level.html">Step 1: Choose the optimal cluster levels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step2_mtree.html">Step 2: MRTree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step3_marker_detection.html">Step 3: Marker Detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step4_prune_tree.html">Step 4: Prune Tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/step5_annotation.html">Step 5: Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/Level1_anno.html">Level 1 Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/Level2_anno.html">Level 2 annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/Level3_anno.html">Level 3 Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/Level4_anno.html">Level 4 annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/Level5_anno.html">Level 5 annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/Level1_anno_epi.html">Level 1 Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/Level2_anno_epi.html">Level 2 Annotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../annotation/Level3_anno_epi.html">Level 3 Annotation</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Trajectory</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of Trajectory</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="trajecoty_reduction.html">Trajectory Reduction</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Stemness and Start Point Inference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20241119_paga.html">Connectivity inference with PAGA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pseudotime_inference.html">Pseudotime Inference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">References</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../about/team.html">Team</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/cite.html">Citing scAtlas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing Guide</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="stemness-and-start-point-inference">
+<h1>Stemness and Start Point Inference<a class="headerlink" href="#stemness-and-start-point-inference" title="Permalink to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Determining the starting point of a trajectory presents a significant challenge, especially when working with integrated datasets. To address this, we can leverage key biological indicators such as cellular age and developmental potential. In this section, we will employ multiple computational methods including Cytotrace2 <span id="id1">[<a class="reference internal" href="../references.html#id39">Kang <em>et al.</em>, 2024</a>]</span>, Cytotrace <span id="id2">[<a class="reference internal" href="../references.html#id43" title="Gunsagar S. Gulati, Shaheen S. Sikandar, Daniel J. Wesche, Anoop Manjunath, Anjan Bharadwaj, Mark J. Berger, Francisco Ilagan, Angera H. Kuo, Robert W. Hsieh, Shang Cai, Maider Zabala, Ferenc A. Scheeren, Neethan A. Lobo, Dalong Qian, Feiqiao B. Yu, Frederick M. Dirbas, Michael F. Clarke, and Aaron M. Newman. Single-cell transcriptional diversity is a hallmark of developmental potential. Science (New York, N.Y.), 367(6476):405, January 2020. doi:10.1126/science.aax0249.">Gulati <em>et al.</em>, 2020</a>]</span>, and SCENT <span id="id3">[<a class="reference internal" href="../references.html#id44" title="Andrew E. Teschendorff and Tariq Enver. Single-cell entropy for accurate estimation of differentiation potency from a cell's transcriptome. Nature Communications, 8(1):15599, June 2017. doi:10.1038/ncomms15599.">Teschendorff and Enver, 2017</a>]</span> to systematically infer the developmental potential of cells and identify suitable trajectory starting points.</p>
+</section>
+<section id="cytotrace2">
+<h2>Cytotrace2<a class="headerlink" href="#cytotrace2" title="Permalink to this heading">#</a></h2>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">CytoTRACE2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">RColorBrewer</span><span class="p">)</span>
+<span class="c1">#devtools::install(&quot;~/soft/cytotrace2/cytotrace2_r/&quot;)</span>
+
+<span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;digitalcytometry/cytotrace2&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">subdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;cytotrace2_r&quot;</span><span class="p">)</span>
+<span class="n">mes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="s">&quot;processed_data/integrated_data/20241106_mesenchyme.Rds&quot;</span><span class="p">)</span>
+<span class="n">cellName</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;processed_data/framework/attributeName/cellName_mes_keep20241119.csv&quot;</span><span class="p">,</span><span class="n">row.names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">unlist</span><span class="p">()</span>
+<span class="n">mes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mes</span><span class="p">[,</span><span class="n">cellName</span><span class="p">]</span>
+<span class="n">loadData_fromSeurat</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function </span><span class="p">(</span><span class="n">object</span><span class="p">,</span><span class="w"> </span><span class="n">slot_type</span><span class="p">,</span><span class="n">assay</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">  </span><span class="n">data</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">Seurat</span><span class="o">::</span><span class="nf">GetAssayData</span><span class="p">(</span><span class="n">object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">object</span><span class="p">,</span>
+<span class="w">                                             </span><span class="n">assay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;originalexp&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">slot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slot_type</span><span class="p">))</span>
+<span class="w">  </span><span class="nf">return</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">cytotrace2_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cytotrace2</span><span class="p">(</span><span class="n">mes</span><span class="p">,</span><span class="w"> </span><span class="n">is_seurat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">slot_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;data&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">species</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#39;mouse&#39;</span><span class="p">,</span><span class="n">assay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;originalexp&quot;</span><span class="p">)</span>
+
+<span class="n">test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">loadData_fromSeurat</span><span class="p">(</span><span class="n">mes</span><span class="p">,</span><span class="n">slot_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;data&quot;</span><span class="p">,</span><span class="n">assay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;originalexp&quot;</span><span class="p">)</span>
+
+<span class="n">cytotrace2_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">cytotrace2</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<span class="n">mes</span><span class="o">$</span><span class="n">cytotrace2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cytotrace2_result</span><span class="o">$</span><span class="n">CytoTRACE2_Score</span>
+
+<span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">mes</span><span class="p">,</span><span class="s">&quot;cytotrace2&quot;</span><span class="p">)</span><span class="o">+</span><span class="nf">scale_colour_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rev</span><span class="p">(</span><span class="nf">brewer.pal</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Spectral&quot;</span><span class="p">)),</span>
+<span class="w">                                                     </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0.4</span><span class="p">,</span><span class="m">0.55</span><span class="p">,</span><span class="m">0.65</span><span class="p">,</span><span class="m">1.0</span><span class="p">))</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;results/trajectory/20241124_multipotent/20241124_cytotrace2_score.pdf&quot;</span><span class="p">,</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
+
+<span class="n">mes</span><span class="o">$</span><span class="n">cytotrace2_preKNN</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">cytotrace2_result</span><span class="o">$</span><span class="n">preKNN_CytoTRACE2_Score</span>
+<span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">mes</span><span class="p">,</span><span class="s">&quot;cytotrace2_preKNN&quot;</span><span class="p">)</span><span class="o">+</span><span class="nf">scale_colour_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rev</span><span class="p">(</span><span class="nf">brewer.pal</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Spectral&quot;</span><span class="p">)),</span>
+<span class="w">                                                     </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0.4</span><span class="p">,</span><span class="m">0.55</span><span class="p">,</span><span class="m">0.65</span><span class="p">,</span><span class="m">1.0</span><span class="p">))</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;results/trajectory/20241124_multipotent/20241124_cytotrace2_score_preknn.pdf&quot;</span><span class="p">,</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">cytotrace2_result</span><span class="p">,</span><span class="s">&quot;process/trajectory/20241124_multipotent/20241124_cytotrace2_result.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../_images/cytotrace2.png" /></p>
+</section>
+<section id="cytotrace">
+<h2>Cytotrace<a class="headerlink" href="#cytotrace" title="Permalink to this heading">#</a></h2>
+<p>We applied CellRank API to infer the developmental potential of cells.
+See this notbook for the detailed code : <a class="reference internal" href="20241124_cytotrace.html"><span class="doc std std-doc">Estimate developmental potential inference with CytoTRACE</span></a></p>
+</section>
+<section id="scent">
+<h2>SCENT<a class="headerlink" href="#scent" title="Permalink to this heading">#</a></h2>
+<p>SCENT is a computational method for inferring the developmental potential of cells based on protein-protein interaction and entropy.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;aet21/SCENT&quot;</span><span class="p">)</span>
+<span class="c1">#library(clusterProfiler)</span>
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;script/utils/seurat_utils.R&quot;</span><span class="p">)</span>
+<span class="c1">#== try my own data------------------------------</span>
+<span class="n">mes.m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">mes</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">originalexp</span><span class="o">@</span><span class="n">data</span><span class="p">)</span>
+<span class="nf">load</span><span class="p">(</span><span class="s">&quot;data/geneinfo_2022.rda&quot;</span><span class="p">)</span>
+<span class="n">convertGene</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">mapper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">value_col</span><span class="p">,</span><span class="w"> </span><span class="n">name_col</span><span class="p">)</span><span class="w"> </span><span class="nf">setNames</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="n">value_col</span><span class="p">]],</span><span class="w"> </span><span class="n">df</span><span class="p">[[</span><span class="n">name_col</span><span class="p">]])</span>
+
+<span class="w">  </span><span class="n">humansymbol2mousesymbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mapper</span><span class="p">(</span><span class="n">geneinfo_2022</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;entrez&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;symbol_mouse&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="n">converted_symbols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">humansymbol2mousesymbol</span><span class="p">[</span><span class="n">symbols</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">as.character</span><span class="p">()]</span>
+
+<span class="w">  </span><span class="nf">return</span><span class="p">(</span><span class="n">converted_symbols</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">#entriz = convertGene(rownames(mes.m))</span>
+<span class="n">mes_pheno</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mes</span><span class="o">$</span><span class="n">C9_named</span>
+
+<span class="n">geneTb2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">convertGene</span><span class="p">(</span><span class="nf">rownames</span><span class="p">(</span><span class="n">mes.m</span><span class="p">))</span><span class="o">%&gt;%</span><span class="nf">na.omit</span><span class="p">()</span>
+
+<span class="n">mes.m</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mes.m</span><span class="p">[</span><span class="nf">names</span><span class="p">(</span><span class="n">geneTb2</span><span class="p">),]</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">mes.m</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">geneTb2</span><span class="p">[</span><span class="nf">rownames</span><span class="p">(</span><span class="n">mes.m</span><span class="p">)]</span>
+
+
+<span class="c1">#rownames(mes.m) &lt;- geneTb$ENTREZID</span>
+<span class="n">ccat.mes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">CompCCAT</span><span class="p">(</span><span class="n">exp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mes.m</span><span class="p">,</span><span class="w"> </span><span class="n">ppiA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">net17Jan16.m</span><span class="p">);</span>
+<span class="nf">boxplot</span><span class="p">(</span><span class="n">ccat.mes</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">mes_pheno</span><span class="p">,</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SR potency estimates&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">xlab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Cell Type&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SR&quot;</span><span class="p">)</span>
+<span class="n">mes</span><span class="o">$</span><span class="n">scent</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ccat.mes</span>
+<span class="nf">FeaturePlot</span><span class="p">(</span><span class="n">mes</span><span class="p">,</span><span class="s">&quot;scent&quot;</span><span class="p">)</span><span class="o">+</span><span class="nf">scale_colour_gradientn</span><span class="p">(</span><span class="n">colours</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">rev</span><span class="p">(</span><span class="nf">brewer.pal</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Spectral&quot;</span><span class="p">)),</span>
+<span class="w">                                                </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0.4</span><span class="p">,</span><span class="m">0.55</span><span class="p">,</span><span class="m">0.65</span><span class="p">,</span><span class="m">1.0</span><span class="p">))</span>
+<span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;results/trajectory/20241124_multipotent/20241124_scent_score_preknn.pdf&quot;</span><span class="p">,</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
+<span class="n">scentMes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">mes</span><span class="o">$</span><span class="n">scent</span><span class="p">)</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">scentMes</span><span class="p">,</span><span class="s">&quot;process/trajectory/20241124_multipotent/20241124_scent_result.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="png" src="../_images/scent.png" /></p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<p>Across all three methods, we observed consistent patterns in developmental potential: distal papilla and odontoblast populations exhibited low developmental potential, while embryonic mesenchyme displayed high developmental potential. This computational inference aligns well with the known biological trajectory, where embryonic mesenchymal cells differentiate into specialized odontoblasts during tooth development. The concordance between multiple computational approaches strengthens our confidence in these developmental trajectories.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="20241119_paga.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Connectivity inference with PAGA</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="trajecoty_reduction.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Trajectory Reduction</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Gilbert Han
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fab fa-github" href="https://github.com/GilbertHan1011/toothAtlasManuscript" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Stemness and Start Point Inference</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#cytotrace2">Cytotrace2</a></li>
+<li><a class="reference internal" href="#cytotrace">Cytotrace</a></li>
+<li><a class="reference internal" href="#scent">SCENT</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=f6245a2f"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
+    <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
+    <script defer="defer" src="../_static/tippy/trajectory/multipotent.b65e34d7-1f2c-4edf-b779-6d397dcd266e.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

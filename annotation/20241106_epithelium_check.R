@@ -105,4 +105,30 @@ ggsave(paste0(outdir,"C22-12.pdf"),width = 6,height = 6)
 p1 <- FeaturePlot(epi,c("Slco4a1","Th"),raster = T)
 p2 <- DimPlot(epi,group.by = "C22",cells.highlight = colnames(epi)[epi$C22=="C22-7"],raster = T)
 p1+p2
-ggsave(paste0(outdir,"C12-2.pdf"),width = 6,height = 8)
+ggsave(paste0(outdir,"C22-2.pdf"),width = 6,height = 6)
+
+
+p1 <- FeaturePlot(epi,c("Thbd","Jph4"),raster = T)
+p2 <- DimPlot(epi,group.by = "C22",cells.highlight = colnames(epi)[epi$C22=="C22-5"],raster = T)
+p1+p2
+ggsave(paste0(outdir,"C22-5.pdf"),width = 6,height = 6)
+
+p1 <- FeaturePlot(epi,c("Ibsp","Enpp2","Cldn10"),raster = T)
+p2 <- DimPlot(epi,group.by = "C22",cells.highlight = colnames(epi)[epi$C22=="C22-4"],raster = T)
+p1+p2
+ggsave(paste0(outdir,"C22-4.pdf"),width = 6,height = 6)
+
+
+FeaturePlot(epi,c("Rab3il1",
+                  "Pmch",
+                  "Cyp2s1",
+                  "Psmb10"
+))
+
+FeaturePlot(epi,c("Enpp2",
+                  "C1qb",
+                  "Ibsp",
+                  "Rhov",
+                  "Nrarp",
+                  "Tactd2"
+))

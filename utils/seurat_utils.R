@@ -53,15 +53,15 @@ dbFinderFun <- function(x){
 }
 
 #== run seurat pipeline-------------------
-runSeurat <- function(x,dim=30,seeds = 0){
+runSeurat <- function(x,dim=30,seed = 0){
   x <- NormalizeData(x, normalization.method = "LogNormalize", scale.factor = 10000)
   x <- FindVariableFeatures(x, selection.method = "vst", nfeatures = 2000)
   all.genes <- rownames(x)
   x <- ScaleData(x, features = all.genes)
   x <- RunPCA(x, features = VariableFeatures(object = x))
   x <- FindNeighbors(x, dims = 1:dim)
-  x <- FindClusters(x, resolution = 0.5,random.seed = seeds)
-  x <- RunUMAP(x, dims = 1:dim,random.seed = seeds)
+  x <- FindClusters(x, resolution = 0.5,  random.seed= seed)
+  x <- RunUMAP(x, dims = 1:dim,random.seed = seed)
 }
 
 # seurat cca merge function-----------------------------------

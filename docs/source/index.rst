@@ -24,6 +24,7 @@ Contents
    pre-integration/index
    integration/index
    annotation/index
+   trajectory/index
    references
 
 
