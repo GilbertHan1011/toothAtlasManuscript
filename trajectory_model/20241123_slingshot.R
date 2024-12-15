@@ -65,4 +65,4 @@ mes$pseduo_merge2[!embryo] <- pseudo[,2]
 FeaturePlot(mes,"pseduo_merge2")&scale_colour_gradientn(colours = rev(brewer.pal(n = 11, name = "Spectral")),
                                                        values = c(0,0.2,0.4,0.65,1.0))
 saveRDS(mes_lineage_embryo2,"process/trajectory/20241124_slingshot/embryo_slingshot2.Rds")
-write.csv(as.data.frame(mes$pseduo_merge),"processed_data//trajectory/20241124_pseudotime_rerun.csv")
+write.csv(as.data.frame(mes$pseduo_merge2),"processed_data//trajectory/20241124_pseudotime_rerun.csv")

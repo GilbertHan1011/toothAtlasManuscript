@@ -1,0 +1,181 @@
+---
+title: "20241210_simudata2"
+output: html_document
+date: "2024-12-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = '/home/gilberthan/Desktop/disk2/202409_tooth')
+```
+
+
+
+```{r cars}
+generate_simulation_data <- function(
+    n_arrays = 25,  # total number of arrays
+    n_positions = 100,
+    base_expression = 3,
+    signal_strength = 2,
+    signal_noise_sd = 0.5,
+    overdispersion = 4,
+    noise_sd = 1,
+    seed = 123
+) {
+    set.seed(seed)
+    
+    # Generate position vector
+    x <- seq(0, 1, length.out = n_positions)
+    
+    # Create polynomial signal pattern
+    true_signal <- base_expression +
+        signal_strength * (-x^3 + 0.5*x^2 + 0.3*x)  # cubic polynomial
+    
+    # Ensure signal is positive
+    true_signal <- true_signal - min(true_signal) + 1
+    
+    # Create empty matrix
+    sim_data <- matrix(
+        NA,
+        nrow = n_arrays,
+        ncol = n_positions,
+        dimnames = list(
+            paste0("Array", 1:n_arrays),
+            paste0("Pos", 1:n_positions)
+        )
+    )
+    
+    # Create mixing weights from signal to noise
+    mixing_weights <- seq(1, 0, length.out = n_arrays)
+    
+    # Generate arrays with gradually changing signal-to-noise ratio
+    for(i in 1:n_arrays) {
+        # Mix signal and noise based on weight
+        weight <- mixing_weights[i]
+        
+        # Generate signal component
+        signal_component <- true_signal + rnorm(n_positions, mean = 0, sd = signal_noise_sd)
+        
+        # Generate noise component
+        noise_component <- rnorm(n_positions, mean = base_expression, sd = noise_sd)
+        
+        # Mix signal and noise
+        mixed_signal <- weight * signal_component + (1 - weight) * noise_component
+        
+        # Ensure positivity
+        sim_data[i, ] <- pmax(mixed_signal, 0)
+    }
+    
+    return(list(
+        data = sim_data,
+        x = x,
+        true_signal = true_signal,
+        mixing_weights = mixing_weights
+    ))
+}
+
+# Generate data
+simuData <- generate_simulation_data(signal_strength =  8,signal_noise_sd = 0.5)
+
+```
+
+
+```{r}
+
+# Visualize the results
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+
+# Create heatmap
+library(ComplexHeatmap)
+library(circlize)
+
+# Define color scheme
+col_fun <- colorRamp2(
+    c(min(simuData$data), mean(simuData$data), max(simuData$data)),
+    c("blue", "white", "red")
+)
+
+pdf("results/trajectory/20241210_conserved_model_validation/20241211_simudata2_heatmap.pdf")
+# Create heatmap
+Heatmap(simuData$data,
+        cluster_rows = FALSE,
+        cluster_columns = FALSE,
+        name = "Expression",
+        row_title = "Arrays\n(Noise → Signal)",
+        column_title = "Positions",show_row_names = F,show_column_names = F)
+
+dev.off()
+
+```
+
+```{r}
+# Plot signal-to-noise ratio
+plot_data <- data.frame(
+    Array = 1:length(simuData$mixing_weights),
+    Weight = simuData$mixing_weights
+)
+
+ggplot(plot_data, aes(x = Array, y = Weight)) +
+    geom_line() +
+    geom_point() +
+    theme_minimal() +
+    labs(title = "Signal-to-Noise Ratio by Array",
+         y = "Signal Weight",
+         x = "Array Index")
+
+# Plot individual arrays
+plot_data_long <- as.data.frame(simuData$data) %>%
+    mutate(Array = row_number()) %>%
+    pivot_longer(cols = starts_with("Pos"),
+                names_to = "Position",
+                values_to = "Expression") %>%
+    mutate(Position = as.numeric(gsub("Pos", "", Position)))
+
+ggplot(plot_data_long, aes(x = Position, y = Expression, group = Array, color = Array)) +
+    geom_line(alpha = 0.7) +
+    scale_color_viridis_c() +
+    theme_minimal() +
+    labs(title = "Expression Patterns by Array",
+         x = "Position",
+         y = "Expression")
+
+```
+
+
+```{r pressure, echo=FALSE}
+formDataset <- function(dataMat,y){
+  x = rep(dataMat$x,25)
+  y = dataMat$data %>%  t() %>% as.vector()
+  i = rep(1:25,each=200)
+  return(list(x,y,i))
+}
+inputDat2 <- formDataset(simuData$data,simuData$x)
+fit2 <- bayesian_gam_regression_nb_shape(x = inputDat2[[1]],y = inputDat2[[2]],array_idx = inputDat2[[3]])
+
+```
+
+
+```{r}
+plot_results_brms(fit2)
+```
+
+
+```{r}
+
+simuData2 <- generate_simulation_data(signal_strength =  8,signal_noise_sd = 0.5,n_positions = 200)
+inputDat3 <- formDataset(simuData2,simuData2$x)
+fit3 <- bayesian_gam_regression_nb_shape(x = inputDat3[[1]],y = inputDat3[[2]],array_idx = inputDat3[[3]])
+getwd()
+p <- plot_results_brms(fit3)
+ggsave(plot = p, "results/trajectory/20241210_conserved_model_validation/20241210_simu2_plotfit.pdf",width = 8,height = 3)
+```
+
+
+```{r}
+plot(inputDat3[[1]][1:200],inputDat3[[2]][1:200])
+plot(inputDat3[[1]][1201:1300],inputDat3[[2]][1201:1300])
+plot(inputDat3[[1]][1401:1500],inputDat3[[2]][1401:1500])
+plot(inputDat3[[1]][2401:2500],inputDat3[[2]][2401:2500])
+```
