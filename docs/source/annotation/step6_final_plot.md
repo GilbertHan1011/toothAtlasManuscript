@@ -1,3 +1,296 @@
+# Step 6: Final Visualization of Cell Type Clusters
+
+## Overview
+
+This documentation covers the final step in the tooth mesenchyme cell annotation pipeline. Once cell clusters have been identified, annotated, and validated, this script generates comprehensive visualizations combining cluster trees with metadata information (age distribution, histology, cell counts). 
+
+The script produces both circular and linear cluster trees with associated heatmaps, followed by marker gene dotplots aligned with the tree structure.
+
+## Prerequisites
+
+### Required R Packages
+
+```r
+library(aplot)       # For plot composition
+library(Seurat)      # For Seurat object manipulation
+library(dplyr)       # For data manipulation
+library(ggplot2)     # For plotting
+library(forcats)     # For factor level manipulation
+```
+
+### Utility Functions
+
+The script relies on custom utility functions defined in:
+```r
+source("script/utils/fun_plot_figure.R")
+source("script/utils/fun_plotclustertree.R")
+```
+
+### Input Objects
+
+The script expects the following objects to be available in the R environment:
+
+1. `full_seurat`: A Seurat object containing the cell data with cluster assignments.
+2. `annotation_df`: A dataframe with cluster annotations, containing at minimum:
+   - `cluster_id`: Cluster identifiers
+   - `clusterlevel`: Level of clustering
+   - `clean_names`: Annotated names for clusters
+3. `comparisons_all`: Dataframe with marker gene information including:
+   - `cluster_id`: Cluster identifier
+   - `gene`: Gene symbol
+   - `specificity`: Measure of gene specificity to the cluster
+4. `all_exclusion_genes` (optional): List of genes to exclude from marker visualization
+
+## Workflow
+
+### 1. Environment Setup
+
+The script begins by loading necessary libraries, setting up the results directory, and loading color settings:
+
+```r
+# Create results directory
+results_path_figure2 <- "results/annotation/20241106_anno_step6_plot"
+dir.create(results_path_figure2, showWarnings = FALSE, recursive = TRUE)
+
+# Load color settings
+load_colors()
+
+# Define visualization parameters
+leaf_level_column <- "C57"  # Column in metadata with cluster labels
+leaf_level <- 6             # Numeric level value
+```
+
+### 2. Data Preparation
+
+#### Filtering Low-Quality Clusters
+
+Low-quality or irrelevant clusters are filtered out from the edge list:
+
+```r
+# Filter out lowquality clusters from the edge list
+exclusion_clusters <- c("C9-5", "C9-9", "C9-3", "C9-4", "C19-9", ...)
+
+# Filter the edge list to remove excluded clusters
+edgelist <- full_seurat@misc$clustering_edgelist
+edgelist <- edgelist %>%
+  dplyr::filter(!(from %in% exclusion_clusters | to %in% exclusion_clusters))
+
+# Filter the annotation dataframe similarly
+annotation_df <- annotation_df %>%
+  dplyr::filter(!(cluster_id %in% exclusion_clusters))
+```
+
+#### Histology Annotation
+
+The script annotates cells with histology information from a metadata file:
+
+```r
+# Read metadata and prepare histology lookup
+metadata <- read.csv("data/metadata/20250326_metadata.csv", row.names = 1)
+
+# Filter metadata based on full_seurat samples
+metadata <- metadata[rownames(metadata) %in% full_seurat$Sample, ]
+
+# Create a unique dataframe for Project and Histology
+metaAnno <- unique(metadata[c("Project", "Histology")])
+
+# Create a lookup vector and apply annotations
+histology_lookup <- setNames(metaAnno$Histology, metaAnno$Project)
+indices <- match(full_seurat$Project, names(histology_lookup))
+annotated_histology <- histology_lookup[indices]
+full_seurat$Histology <- as.character(annotated_histology)
+```
+
+### 3. Heatmap Matrix Generation
+
+Two helper functions create percentage matrices for visualizing metadata distributions:
+
+```r
+# Function to create a percentage heatmap matrix for a given grouping variable
+create_percent_heatmap <- function(seurat_obj, grouping_var, cluster_column) {
+  # Creates a matrix of percentages for each cluster/group combination
+}
+
+# Function to create a cell count percentage matrix
+create_count_heatmap <- function(seurat_obj, cluster_column) {
+  # Creates a matrix of cell count percentages per cluster
+}
+```
+
+These functions are used to create three key matrices:
+- `heatmap_matrix`: Age distribution per cluster
+- `heatmap_matrix2`: Cell count percentages
+- `heatmap_matrix3`: Histology distribution per cluster
+
+### 4. Tree Construction and Visualization
+
+#### Circular Tree
+
+First, a basic cluster tree is created and saved:
+
+```r
+# Create base cluster tree
+circular_tree <- plot_cluster_tree(
+  edgelist = edgelist,
+  leaf_level = leaf_level,
+  anno_df = anno_df,
+  metadata = full_seurat@meta.data,
+  label_size = 4,
+  show_genes = TRUE,
+  vjust_label = -0.5,
+  edge_color = tree_color,
+  node_color = tree_color
+)
+
+# Rotate tree for better visualization
+circular_tree <- rotate_tree(circular_tree, -90)
+```
+
+#### Adding Heatmaps
+
+Heatmaps are added to the circular tree for age, histology, and cell counts:
+
+```r
+# Add Age heatmap
+circular_tree_heat <- add_heatmap(
+  circular_tree = circular_tree,
+  heatmap_matrix = heatmap_matrix,
+  heatmap_colors = c(bg_col, "darkred"),
+  heatmap_colnames = TRUE,
+  legend_title = "Pct Age",
+  matrix_offset = 2.2,
+  matrix_width = 0.8,
+  colnames_angle = 0,
+  legend_text_size = 2,
+  hjust_colnames = 0.5,
+  na_color = "white",
+  heatmap_text_size = 1  # Important for column visibility
+)
+
+# Additional heatmaps follow the same pattern
+```
+
+#### Linear Tree with Heatmaps
+
+A linear tree version is also created with heatmaps:
+
+```r
+# Create linear tree
+normaltree <- ggtree(circular_tree$data) +
+  geom_nodelab(aes(x = branch, label = first_cluster_name),
+               color = "darkred", vjust = -0.25, size = 2.5) +
+  geom_tiplab(ggplot2::aes(x = branch, label = first_cluster_name),
+              color = "darkred", vjust = -0.25, size = 2.5)
+
+# Add heatmaps to the linear tree
+normal_tree_heat <- add_heatmap(...)
+```
+
+### 5. Marker Gene Dotplot Generation
+
+The script creates a dotplot showing marker gene expression per cluster:
+
+```r
+# Get top marker genes for each cluster
+comparisonGene <- comparisons_all_update %>%
+  dplyr::filter(cluster_id %in% selectCluster & !(gene %in% all_exclusion_genes)) %>%
+  group_by(cluster_id) %>%
+  arrange(desc(specificity)) %>%
+  top_n(1) %>%
+  arrange(fct_relevel(cluster_id, clusterOrder)) %>%
+  ungroup() %>%
+  select(gene) %>%
+  unlist()
+
+# Create dotplot of marker gene expression
+p2 <- DotPlot(
+  full_seurat,
+  features = unique(comparisonGene),
+  assay = "originalexp",
+  cluster.idents = TRUE,
+  cols = c("lightgrey", "tan1")
+) + theme(...)
+```
+
+### 6. Composite Visualization
+
+Finally, the tree with heatmaps is combined with the dotplot:
+
+```r
+# Combine tree heatmap with dotplot
+p3 <- p2 %>%
+  insert_left(normal_tree_heat, width = 0.8)
+```
+
+## Output Files
+
+The script generates several visualization files:
+
+1. `20250220_circletree_full_layer.pdf`: Basic circular cluster tree
+2. `20250220_circletree_full_heatmaps.pdf`: Circular tree with heatmaps
+3. `20250220_lineartree_heatmaps.pdf`: Linear tree with heatmaps
+4. `20250220_tree_dotplot_combined.pdf`: Combined visualization of tree with heatmaps and marker gene dotplot
+
+Additionally, column name mappings are saved as text files:
+- `circular_tree_colnames.txt`
+- `circular_tree_colnames_histology.txt`
+
+Optional outputs (commented out in the script):
+- `20250220_tree_dotplot_combined.Rds`: R object of the combined visualization
+- `20250220_circular_heatmap.Rds`: R object of the circular tree with heatmaps
+- `20250220_full_seurat.Rds`: The annotated Seurat object
+
+## Troubleshooting
+
+### Heatmap Column Names Not Displaying
+
+If column names in the heatmaps are not visible, check these parameters:
+
+1. **`heatmap_text_size`**: Should be a positive value (recommended 1-3), not zero
+   ```r
+   heatmap_text_size = 8  # Increased from 0 to make text visible
+   ```
+
+2. **`matrix_width`**: If too small, column names may not have enough space
+   ```r
+   matrix_width = 0.5  # Increase for better column name display
+   ```
+
+3. **`hjust_colnames`**: Adjust to 0.5 for centered text
+   ```r
+   hjust_colnames = 0.5  # For centered column names
+   ```
+
+4. **Descriptive column names**: Use descriptive names instead of numbers
+   ```r
+   # Replace this
+   colnames(heatmap_matrix) = colnames_overview$number
+   
+   # With this
+   colnames(heatmap_matrix) = colnames_overview$Dataset
+   ```
+
+### Missing Matrix Offset
+
+Ensure all parameters in `add_heatmap()` have values. A common error is:
+```r
+matrix_offset = ,  # Missing value
+```
+
+This should be fixed with an appropriate value:
+```r
+matrix_offset = 11.0,  # Proper value
+```
+
+## Example Images
+
+When executed properly, the script should produce visualizations similar to:
+
+![png](../img/annotation/anno_final2.png)
+
+
+## Full code 
+```R
 ###############################################################################
 # Tooth Mesenchyme Annotation and Visualization
 # Script: Cluster Tree and Heatmap Visualization for Annotated Cell Types
@@ -380,3 +673,4 @@ ggsave(paste0(results_path_figure2, "/20250220_tree_dotplot_combined.pdf"),
 
 # Print completion message
 cat("Visualization script completed successfully.\n")
+```

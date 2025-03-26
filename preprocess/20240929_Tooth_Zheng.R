@@ -1,7 +1,7 @@
 library(Seurat)
 source("script/utils/seurat_utils.R")
-M1 <- Read10X("rawdata/Tooth_Zheng/M1/")
-M2 <- Read10X("rawdata/Tooth_Zheng/M2/")
+M1 <- Read10X("../202409_tooth_raw/Tooth_Zheng//M1/")
+M2 <- Read10X("../202409_tooth_raw/Tooth_Zheng//M2/")
 M1_seurat <- CreateSeuratObject(M1)
 M2_seurat <- CreateSeuratObject(M2)
 seurat_list <- list(M1_seurat,M2_seurat)
@@ -44,3 +44,10 @@ FeaturePlot(seuratMerge,markers[1:9])
 FeaturePlot(seuratMerge,markers[10:18])
 FeaturePlot(seuratMerge,"Wnt10a")
 saveRDS(seuratMerge,"preprocess_data/Tooth_Zheng.Rds")
+
+
+rat_mes_2 <- seuratMerge[,colnames(rat_mes)]
+DimPlot(rat_mes_2, group.by = "curate_anno",label = T)
+ggsave("results/annotation/anno_harmonize/20250119_mes/20250119_rat_combine.pdf")
+
+rat_mes_2$curate_anno <- rat_mes$label

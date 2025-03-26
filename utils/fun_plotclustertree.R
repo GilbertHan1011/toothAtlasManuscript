@@ -51,7 +51,7 @@ rasterize_ggplot = function(plot,pixel_raster = 1024,pixel_raster_y = NULL,inter
     # move into geom_point_mapping level in object (to preserve order of layers)
     rasterized_plot$layers[[layer_idx]] = rasterized_plot$layers[[length(rasterized_plot$layers)]]
     rasterized_plot$layers[[length(rasterized_plot$layers)]] = NULL
-    #check if the new geom has non-default data that should be added 
+    #check if the new geom has non-default data that should be added
     if(length(geom_point_layer$data)>0){
       rasterized_plot$layers[[layer_idx]]$data = geom_point_layer$data
     }
@@ -89,7 +89,7 @@ rasterize_ggplot = function(plot,pixel_raster = 1024,pixel_raster_y = NULL,inter
 plot_cluster_tree = function(edgelist,leaf_level=NULL,anno_df=NULL,metadata=NULL,pruned_edgelist=NULL,level_pattern = "K[0-9]+",cluster_id_pattern = "_pruned",
                              cluster_name_pattern = "_named",label_size = 2,label_size_tip = label_size, show_genes = TRUE,vjust_label = -0.5,
                              annotate_reverse =TRUE,na_color = "grey90",edge_color="black",node_color="black"){
-  
+
   # I am loading packages here instead of using them as part of a pachage and playing around with namespaces because for some reason the fucks up the ggtree package
   # for example geom_nodelab behaves different when called via ggtree::geom_nodelab, indicating taht is uses some other version?
   # also ggtree has some bugs, like not working with dplyr > 1.06
@@ -100,10 +100,16 @@ plot_cluster_tree = function(edgelist,leaf_level=NULL,anno_df=NULL,metadata=NULL
   library(treeio)
   library(tidytree)
   library(ggtree)
-  
+
+  # Add debug information about the edgelist
+  message("Debug: Edgelist structure before processing:")
+  message("Number of edges: ", nrow(edgelist))
+  message("Unique 'from' nodes: ", length(unique(edgelist$from)))
+  message("Unique 'to' nodes: ", length(unique(edgelist$to)))
+  message("Levels present: ", paste(sort(unique(edgelist$level)), collapse=", "))
+
   # check that req columns exist
   if(length(setdiff(c("from","to","level"),colnames(edgelist)))>0){
-    
     warning("Error: Wrong edgelist format. Requires columns: from, to, level")
     return(NULL)
   }
@@ -112,7 +118,7 @@ plot_cluster_tree = function(edgelist,leaf_level=NULL,anno_df=NULL,metadata=NULL
     warning("Error: leaf_level '",leaf_level,"' cannot be found in level column of edgelist")
     return(NULL)
   }
-  
+
   # construct a dataframe with the required annotations
   if(is.null(anno_df)){
     if(is.null(metadata)){
@@ -133,7 +139,7 @@ plot_cluster_tree = function(edgelist,leaf_level=NULL,anno_df=NULL,metadata=NULL
     named_ids =metadata[,c("Cell_ID",colnames(metadata)[grepl(cluster_name_pattern,colnames(metadata))])] %>%
       tidyr::gather(-Cell_ID,key="colname",value="id") %>% dplyr::mutate(clusterlevel = stringr::str_extract(colname,level_pattern))  %>% dplyr::distinct(id,clusterlevel,.keep_all=TRUE)
     both_map = dplyr::left_join(pruned_ids,named_ids,by=c("Cell_ID"="Cell_ID","clusterlevel"="clusterlevel")) %>% dplyr::select(cluster_id = id.x,cluster_name = id.y)
-    
+
     # anno_df = neuron_map_seurat@misc$pruned_edgelist %>% dplyr::select(cluster_id = to, clusterlevel = clusterlevel,ncells ) %>% dplyr::left_join(both_map,by="cluster_id")
     anno_df =pruned_edgelist %>% dplyr::select(cluster_id = to, clusterlevel = clusterlevel,ncells ) %>% dplyr::left_join(both_map,by="cluster_id")
     if(annotate_reverse){
@@ -147,26 +153,74 @@ plot_cluster_tree = function(edgelist,leaf_level=NULL,anno_df=NULL,metadata=NULL
       stop("Wrong anno_df format. Required columns: cluster_id, clusterlevel, cluster_name, first_cluster_name")
     }
   }
-  
+
   # if a heatmap matrix is provided, this function tries to infer the leaflevel based on the matrix
   # if(!is.null(heatmap_matrix) & is.null(leaf_level)){
   #   # TODO
   # }
-  # 
+  #
   # reduce edgelist to certain level and from and to cols
   edgelist$level = as.numeric(edgelist$level)
   edgelist = edgelist[edgelist$level<=as.numeric(leaf_level),1:2]
   edgelist = edgelist[edgelist$to %in% anno_df$cluster_id,] # remove edges/nodes that are not part of anno_df
-  
+  print(head(edgelist))
+  # Add debug information about processed edgelist
+  message("\nDebug: Processed edgelist structure:")
+  message("Number of edges after filtering: ", nrow(edgelist))
+  message("Unique 'from' nodes: ", length(unique(edgelist$from)))
+  message("Unique 'to' nodes: ", length(unique(edgelist$to)))
+
+  # Check if there's exactly one root node
+  root_nodes = setdiff(edgelist$from, edgelist$to)
+  print(edgelist[edgelist$to=="C19-7",])
+  print(edgelist[edgelist$from=="C19-7",])
+  message("\nDebug: Root node information:")
+  message("Number of root nodes: ", length(root_nodes))
+  message("Root nodes: ", paste(root_nodes, collapse=", "))
+
+  # Check if one root is parent of the other
+  if(length(root_nodes) > 1) {
+    # Find connections between root nodes
+    root_connections = edgelist[edgelist$from %in% root_nodes & edgelist$to %in% root_nodes,]
+    message("\nDebug: Connections between root nodes:")
+    print(root_connections)
+
+    if(nrow(root_connections) > 0) {
+      # Keep only the true root node
+      true_root = root_connections$from[1]
+      root_nodes = true_root
+      message("\nDebug: Found true root node: ", true_root)
+    } else {
+      # If no connections between roots, we need to create an artificial root
+      new_root = "root"
+      message("\nDebug: Creating artificial root node")
+      # Add new edges from artificial root to current roots
+      new_edges = data.frame(
+        from = rep(new_root, length(root_nodes)),
+        to = root_nodes,
+        level = min(edgelist$level) - 1
+      )
+      edgelist = rbind(new_edges, edgelist)
+      root_nodes = new_root
+    }
+  }
+
+  if(length(root_nodes) != 1) {
+    warning("Error: Graph must have exactly one root node. Found ", length(root_nodes), " root nodes.")
+    return(NULL)
+  }
+
   ## convert to treedata
-  # only take
+  message("\nDebug: Converting to igraph...")
   tree_data_igraph = base::suppressWarnings(igraph::graph_from_edgelist(as.matrix(edgelist)))
+  message("Debug: Converting to phylo...")
   tree_data_phylo = base::suppressWarnings(treeio::as.phylo(tree_data_igraph))
+  message("Debug: Converting to tibble...")
   tree_data_tibble <- dplyr::as_tibble(tree_data_phylo)
-  
+
   # add labels from annotation_df
   tree_data_tibble = dplyr::left_join(tree_data_tibble,anno_df,by=c("label"="cluster_id"))
-  
+
   # update additional columns
   tree_data_tibble$first_cluster_name[is.na(tree_data_tibble$first_cluster_name)]=""
   tree_data_tibble$nodesize = 1 # default node size
@@ -178,10 +232,10 @@ plot_cluster_tree = function(edgelist,leaf_level=NULL,anno_df=NULL,metadata=NULL
   tree_data_tibble$tip.label =NA
   tree_data_tibble$tip.label[tree_data_tibble$n_children==0] = tree_data_tibble$node[tree_data_tibble$n_children==0] # add tip labels if leaf
   tree_data_tibble$first_cluster_name[ tree_data_tibble$n_children<2 & is.na(tree_data_tibble$tip.label)] = "" # if only one child node: changeto ""
-  
+
   # convert back to treedata
   tree_data = suppressWarnings(tidytree::as.treedata(tree_data_tibble))
-  
+
   #plot circular tree
   circular_tree =ggtree(tree_data,layout = 'circular', branch.length='none',color=edge_color)+
     geom_nodepoint(aes(subset = n_children > 1),color=node_color)#+geom_tippoint() + layout_circular()
@@ -191,44 +245,9 @@ plot_cluster_tree = function(edgelist,leaf_level=NULL,anno_df=NULL,metadata=NULL
       geom_nodelab(aes(x=branch, label=first_cluster_name), size=label_size,vjust=vjust_label, color="darkred")+
       geom_tiplab(ggplot2::aes(x=branch, label=first_cluster_name), size=label_size_tip,vjust=vjust_label,color="darkred")
   }
-  
+
   return(circular_tree)
-  
-  # circular_tree_heat <- circular_tree
-  # 
-  # for(i in 1:length(heatmap_matrix_list)){
-  #   
-  #   ## add heatmap
-  #   heatmap_matrix = heatmap_matrix_list[[i]]
-  #   circular_tree_heat <- circular_tree_heat + ggnewscale::new_scale_fill()
-  #   #circular_tree
-  #   # make new fill scale
-  #   circular_tree_heat <- circular_tree_heat + ggnewscale::new_scale_fill()
-  #   # optionally add custom cont scale
-  #   if(is.numeric(heatmap_matrix2[,1])){
-  #     scale_limits = c(min(heatmap_matrix2),max(heatmap_matrix2))
-  #     circular_tree_heat <- gheatmap(circular_tree, heatmap_matrix2, offset=manual_off_second, width=matrix_width_2,
-  #                                    colnames = heatmap_colnames,colnames_angle=colnames_angle, colnames_offset_y = matrix_offset*2,
-  #                                    font.size=heatmap_text_size,hjust = hjust_colnames)+
-  #       scale_fill_gradientn(colours = heatmap_colors,limits=scale_limits,oob=squish) +
-  #       guides(fill=ggplot2::guide_colourbar(title=legend_title_2)) + # guide_colourbar for continous  +
-  #       theme(legend.text=element_text(size=legend_text_size))
-  #   }else{
-  #     circular_tree_heat <- gheatmap(circular_tree_heat, heatmap_matrix2, offset=manual_off_second,
-  #                                    width=matrix_width_2,colnames = heatmap_colnames,colnames_angle=colnames_angle,
-  #                                    colnames_offset_y = matrix_offset*2,font.size=heatmap_text_size,hjust = hjust_colnames)+
-  #       scale_fill_discrete(na.value = na_color) +
-  #       guides(fill=ggplot2::guide_legend(title=legend_title_2)) +
-  #       theme(legend.text=element_text(size=legend_text_size))
-  #   }
-  # }
-  # 
-  # if(returnData){
-  #   return(circular_tree_heat)
-  # }else{
-  #   circular_tree_heat
-  # }
-  
+
 }
 
 ##########
@@ -253,9 +272,9 @@ plot_cluster_tree = function(edgelist,leaf_level=NULL,anno_df=NULL,metadata=NULL
 #'
 
 add_heatmap = function(circular_tree,heatmap_matrix,heatmap_colors=c("white","darkred"),scale_limits = NULL,heatmap_colnames =TRUE, legend_title = "Legend1",
-                       matrix_offset = 0.2,matrix_width =0.2,colnames_angle=0,legend_text_size = 4,hjust_colnames=0.5, 
+                       matrix_offset = 0.2,matrix_width =0.2,colnames_angle=0,legend_text_size = 4,hjust_colnames=0.5,
                        heatmap_text_size=4,na_color = "grey90"){
-  
+
   # I am loading packages here instead of using them as part of a pachage and playing around with namespaces because for some reason the fucks up the ggtree package
   # for example geom_nodelab behaves different when called via ggtree::geom_nodelab, indicating taht is uses some other version?
   # also ggtree has some bugs, like not working with dplyr > 1.06
@@ -268,7 +287,7 @@ add_heatmap = function(circular_tree,heatmap_matrix,heatmap_colors=c("white","da
   library(ggtree)
   library(ggnewscale)
   library(scales)
-  
+
   circular_tree_heat <- circular_tree
   # make new fill scale
   circular_tree_heat <- circular_tree_heat + ggnewscale::new_scale_fill()
@@ -291,9 +310,9 @@ add_heatmap = function(circular_tree,heatmap_matrix,heatmap_colors=c("white","da
       #  guides(fill=ggplot2::guide_legend(title=legend_title)) +
       theme(legend.text=element_text(size=legend_text_size))
   }
-  
+
   return(circular_tree_heat)
-  
+
 }
 
 
@@ -301,7 +320,7 @@ add_heatmap = function(circular_tree,heatmap_matrix,heatmap_colors=c("white","da
 ### get_coordinates
 ##########
 
-# get_coordinates for cluster/label centers 
+# get_coordinates for cluster/label centers
 
 get_coordinates = function(label_vector,label_column,seurat_object,reduction_name = "umap_scvi"){
   plotdata = bind_cols(seurat_object@reductions[[reduction_name]]@cell.embeddings,label=seurat_object@meta.data[,label_column]) %>%
@@ -330,12 +349,12 @@ barplots_on_umap = function(scatter_plot,
                             cluster_col = "cluster",
                             scatter_1_col = "umapscvi_1",
                             scatter_2_col= "umapscvi_2"){
-  
+
   for(i in 1:nrow(data_barplot)){
     dataplot = data_barplot[i,]
     dataplot$dummy = "1"
     if(is.null(max_value_display)){
-      max_value_display = max(data_barplot[,value_col]) 
+      max_value_display = max(data_barplot[,value_col])
     }
     add = data.frame(cluster_col = data_barplot[i,cluster_col],value_col=max_value_display)
     colnames(add) =c(cluster_col,value_col)
@@ -357,9 +376,9 @@ barplots_on_umap = function(scatter_plot,
                         xmax = data_barplot[i,scatter_1_col]+(max_width/2),
                         ymin = data_barplot[i,scatter_2_col] - below_center_y,
                         ymax = data_barplot[i,scatter_2_col] - below_center_y + max_height)
-    
+
   }
-  
+
   return(scatter_plot)
 }
 
@@ -371,23 +390,23 @@ barplots_on_umap = function(scatter_plot,
 
 coexpression_opacity <- function(seurat_object,genes,reduction_name,colors=c("#6b0801","#1d6b01","#01066b"),color_seven = FALSE,alpha = 0.5,text_size=15,bg_color = "grey90",pt_size= 0.5) {
   # require(scales)
-  
+
   gene_data = Seurat::FetchData(seurat_object,vars = genes)
   plotdata =  dplyr::bind_cols(seurat_object@reductions[[reduction_name]]@cell.embeddings,gene_data)
   # get column names of plotdata
   col_labels = colnames(plotdata)
-  
+
   # default colors to use:
   if(color_seven){colors=as.character(palette.colors(palette = "Okabe-Ito")[2:8])}
   if(length(colors) < ncol(gene_data)){
-    stop("Error: More genes than colors. Recommended are a maximum of three genes!") 
+    stop("Error: More genes than colors. Recommended are a maximum of three genes!")
   }
-  
-  # alpha_values 
+
+  # alpha_values
   # init with alpha 1
   # plotdata$alpha = 1
   # # get gene occurences
-  # 
+  #
   # plotdata$alpha = rowSums(gene_data_binary)
   # # claculate alpha as 1 / occurences
   # plotdata$alpha = 1 / plotdata$n_expressed_genes
@@ -395,11 +414,11 @@ coexpression_opacity <- function(seurat_object,genes,reduction_name,colors=c("#6
   # plotdata$alpha_bg = plotdata$alpha
   # plotdata$alpha_bg[plotdata$alpha_bg <= 1] = 0
   # plotdata$alpha_bg[!is.infinite(plotdata$alpha)] = 1
-  # 
+  #
   # # infinite get alpha zero
   # plotdata$alpha[is.infinite(plotdata$alpha)] = 0
-  # 
-  # 
+  #
+  #
   ##
   gene_data_binary = as.matrix(gene_data)
   gene_data_binary[gene_data_binary > 0 ] = 1
@@ -410,10 +429,10 @@ coexpression_opacity <- function(seurat_object,genes,reduction_name,colors=c("#6
   })))
   gene_data_alpha_rowsums = rowSums(gene_data_alpha)
   gene_data_alpha_rowsums = abs(1-gene_data_alpha_rowsums)
-  
+
   gene_data_alpha = as.matrix(gene_data_alpha)
   gene_data_alpha[ gene_data_alpha < 1 & gene_data_alpha > 0] = 0.9
-  
+
   # make basic plot
   g = ggplot(plotdata, aes_string(x = col_labels[1], y = col_labels[2])) +
     geom_point( size = pt_size,color=bg_color,alpha=gene_data_alpha_rowsums)+
@@ -423,7 +442,7 @@ coexpression_opacity <- function(seurat_object,genes,reduction_name,colors=c("#6
                        plot.background=element_blank(),
                        text = element_text(size=text_size))
   global_max = max(gene_data)
-  # add genes 
+  # add genes
   for(i in 1:ncol(plotdata[,3:ncol(plotdata)])){
     g = g+ ggnewscale::new_scale_color()
     g = g + geom_point(aes_string(color=col_labels[i+2]), size = pt_size,alpha = gene_data_alpha[,i]) +

@@ -72,43 +72,73 @@ bayesian_gam_regression_nb_shape <- function(x, y, n_knots = 5, array_idx, n_sam
   ))
 }
 
+.bin_to_100 <- function(x, n_bins = n_bin) {
+  bins <- cut(x,
+              breaks = seq(min(x), max(x), length.out = n_bins + 1),
+              labels = FALSE,
+              include.lowest = TRUE)
+  return(bins)
+}
 
+.examTail <- function(metaDf,n_bin, tail_width,tail_num){
+  tail <- (1-tail_width) * n_bin
+  metaDf$pseudotime_binned_tail <- metaDf$pseudotime_binned > tail
+  metaBin <- unique(metaDf)
+  selectTable <- table(metaBin$batch,metaBin$pseudotime_binned_tail)
+  return(rownames(selectTable)[selectTable[,2]> tail_num* n_bin])
+}
 
-scRNA_2_mat <- function(mes, assay ,slot ,pseudo_col, project_col, thred = 0.1, batch_thred = 0.3, n_bin = 100) {
+# Calculate bin means
+.calculate_bin_means_fast1 <- function(expression_matrix, bin_labels) {
+  require(data.table)
+
+  # Convert to data.table
+  dt <- as.data.table(t(expression_matrix))
+  dt[, bin := factor(bin_labels, levels = sort(unique(bin_labels)))]
+
+  # Calculate means by group
+  result <- dt[, lapply(.SD, mean), by = bin]
+  result[, bin := NULL]
+
+  # Return transposed matrix
+  return(as.matrix(t(result)))
+}
+
+.reshape_to_3d <- function(matrix_data, prefixes, numbers, n_bins = n_bin) {
+  unique_prefixes <- unique(prefixes)
+  result <- array(NA,
+                  dim = c(length(unique_prefixes), n_bins, nrow(matrix_data)),
+                  dimnames = list(unique_prefixes,
+                                  1:n_bins,
+                                  rownames(matrix_data)))
+
+  for(i in seq_along(prefixes)) {
+    prefix <- prefixes[i]
+    number <- numbers[i]
+    if(number <= n_bins) {
+      result[prefix, number, ] <- matrix_data[, i]
+    }
+  }
+  return(result)
+}
+scRNA_2_mat <- function(mes, assay ,slot ,pseudo_col, project_col, thred = 0.1, batch_thred = 0.3, n_bin = 100,
+                        ensure_tail = TRUE,tail_width = 0.3,tail_num = 0.02) {
   # Extract expression matrix
   mesDf <- GetAssayData(mes,assay = assay,slot = slot) %>% as.matrix()
   pseudotime <- mes@meta.data[[pseudo_col]]
   batch <- mes@meta.data[[project_col]]
 
-  # Function to bin values
-  bin_to_100 <- function(x, n_bins = n_bin) {
-    bins <- cut(x,
-                breaks = seq(min(x), max(x), length.out = n_bins + 1),
-                labels = FALSE,
-                include.lowest = TRUE)
-    return(bins)
-  }
-
   # Bin pseudotime
-  pseudotime_binned <- bin_to_100(pseudotime)
+  pseudotime_binned <- .bin_to_100(pseudotime,n_bins = n_bin)
   metaDf <- data.frame(batch, pseudotime_binned)
   metaDf$bin <- paste0(metaDf$batch, "_", metaDf$pseudotime_binned)
 
-  # Calculate bin means
-  calculate_bin_means_fast1 <- function(expression_matrix, bin_labels) {
-    bin_factors <- factor(bin_labels, levels = sort(unique(bin_labels)))
-    result_matrix <- t(apply(expression_matrix, 1, function(x) {
-      tapply(x, bin_factors, mean)
-    }))
-    return(result_matrix)
-  }
-
-  binned_means <- calculate_bin_means_fast1(mesDf, metaDf$bin)
-
+  binned_means <- .calculate_bin_means_fast1(mesDf, metaDf$bin)
+  colnames(binned_means) <- unique(metaDf$bin)
   # Filter genes and batches
   geneNum <- round(thred * ncol(binned_means))
   filteredGene <- rownames(binned_means)[rowSums(binned_means > 0) > geneNum]
-
+  head(colnames(binned_means))
   #parts <- strsplit(colnames(binned_means), "_")
   #prefixes <- sapply(parts, function(x) paste(x[1:2], collapse = "_"))
   prefixes <- sapply(strsplit(colnames(binned_means), "_"),
@@ -119,33 +149,22 @@ scRNA_2_mat <- function(mes, assay ,slot ,pseudo_col, project_col, thred = 0.1, 
 
   bath_thred_real <- batch_thred * n_bin
   batchName <- names(table(prefixes) > bath_thred_real)[table(prefixes) > bath_thred_real]
+  if (ensure_tail){
+    remain_sample <- .examTail(metaDf,n_bin = n_bin,tail_width = tail_width,tail_num=tail_num)
+    batchName <- intersect(remain_sample,batchName)
+  }
+
   binned_means_filter <- binned_means[filteredGene, prefixes %in% batchName]
 
   # Reshape to 3D array
-  reshape_to_3d <- function(matrix_data, prefixes, numbers, n_bins = n_bin) {
-    unique_prefixes <- unique(prefixes)
-    result <- array(NA,
-                    dim = c(length(unique_prefixes), n_bins, nrow(matrix_data)),
-                    dimnames = list(unique_prefixes,
-                                    1:n_bins,
-                                    rownames(matrix_data)))
 
-    for(i in seq_along(prefixes)) {
-      prefix <- prefixes[i]
-      number <- numbers[i]
-      if(number <= n_bins) {
-        result[prefix, number, ] <- matrix_data[, i]
-      }
-    }
-    return(result)
-  }
 
   # Process final data
   prefixes <- sapply(strsplit(colnames(binned_means_filter), "_"),
                      function(x) paste(x[-length(x)], collapse = "_"))
   numbers <- sapply(strsplit(colnames(binned_means_filter), "_"),
                     function(x) paste(x[length(x)], collapse = "_")) %>% as.numeric()
-  reshaped_data <- reshape_to_3d(binned_means_filter, prefixes, numbers)
+  reshaped_data <- .reshape_to_3d(binned_means_filter, prefixes, numbers,n_bins =n_bins)
 
   # Return results
   return(list(

@@ -15,6 +15,7 @@ You can just run this pipeline directly. Here, I just break down the pipeline in
     step3_marker_detection
     step4_prune_tree
     step5_annotation
+    step6_final_plot
 
 
 

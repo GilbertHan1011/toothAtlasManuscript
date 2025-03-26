@@ -268,7 +268,9 @@ FeaturePlot(full_seurat,c("Sox9","Itga4"))
 
 ### C19-5 Dental follicle
 ``` {r}
-FeaturePlot(full_seurat,c("Acta2","Bmp3","Hhip","Igfbp5"))
+p1 <- FeaturePlot(full_seurat,c("Acta2","Bmp3","Hhip","Igfbp5"))
+p2 <-  DimPlot(full_seurat,group.by = "C19",cells.highlight = colnames(full_seurat)[full_seurat$C19=="C19-5"])
+p1+p2
 ```
 
 
