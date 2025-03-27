@@ -311,7 +311,7 @@ normal_tree_heat
 
 # Save the linear tree with heatmaps
 ggsave(paste0(results_path_figure2, "/20250220_lineartree_heatmaps.pdf"),
-       plot = normal_tree_heat, width = 12, height = 8)
+       plot = normal_tree_heat, width = 8, height = 6)
 
 ###############################################################################
 # Generate DotPlot of Marker Genes
@@ -371,12 +371,12 @@ p3
 
 # Save the final combined visualization
 ggsave(paste0(results_path_figure2, "/20250220_tree_dotplot_combined.pdf"),
-       plot = p3, height = 15, width = 20)
+       plot = p3, height = 8, width = 12)
 
 # Save key objects for future use
 #saveRDS(p3, paste0(results_path_figure2, "/20250220_tree_dotplot_combined.Rds"))
 #saveRDS(circular_tree_heat, paste0(results_path_figure2, "/20250220_circular_heatmap.Rds"))
-#saveRDS(full_seurat, "../important_processed_data/20250220_full_seurat.Rds")
+saveRDS(full_seurat, "processed_data/integrated_data/20250326_mesenchyme.Rds")
 
 # Print completion message
 cat("Visualization script completed successfully.\n")
