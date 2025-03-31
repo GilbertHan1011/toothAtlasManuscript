@@ -32,6 +32,8 @@ Here, $\mu$ is the mean, and $\phi$ is the shape parameter representing overdisp
 
 The shape parameter $\phi$ controls overdispersion, with higher values indicating more reliable data (less overdispersion).
 
+You can see this [tutorial](20250331_nb_tutorial.md) for detail.
+
 ## Using Bayesian GAM Modeling
 
 We use Bayesian GAM to combine these approaches:
