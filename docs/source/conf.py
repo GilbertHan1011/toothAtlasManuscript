@@ -1,7 +1,14 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
+
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../..'))  # Adjust this path to your project's main code location
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -30,6 +37,7 @@ extensions = [
     "sphinx_autodoc_typehints",
     "sphinx_tippy",
     "sphinx_design",
+    'sphinx.ext.mathjax',
     "nbsphinx",
     "IPython.sphinxext.ipython_console_highlighting"
 ]
@@ -41,8 +49,18 @@ master_doc = "index"
 pygments_style = "tango"
 pygments_dark_style = "monokai"
 
-nitpicky = True
+# Configure MathJax
+mathjax_path = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
 
+nitpicky = True
+mathjax_config = {
+    'tex2jax': {
+        'inlineMath': [['$', '$'], ['\\(', '\\)']],
+        'displayMath': [['$$', '$$'], ['\\[', '\\]']],
+        'processEscapes': True,
+        'processEnvironments': True,
+    }
+}
 templates_path = ['_templates']
 source_suffix = {
     ".rst": "restructuredtext"
@@ -59,12 +77,12 @@ bibtex_bibfiles = ["references.bib"]
 bibtex_reference_style = "author_year"
 bibtex_default_style = "alpha"
 
-
 # hover
 tippy_anchor_parent_selector = "div.content"
 tippy_enable_mathjax = True
 # no need because of sphinxcontrib-bibtex
 tippy_enable_doitips = False
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
@@ -96,3 +114,6 @@ html_theme_options = {
         },
     ],
 }
+
+def setup(app):
+    app.add_css_file('custom.css')  # Path relative to _static

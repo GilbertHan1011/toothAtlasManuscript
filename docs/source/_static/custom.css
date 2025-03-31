@@ -1,0 +1,43 @@
+/* Improve the styling of math elements */
+
+/* Increase size of inline math */
+.math {
+    font-size: 110%;
+}
+
+/* Add some margin around display math */
+div.math {
+    margin: 1em 0;
+    padding: 0.5em;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+/* Ensure equations have enough space */
+.MathJax_Display {
+    margin: 1em 0 !important;
+}
+
+/* Improve alignment of equation numbers */
+.eqno {
+    margin-left: 0.5em;
+}
+
+/* Additional styles for MathJax 3 */
+mjx-container {
+    padding: 0.5em 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* Make inline math stand out a bit */
+mjx-container[display="inline"] {
+    font-size: 105%;
+}
+
+/* Hack to fix some display issues with complex equations */
+.MathJax_SVG_Display {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+} 
