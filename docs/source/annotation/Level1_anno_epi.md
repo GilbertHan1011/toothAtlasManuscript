@@ -1,4 +1,4 @@
-# Level 1 Annotation
+# Epithelium Level 1 Annotation
 
 ## Motivation
 In level 1 annotation, we devided the epithelium into two major clusters and other low quality clusters. Base on ameloblast markers, these two clusters can be annotated as ameloblasts, Non-ameloblasts.

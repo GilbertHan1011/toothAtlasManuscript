@@ -1,4 +1,4 @@
-# Level 2 annotation
+# Mesenchyme Level 2 annotation
 
 ## Motivation
 In level 2 annotation, we devided the mesenchyme into 9 clusters, including four large populations ("C9-1","C9-2","C9-6","C9-7") and five small populations. In this level, we want to assign the consensus annotation from literature to these clusters.

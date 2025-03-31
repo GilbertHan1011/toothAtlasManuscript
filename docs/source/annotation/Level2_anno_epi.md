@@ -1,4 +1,4 @@
-# Level 2 Annotation
+# Epithelium Level 2 Annotation
 ## Dental Epithelial Progenitors
 This cluster is annotated base on the time point, mainly E12.5-E15.5, with high development potential
 ![png](../img/annotation_epi/C12-1.png)
