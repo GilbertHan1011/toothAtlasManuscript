@@ -28,6 +28,8 @@ While this is highly dependent on the study, here are some general categories of
 
 In the following sections, we will go through an example of the metadata we collected in the tooth atlas.
 
+![png](../img/preprocess/00_metadata.png)
+
 ## Study metadata
 ### Study name & Sample name
 Usually, we define the study as one publication conducted by one lab. Samples in the same study are usually comparable. For example, the paper [**Spatiotemporal single-cell regulatory atlas reveals neural crest lineage diversification and cellular function during tooth morphogenesis**](https://www.nature.com/articles/s41467-022-32490-y) {cite:p}`jingSpatiotemporalSinglecellRegulatory2022` conducted by Yang Chai lab contains five samples ranging from E13.5 to PN7.5 in mouse embryo development. In my convention, I use characters "uniqueID+author" to name the study and use "uniqueID+sampleName" to name the sample. In this example, the study name is `ToothNc_Junjun` and the sample name is `ToothNc_Junjun_E13.5`. The most important thing is the study name should be easy to remember and unique.

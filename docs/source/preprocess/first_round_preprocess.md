@@ -3,7 +3,7 @@
 ## Aim of first round preprocess
 The goal of first round preprocess is to generate a clean and standard data for downstream analysis. So we build an standard pipeline to perform basic quality control and annotation.
 
-
+![png](../img/preprocess/01_preprocess.png)
 
 
 ## Utils that used in this step

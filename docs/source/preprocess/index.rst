@@ -10,6 +10,5 @@ Preprocess
     first_round_preprocess
     droplet
     first_round_annotation
-    post_annotation
+    normalization_workflow
     batch_division
-    normalization

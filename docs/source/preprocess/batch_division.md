@@ -5,6 +5,7 @@
 Batch correction algorithms have the potential to remove not only technical variation but also biological variation {cite:p}`liTradeconservationBiologicalVariation2022`. In our reference atlas, it is crucial to distinguish cell states with fine resolution, making it essential to differentiate between technical and biological variation. Our atlas includes multi-level batch covariates, such as datasets, samples, age, and tissue location. Deciding which levels of variation to retain and which to correct can significantly impact the results. Although batch division is not a common step in regular single-cell RNA sequencing (scRNA-seq) data analysis, constructing comprehensive atlases often involves this step {cite:p}`steuernagelHypoMapUnifiedSinglecell2022` {cite:p}`sikkemaIntegratedCellAtlas2023`.
 
 ## Methods
+![png](../img/preprocess/04_batch_division.png)
 
 ### Quantifying the Source of Variance
 
