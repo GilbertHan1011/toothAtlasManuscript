@@ -1,4 +1,4 @@
-bayesian_gam_regression_nb_shape <- function(x, y, n_knots = 5, array_idx, n_samples = 2000) {
+ <- function(x, y, n_knots = 5, array_idx, n_samples = 2000) {
   # Create data frame
   df <- data.frame(
     y = round(y[!is.na(y)]),  # ensure integers
