@@ -2,7 +2,7 @@
 
 ## Introduction
 
-TrajConserve is an R package designed for analyzing trajectory conservation in single-cell RNA sequencing data. It implements Bayesian Generalized Additive Models (GAMs) with negative binomial distribution to identify and compare gene expression patterns across developmental trajectories.
+[TrajConserve](https://gilberthan1011.github.io/TrajConserve/) is an R package designed for analyzing trajectory conservation in single-cell RNA sequencing data. It implements Bayesian Generalized Additive Models (GAMs) with negative binomial distribution to identify and compare gene expression patterns across developmental trajectories.
 
 ## Key Innovation
 
