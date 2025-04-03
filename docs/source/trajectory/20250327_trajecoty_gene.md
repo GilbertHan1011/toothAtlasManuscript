@@ -103,6 +103,8 @@ The analysis generates the following output files:
 - Color schemes, cluster ordering, and annotations can be adjusted as needed
 - The analysis can be extended to include additional trajectories or conditions
 
+For the downsteam analysis, please loop at [enrichment](./20250403_traj_downstream_enrich.md).
+
 ## Process
 
 ```R

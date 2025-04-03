@@ -318,7 +318,7 @@ position <- sapply(labelsT, function(gene) which(rownames(scaled_mat) == gene))
 
 # Create row annotation with gene labels
 har <- rowAnnotation(link = anno_mark(at = position, labels = labelsT,
-                                     labels_gp = gpar(fontsize = 9, fontface = "bold"), 
+                                     labels_gp = gpar(fontsize = 9, fontface = "bold"),
                                      link_width = unit(1.5, "cm")))
 
 # Create final heatmap and save to PDF
@@ -349,3 +349,8 @@ hmAll <- Heatmap(scaled_mat[,4:182],
                  ))
 hmAll <- draw(hmAll)
 dev.off()
+sigGeneDf <- as.data.frame(sigGene_ordered) %>% rownames_to_column("gene")
+
+dir.create("process/trajectory/tradeseq")
+write.csv(sigGeneDf,"process/trajectory/tradeseq/20250403_gene_cluster.csv")
+saveRDS(hmAll,"process/trajectory/tradeseq/20250403_mes_heatmap.Rds")

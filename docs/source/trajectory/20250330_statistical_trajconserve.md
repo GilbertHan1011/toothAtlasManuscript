@@ -17,7 +17,7 @@ Let me break this down step by step.
 It's very common to use Generalized Additive Models (GAMs) to model gene expression along trajectories.
 We apply the strategy used in TradeSeq {cite:p}`vandenbergeTrajectorybasedDifferentialExpression2020` and Lamian {cite:p}`houStatisticalFrameworkDifferential2023`. 
 
-$$y \sim s(x, \text{bs} = \text{'cr'}, k = n\_knots) + \text{array}$$
+$$y \sim s(x, \text{bs} = \text{'cr'}, k = n_\text{knots}) + \text{array}$$
 
 The left side represents the standard GAM model. The right side includes array-specific parameters to adjust for batch effects.
 
