@@ -55,3 +55,4 @@ dotplot(res_select) +
   labs(fill = "-log10(p.adjust)") +
   theme_minimal()
 ggsave("results/final_plot/20250403_traj_dotplot.pdf",width = 8,height = 6)
+write.csv(ck@compareClusterResult,"results/final_plot/20250403_enrich_mes.csv")

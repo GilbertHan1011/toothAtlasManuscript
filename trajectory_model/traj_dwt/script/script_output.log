@@ -1,0 +1,58 @@
+
+=== Trajectory Conservation Analysis for Specific Genes ===
+
+Results will be saved to: ../../../../processed_data/toy_data/gene_subset_analysis
+
+1. Loading AnnData
+--------------------------------------------------
+Loading AnnData...
+AnnData shape: (8000, 100)
+
+2. Selecting Genes of Interest
+--------------------------------------------------
+Genes of interest: Map2, Sox9, Mki67, Col1a1, Bmp4, Wnt7b, Runx2, Lgr5
+Available genes in dataset: Map2
+Missing genes (not in dataset): Sox9, Mki67, Col1a1, Bmp4, Wnt7b, Runx2, Lgr5
+Added random genes to supplement: Gm4208, Fhl2
+Created subset AnnData with shape: (8000, 3)
+
+3. Processing Subset Data
+--------------------------------------------------
+Running pipeline on gene subset (direct approach)...
+Calculating pairwise DTW distances for 2 genes across 4 samples (6 pairwise comparisons per gene)...
+Using normalization method: zscore
+Filtering samples by variation: threshold=0.1, metric=max
+Processed 2/2 genes
+Results saved to ../../../../processed_data/toy_data/gene_subset_analysis/direct_pipeline
+Creating visualizations for top 2 genes out of 2 fitted genes
+Visualizing smoothing values distribution...
+
+Running custom approach for gene subset (more control)...
+  Converting AnnData to 3D matrix...
+  Reshaped data shape: (6, 100, 3)
+  Filtered gene count: 3
+  Batch count: 6
+  Initializing TrajectoryFitter...
+  Fitting models for each gene...
+  Gene Map2: Standard DTW = 31.4685, Optimized DTW = 30.5658, Improvement = 2.87%
+  Gene Gm4208: Standard DTW = 66.8198, Optimized DTW = 66.8198, Improvement = 0.00%
+  Gene Fhl2: Standard DTW = 53.9283, Optimized DTW = 53.9283, Improvement = 0.00%
+
+  Creating visualization for top gene...
+
+4. Comparing Approaches
+--------------------------------------------------
+Genes analyzed in direct pipeline approach:
+  1. Map2
+  2. Fhl2
+
+Genes analyzed in custom approach (in order of improvement):
+  1. Map2 (Improvement: 2.87%)
+  2. Gm4208 (Improvement: 0.00%)
+  3. Fhl2 (Improvement: 0.00%)
+
+Note on approaches:
+- Direct pipeline: Simpler, but genes are automatically sorted by conservation score
+- Custom approach: More control over gene selection and processing order
+
+=== Gene Subset Analysis Complete ===
