@@ -3,7 +3,7 @@ import scanpy as sc
 
 run_trajectory_conservation_analysis(
     adata_path = "/home/gilberthan/Desktop/disk2/202409_tooth/processed_data/integrated_data/20250415_mes_adata.h5ad",
-    output_dir = "/home/gilberthan/Desktop/disk2/202409_tooth/process/trajectory/20250415_odonto_run_2/",
+    output_dir = "/home/gilberthan/Desktop/disk2/202409_tooth/process/trajectory/20250415_odonto_run_3/",
     pseudo_col = "pseudotime",
     batch_col = "Sample",
     n_bins = 100,

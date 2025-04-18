@@ -51,6 +51,7 @@ result = anndata_to_3d_matrix(
     layer = "logcounts"
 )
 reshaped_data = result["reshaped_data"]
+
 # save reshaped_data as npy file
 np.save(output_dir / "reshaped_data.npy", reshaped_data)
 
